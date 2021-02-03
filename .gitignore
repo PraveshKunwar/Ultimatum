@@ -5,3 +5,4 @@ dist
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+token.json
