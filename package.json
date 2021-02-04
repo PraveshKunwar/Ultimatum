@@ -1,0 +1,23 @@
+{
+  "name": "Ultimatum",
+  "version": "1.0.0",
+  "description": "Ultimatum - The ultimate all in one bot you need for Discord.",
+  "main": "index.ts",
+  "repository": "https://github.com/PraveshKunwar/Ultimatum",
+  "author": "praveshk04@outlook.com",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "fs": "^0.0.1-security",
+    "glob": "^7.1.6",
+    "readdir-enhanced": "^6.0.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon -e ts --exec \"npm run build && npm start\""
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.24"
+  }
+}
