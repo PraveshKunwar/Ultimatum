@@ -1,2 +1,4 @@
 node_modules
-
+dist
+util/config.json
+src/index.ts
