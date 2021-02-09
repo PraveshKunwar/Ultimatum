@@ -9,8 +9,14 @@ const Ultimatum: Client = new Client({
   fetchAllMembers: true,
 });
 
-const CmdCollection: Collection<string | string[], Command> = new Collection();
-const EvtCollection: Collection<string | string[], Event> = new Collection();
+export const CmdCollection: Collection<
+  string | string[],
+  Command
+> = new Collection();
+export const EvtCollection: Collection<
+  string | string[],
+  Event
+> = new Collection();
 
 export const StartClient = (config: string | any): void => {
   //cmd handler!

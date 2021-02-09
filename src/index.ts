@@ -1,4 +1,4 @@
 import { StartClient } from "./discord";
-const token = require("./config");
+require("dotenv").config();
 
-StartClient(token.Token);
+StartClient(process.env.BOT_TOKEN);
