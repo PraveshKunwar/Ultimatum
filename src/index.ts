@@ -1,3 +1,4 @@
 import { StartClient } from "./discord";
+const token = require("./config");
 
-StartClient("ODA2NTQwMDI5MDUyMDU5Njk4.YBq67w.NSr7P95uRj4aBRZgKIxALayU07Y");
+StartClient(token.Token);
