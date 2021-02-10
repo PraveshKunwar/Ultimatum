@@ -3,12 +3,12 @@ import { Run } from "../../interfaces/Event";
 import { Message } from "discord.js";
 import { CmdCollection } from "../../discord";
 
-export const run: Run = async (client: typeof Ultimatum, message: Message) => {
+export const run: Run = async (client, message) => {
   const prefix = "ult!";
   if (
     message.author.bot ||
     !message.guild ||
-    message.content.startsWith(prefix)
+    !message.content.startsWith(prefix)
   )
     return;
   const args: string[] = message.content

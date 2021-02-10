@@ -20,18 +20,18 @@ export const EvtCollection: Collection<
 
 export const StartClient = (config: string | any): void => {
   //cmd handler!
-  /*readdir("./dist/handlers/commands", (err: any, files: string[] | any[]) => {
+  readdir("./dist/handlers/commands", (err: any, files: string[] | any[]) => {
     err ? console.log(err) : false;
     if (files.length < 0) {
       return console.log("No commands!");
     } else {
       files.forEach((f) => {
         const CmdName: string = f.split(".")[0];
-        const props = require(`./dist/handlers/commands/${f}`);
+        const props = require(`./handlers/commands/${f}`);
         CmdCollection.set(CmdName, props);
       });
     }
-  });*/
+  });
 
   //evt handler
 
