@@ -1,4 +1,5 @@
 import { MessageEmbed, Client, Message } from "discord.js";
+import Colors from "../util/Colors";
 
 const ErrorEmbed = (
   err: string,
@@ -10,12 +11,12 @@ const ErrorEmbed = (
     .setAuthor(client.user?.tag, client.user?.displayAvatarURL())
     .setTitle("↠↠ Recieved an error:")
     .setDescription(`↠↠ Error: **${err}**`)
-    .setColor("#7d2323")
+    .setColor(Colors.error)
     .setTimestamp()
     .setFooter(
       `↠↠ User: ${message.author?.tag}`,
       message.author.displayAvatarURL()
     );
-  message.channel.send(Embed);
+  return Embed;
 };
 export default ErrorEmbed;
