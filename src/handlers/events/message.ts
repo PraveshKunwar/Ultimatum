@@ -11,7 +11,7 @@ export const run: Run = async (client, message) => {
     !message.content.startsWith(prefix)
   )
     return;
-  const args: string[] = message.content
+  const args: string[] | any[] = message.content
     .slice(prefix.length)
     .trim()
     .split(/ +/g);

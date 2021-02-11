@@ -3,11 +3,12 @@ import { Message, MessageEmbed } from "discord.js";
 import ErrorEmbed from "../../errors/ErrorEmbed";
 import BlockQuote from "../../util/BlockQuote";
 import Colors from "../../util/Colors";
-import * as math from "mathjs";
+const math = require("mathjs");
 
 export const run: Run = async (client, message, args) => {
-  const equation: string = args[0].toString();
-  console.log(equation);
+  /* const equation = args;
+  console.log(message.content);
+  console.log(args);
   if (!equation) {
     const ArgsError = ErrorEmbed(
       `Please specify an equation for me to calculate!
@@ -40,7 +41,7 @@ export const run: Run = async (client, message, args) => {
       math.evaluate(`${equation}`)
     )} 
   `);
-    const ReactMsg = message.channel.send(OutputEmbed);
-  }
+    message.channel.send(OutputEmbed); *
+  }*/
 };
 export const name: string = "calculate";
