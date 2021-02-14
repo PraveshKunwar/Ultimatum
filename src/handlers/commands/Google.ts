@@ -4,7 +4,7 @@ import BlockQuote from '../../util/BlockQuote';
 import Colors from '../../util/Colors';
 import { Run } from '../../interfaces/Command';
 
-export const run: Run = async (client, message, args) => {
+export const run: Run = async (client, message, args, prefix) => {
 	const SearchParams: string | number = args.join('+');
 	if (!SearchParams) {
 		const Error = ErrorEmbed(
@@ -12,10 +12,9 @@ export const run: Run = async (client, message, args) => {
     **Examples:**
     ${BlockQuote(
 			`
-    ult!Google what's the weather today?
-    ult!Google latest news!
-    `,
-			'js'
+    ${prefix}Google what's the weather today?
+    ${prefix}Google latest news!
+    `
 		)}
     `,
 			client,
