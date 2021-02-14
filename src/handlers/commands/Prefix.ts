@@ -8,9 +8,13 @@ import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NewPrefix: string | number = args[0];
-	if (!NewPrefix) {
+	if (
+		!NewPrefix ||
+		!message.member?.hasPermission('MANAGE_GUILD') ||
+		NewPrefix.endsWith(typeof Number)
+	) {
 		const Error = ErrorEmbed(
-			`Error: You may have not specified a prefix OR you do not have the following permission: **MANAGE_GUILD**.
+			`Error: You may have not specified a prefix that ends with a symbol (NOT A NUMBER) OR you do not have the following permission: **MANAGE_GUILD**. \n \n
         **Examples:**
         ${BlockQuote(
 					`
@@ -24,7 +28,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			args
 		);
 		message.channel.send(Error);
-	} else {
+	} else if (NewPrefix && message.member.hasPermission('MANAGE_GUILD')) {
 		const settings = await Prefix.findOne(
 			{
 				GuildId: message.guild?.id,

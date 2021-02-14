@@ -1,8 +1,6 @@
-import Ultimatum from '../../discord';
 import { Run } from '../../interfaces/Event';
-import { Message } from 'discord.js';
 import { CmdCollection } from '../../discord';
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 import Prefix from '../../models/PrefixModel';
 
 export const run: Run = async (client, message) => {
