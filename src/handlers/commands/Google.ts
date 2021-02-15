@@ -31,11 +31,11 @@ export const run: Run = async (client, message, args, prefix) => {
 			.setColor(Colors.successful)
 			.setTimestamp()
 			.setFooter(
-				`↠↠ User: ${message.author?.tag}`,
+				`User: ${message.author?.tag} • Created by: PraveshK`,
 				message.author.displayAvatarURL()
 			);
 		message.channel.send(GoogleLink);
 	}
 };
 
-export const name: string = 'Google';
+export const name: string = 'google';

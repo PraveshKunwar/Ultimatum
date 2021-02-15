@@ -10,11 +10,11 @@ const ErrorEmbed = (
 	const Embed: MessageEmbed = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setTitle('⚠️ Recieved an error:')
-		.setDescription(`↠↠ Error: **${err}**`)
+		.setDescription(`Error: **${err}**`)
 		.setColor(Colors.error)
 		.setTimestamp()
 		.setFooter(
-			`↠↠ User: ${message.author?.tag}`,
+			`User: ${message.author?.tag} • Created by: PraveshK`,
 			message.author.displayAvatarURL()
 		);
 	return Embed;

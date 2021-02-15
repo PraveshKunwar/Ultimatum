@@ -2,7 +2,7 @@ import { Run } from '../../interfaces/Command';
 import ErrorEmbed from '../../errors/ErrorEmbed';
 import BlockQuote from '../../util/BlockQuote';
 import Prefix from '../../models/PrefixModel';
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../util/Colors';
 
@@ -14,18 +14,16 @@ export const run: Run = async (client, message, args, prefix) => {
 		NewPrefix.endsWith(typeof Number)
 	) {
 		const Error = ErrorEmbed(
-			`Error: You may have not specified a prefix that ends with a symbol (NOT A NUMBER) OR you do not have the following permission: **MANAGE_GUILD**. \n \n
-        **Examples:**
+			`Please make sure you meet the following requirements:
         ${BlockQuote(
 					`
-        ${prefix}Prefix newPrefix.
-        ${prefix}Prefix prefix!
+       1. Please make sure to use the command correctly: (ex: ${prefix}Prefix newPrefix).
+	   2. Must have the permission MANAGE_GUILD!
         `
 				)}
         `,
 			client,
-			message,
-			args
+			message
 		);
 		message.channel.send(Error);
 	} else if (NewPrefix && message.member.hasPermission('MANAGE_GUILD')) {
@@ -57,11 +55,11 @@ export const run: Run = async (client, message, args, prefix) => {
 			.setColor(Colors.successful)
 			.setTimestamp()
 			.setFooter(
-				`↠↠ User: ${message.author?.tag}`,
+				`User: ${message.author?.tag} • Created by: PraveshK`,
 				message.author.displayAvatarURL()
 			);
 		message.channel.send(NewPrefixEmbed);
 	}
 };
 
-export const name: string = 'Prefix';
+export const name: string = 'prefix';

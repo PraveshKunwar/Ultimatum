@@ -18,7 +18,7 @@ export const run: Run = async (client, message, args, prefix) => {
         Please make sure you have the following requirements to delete a message:
         ${BlockQuote(`
         1. Must have permission: MANAGE_MESSAGES. (For both you and me!)
-        2. Must correctly use this command (Ex: ${prefix}BulkDelete 100)
+        2. Must correctly use this command (Ex: ${prefix}Delete 100)
         3. Number must not be greater than a 100.
         4. Must be a number, nothing else.
         `)}
@@ -37,7 +37,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						`Deleted ${NumMsgDel} messages by ${message.author.tag}`
 					)
 					.setFooter(
-						`↠↠ User: ${message.author?.tag}`,
+						`User: ${message.author?.tag} • Created by: PraveshK`,
 						message.author.displayAvatarURL()
 					)
 					.setAuthor(client.user?.tag, client.user?.displayAvatarURL());
@@ -48,4 +48,4 @@ export const run: Run = async (client, message, args, prefix) => {
 	}
 };
 
-export const name: string = 'Delete';
+export const name: string = 'delete';

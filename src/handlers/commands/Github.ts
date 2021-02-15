@@ -33,12 +33,15 @@ export const run: Run = async (client, message, args, prefix) => {
 				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 				.setThumbnail(res.data.avatar_url)
 				.setFooter(
-					`↠↠ User: ${message.author?.tag}`,
+					`User: ${message.author?.tag} • Created by: PraveshK`,
 					message.author.displayAvatarURL()
 				)
 				.setDescription(`Github Profile displayed for user **${username}**.`)
 				.addFields(
-					{ name: '⭐ Bio', value: res.data.bio },
+					{
+						name: '⭐ Bio',
+						value: res.data.bio === null ? 'No Bio!' : res.data.bio,
+					},
 					{ name: '⭐ Followers', value: res.data.followers, inline: true },
 					{ name: '⭐ Following', value: res.data.following, inline: true },
 					{ name: '⭐ Location', value: res.data.location, inline: true },
@@ -61,4 +64,4 @@ export const run: Run = async (client, message, args, prefix) => {
 	}
 };
 
-export const name: string = 'Github';
+export const name: string = 'github';
