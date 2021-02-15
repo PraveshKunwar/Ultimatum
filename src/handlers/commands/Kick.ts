@@ -2,7 +2,7 @@ import { Run } from '../../interfaces/Command';
 import ErrorEmbed from '../../errors/ErrorEmbed';
 import BlockQuote from '../../util/BlockQuote';
 import mongoose from 'mongoose';
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed, TextChannel } from 'discord.js';
 import Colors from '../../util/Colors';
 import Moderation from '../../models/Moderation';
 
@@ -32,40 +32,35 @@ export const run: Run = async (client, message, args, prefix) => {
 		);
 		message.channel.send(Error);
 	} else {
-		const ModChannel = await Moderation.findOne(
-			{
-				GuildId: message.guild?.id,
-			},
-			(err: any, channel: any) => {
-				err ? console.log(err) : false;
-				if (!channel) {
-					const NewMod = new Moderation({
-						_id: mongoose.Types.ObjectId(),
-						ModerationChannel: message.channel.id,
-						GuildId: message.guild?.id,
-					});
-					NewMod.save()
-						.then((res) => console.log(res))
-						.catch((err) => console.log(err));
-					MentionedUser.kick(reason);
-					const MainChannel = new MessageEmbed()
-						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-						.setTitle('👟 Recieved an error:')
-						.setDescription(
-							`Kicked member: **${MentionedUser.user.username}**. Lets get some F's in the chat.`
-						)
-						.setColor(Colors.successful)
-						.setTimestamp()
-						.setFooter(
-							`User: ${message.author?.tag} • Created by: PraveshK`,
-							message.author.displayAvatarURL()
-						);
-					message.channel.send(MainChannel);
-					client.channels.cache.get(ModChannel);
-				}
-			}
-		);
+		const Mod: any = await Moderation.findOne({
+			GuildId: message.guild?.id,
+		});
+		if (!Mod) {
+			const NewChannel = new Moderation({
+				_id: mongoose.Types.ObjectId(),
+				GuildId: message.guild.id,
+				ModerationChannel: message.channel.id,
+			});
+			NewChannel.save()
+				.then((res) => console.log(res))
+				.catch((err) => console.log(err));
+		}
+		const ModChannel = Mod ? Mod.ModerationChannel : message.channel.id;
 		console.log(ModChannel);
+		const MainChannelEmbed = new MessageEmbed()
+			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+			.setTitle('👟 Recieved an error:')
+			.setDescription(
+				`Kicked member: **${MentionedUser.user.username}**. Lets get some F's in the chat.`
+			)
+			.setColor(Colors.successful)
+			.setTimestamp()
+			.setFooter(
+				`User: ${message.author?.tag} • Created by: PraveshK`,
+				message.author.displayAvatarURL()
+			);
+		const SendChannel = client.channels.cache.get(ModChannel);
+		(SendChannel as TextChannel).send(MainChannelEmbed);
 	}
 };
 

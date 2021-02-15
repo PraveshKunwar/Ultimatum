@@ -50,7 +50,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		});
 		const NewPrefixEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('↠ Changed server prefix:')
+			.setTitle('Changed server prefix:')
 			.setDescription(`New Prefix: **${NewPrefix}**`)
 			.setColor(Colors.successful)
 			.setTimestamp()
