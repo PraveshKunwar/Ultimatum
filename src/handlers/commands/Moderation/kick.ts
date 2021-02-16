@@ -1,10 +1,10 @@
-import { Run } from '../../interfaces/Command';
-import ErrorEmbed from '../../errors/ErrorEmbed';
-import BlockQuote from '../../util/BlockQuote';
+import { Run } from '../../../interfaces/Command';
+import ErrorEmbed from '../../../errors/ErrorEmbed';
+import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
-import Colors from '../../util/Colors';
-import Moderation from '../../models/Moderation';
+import Colors from '../../../util/Colors';
+import Moderation from '../../../models/Moderation';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const MentionedUser = message.mentions.members?.first();
@@ -31,27 +31,24 @@ export const run: Run = async (client, message, args, prefix) => {
 			message
 		);
 		message.channel.send(Error);
-	} else {
-		const Mod: any = await Moderation.findOne({
-			GuildId: message.guild?.id,
-		});
-		if (!Mod) {
-			const NewChannel = new Moderation({
-				_id: mongoose.Types.ObjectId(),
-				GuildId: message.guild.id,
-				ModerationChannel: message.channel.id,
-			});
-			NewChannel.save()
-				.then((res) => console.log(res))
-				.catch((err) => console.log(err));
-		}
-		const ModChannel = Mod ? Mod.ModerationChannel : message.channel.id;
-		console.log(ModChannel);
+	} else if (
+		MentionedUser &&
+		reason &&
+		message.member?.hasPermission('KICK_MEMBERS') &&
+		message.guild?.me?.hasPermission('KICK_MEMBERS') &&
+		message.guild.me.roles.highest.position >
+			MentionedUser.roles.highest.position
+	) {
 		const MainChannelEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 			.setTitle('👟 Recieved an error:')
-			.setDescription(
-				`Kicked member: **${MentionedUser.user.username}**. Lets get some F's in the chat.`
+			.addFields(
+				{
+					name: 'Kicked Member',
+					value: `Kicked member: **${MentionedUser.user.username}**. Lets get some F's in the chat.`,
+					inline: true,
+				},
+				{ name: 'Reason', value: `**${reason}**`, inline: true }
 			)
 			.setColor(Colors.successful)
 			.setTimestamp()
@@ -59,8 +56,8 @@ export const run: Run = async (client, message, args, prefix) => {
 				`User: ${message.author?.tag} • Created by: PraveshK`,
 				message.author.displayAvatarURL()
 			);
-		const SendChannel = client.channels.cache.get(ModChannel);
-		(SendChannel as TextChannel).send(MainChannelEmbed);
+		MentionedUser.kick(reason);
+		message.channel.send(MainChannelEmbed);
 	}
 };
 

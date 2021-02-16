@@ -1,10 +1,10 @@
-import { Run } from '../../interfaces/Command';
-import ErrorEmbed from '../../errors/ErrorEmbed';
-import BlockQuote from '../../util/BlockQuote';
-import Prefix from '../../models/PrefixModel';
+import { Run } from '../../../interfaces/Command';
+import ErrorEmbed from '../../../errors/ErrorEmbed';
+import BlockQuote from '../../../util/BlockQuote';
+import Prefix from '../../../models/PrefixModel';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../util/Colors';
+import Colors from '../../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NewPrefix: string | number = args[0];

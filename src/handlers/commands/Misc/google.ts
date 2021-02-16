@@ -1,8 +1,8 @@
-import ErrorEmbed from '../../errors/ErrorEmbed';
+import ErrorEmbed from '../../../errors/ErrorEmbed';
 import { MessageEmbed } from 'discord.js';
-import BlockQuote from '../../util/BlockQuote';
-import Colors from '../../util/Colors';
-import { Run } from '../../interfaces/Command';
+import BlockQuote from '../../../util/BlockQuote';
+import Colors from '../../../util/Colors';
+import { Run } from '../../../interfaces/Command';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const SearchParams: string | number = args.join('+');

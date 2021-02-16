@@ -20,18 +20,85 @@ export const EvtCollection: Collection<
 
 export const StartClient = (config: string | any): void => {
 	//cmd handler!
-	readdir('./dist/handlers/commands', (err: any, files: string[] | any[]) => {
-		err ? console.log(err) : false;
-		if (files.length < 0) {
-			return console.log('No commands!');
-		} else {
-			files.forEach((f) => {
-				const CmdName: string = f.split('.')[0];
-				const props = require(`./handlers/commands/${f}`);
-				CmdCollection.set(CmdName, props);
-			});
+	readdir(
+		'./dist/handlers/commands/Docs',
+		(err: any, files: string[] | any[]) => {
+			err ? console.log(err) : false;
+			if (files.length < 0) {
+				return console.log('No commands!');
+			} else {
+				files.forEach((f) => {
+					const CmdName: string = f.split('.')[0];
+					const props = require(`./handlers/commands/Docs/${f}`);
+					CmdCollection.set(CmdName, props);
+				});
+			}
 		}
-	});
+	);
+
+	readdir(
+		'./dist/handlers/commands/Misc',
+		(err: any, files: string[] | any[]) => {
+			err ? console.log(err) : false;
+			if (files.length < 0) {
+				return console.log('No commands!');
+			} else {
+				files.forEach((f) => {
+					const CmdName: string = f.split('.')[0];
+					const props = require(`./handlers/commands/Misc/${f}`);
+					CmdCollection.set(CmdName, props);
+				});
+			}
+		}
+	);
+
+	readdir(
+		'./dist/handlers/commands/Moderation',
+		(err: any, files: string[] | any[]) => {
+			err ? console.log(err) : false;
+			if (files.length < 0) {
+				return console.log('No commands!');
+			} else {
+				files.forEach((f) => {
+					const CmdName: string = f.split('.')[0];
+					const props = require(`./handlers/commands/Moderation/${f}`);
+					CmdCollection.set(CmdName, props);
+				});
+			}
+		}
+	);
+
+	readdir(
+		'./dist/handlers/commands/Owner',
+		(err: any, files: string[] | any[]) => {
+			err ? console.log(err) : false;
+			if (files.length < 0) {
+				return console.log('No commands!');
+			} else {
+				files.forEach((f) => {
+					const CmdName: string = f.split('.')[0];
+					const props = require(`./handlers/commands/Owner/${f}`);
+					CmdCollection.set(CmdName, props);
+				});
+			}
+		}
+	);
+
+	readdir(
+		'./dist/handlers/commands/Profile',
+		(err: any, files: string[] | any[]) => {
+			err ? console.log(err) : false;
+			if (files.length < 0) {
+				return console.log('No commands!');
+			} else {
+				files.forEach((f) => {
+					const CmdName: string = f.split('.')[0];
+					const props = require(`./handlers/commands/Profile/${f}`);
+					CmdCollection.set(CmdName, props);
+				});
+			}
+		}
+	);
 
 	//evt handler
 

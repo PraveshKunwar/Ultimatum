@@ -1,8 +1,8 @@
-import { Run } from '../../interfaces/Command';
+import { Run } from '../../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
-import ErrorEmbed from '../../errors/ErrorEmbed';
-import BlockQuote from '../../util/BlockQuote';
-import Colors from '../../util/Colors';
+import ErrorEmbed from '../../../errors/ErrorEmbed';
+import BlockQuote from '../../../util/BlockQuote';
+import Colors from '../../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NumMsgDel = parseInt(args[0]);
@@ -41,7 +41,9 @@ export const run: Run = async (client, message, args, prefix) => {
 						message.author.displayAvatarURL()
 					)
 					.setAuthor(client.user?.tag, client.user?.displayAvatarURL());
-				message.channel.send(DeletedEmbed);
+				message.channel
+					.send(DeletedEmbed)
+					.then((msg) => msg.delete({ timeout: 3000 }));
 				await message.react('🗑️');
 			});
 		}

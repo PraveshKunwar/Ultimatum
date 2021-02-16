@@ -1,7 +1,7 @@
-import { Run } from '../../interfaces/Command';
-import ErrorEmbed from '../../errors/ErrorEmbed';
-import BlockQuote from '../../util/BlockQuote';
-import Colors from '../../util/Colors';
+import { Run } from '../../../interfaces/Command';
+import ErrorEmbed from '../../../errors/ErrorEmbed';
+import BlockQuote from '../../../util/BlockQuote';
+import Colors from '../../../util/Colors';
 import axios from 'axios';
 import { MessageEmbed } from 'discord.js';
 
