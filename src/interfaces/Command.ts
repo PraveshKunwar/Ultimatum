@@ -1,4 +1,4 @@
-import Ultimatum from '../client/discord';
+import Ultimatum from '../discord';
 import { Message } from 'discord.js';
 
 export interface Run {

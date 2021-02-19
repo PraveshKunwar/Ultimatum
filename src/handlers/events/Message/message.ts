@@ -1,7 +1,7 @@
-import { Run } from '../../interfaces/Event';
-import { CmdCollection } from '../../client/discord';
+import { Run } from '../../../interfaces/Event';
+import { CmdCollection } from '../../../discord';
 import mongoose from 'mongoose';
-import Prefix from '../../models/PrefixModel';
+import Prefix from '../../../models/PrefixModel';
 
 export const run: Run = async (client, message) => {
 	const data: any = await Prefix.findOne({
