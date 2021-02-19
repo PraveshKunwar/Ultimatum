@@ -6,6 +6,8 @@ The all in one bot you will ever need. _Seriously._
 Welcome to Ultimatum. The all in one Discord.JS bot you will ever need to run your server.
 This bot includes many features that allow it be considered a "top notch" bot.
 
+Invite link can be found [here](https://discord.com/api/oauth2/authorize?client_id=806540029052059698&permissions=0&scope=bot).
+
 ```sh
 ❓ Q: Why should I use this bot?
 ```
@@ -16,7 +18,7 @@ This bot includes many features that allow it be considered a "top notch" bot.
 ```
 > ❗ A: If you would like to contribute to this bot, more information will be down below, and you can also check out CONTRIBUTING.md in the root directory of this project!
 
-## 🎉 Features 🎉
+## Features 🎉
 Here are features that are implemented / will be implemented in the bot! If you have any suggestions, check out contributions info by scrolling to the bottom of this README!
 
 > Note: (This table will be updated as commands are added!)
@@ -40,3 +42,17 @@ Here are features that are implemented / will be implemented in the bot! If you 
 | economy system (daily, pay, balance) | An economy system with leaderboards and other cool commands. | Economy | ❌ |
 | music (play, skip, stop, queue, remove, add) | A music system with a specialized queue system. | Music | ❌ |
 
+## Contributions 📜
+If you would like to contribute by:
+- 🔰 New command suggestions.
+- 🔰 Changing code, or code suggestions.
+- 🔰 Bot website, or contributing to a bot website.
+- 🔰 Patreon.
+
+You may contact me through one of the following:
+> Email me: praveshk04@outlook.com
+> DM me through Discord. (PraveshK#4056)
+
+
+### Author Creds: 
+© 2021, Pravesh Kunwar. All rights reserved.
