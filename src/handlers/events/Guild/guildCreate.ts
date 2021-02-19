@@ -1,6 +1,6 @@
-import { Run } from '../../interfaces/Event';
+import { Run } from '../../../interfaces/Event';
 import mongoose from 'mongoose';
-import GuildModel from '../../models/GuildJoin';
+import GuildModel from '../../../models/GuildJoin';
 
 export const run: Run = async (client, message, guild) => {
 	const GuildJoin = new GuildModel({

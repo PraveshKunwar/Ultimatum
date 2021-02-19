@@ -26,9 +26,8 @@ export const StartClient = async (config: string | any): Promise<void> => {
 		files.map(async (f) => {
 			if (f.endsWith('.js') || f.match(/.*\.js$/)) {
 				const Command = f.split('./dist/handlers/commands/')[1];
-				const props = require(`./handlers/commands/${Command}`);
-				const CommandName = Command.split('/')[1].split('.')[0];
-				CmdCollection.set(CommandName, props);
+				const props: Command = require(`./handlers/commands/${Command}`);
+				CmdCollection.set(props.name, props);
 			}
 		});
 	});
@@ -38,12 +37,10 @@ export const StartClient = async (config: string | any): Promise<void> => {
 		err ? console.log(err) : false;
 		files.map(async (f) => {
 			if (f.endsWith('.js') || f.match(/.*\.js$/)) {
-				const Event = f.split('./dist/handlers/events/')[1];
+				const Event = f.split('./dist/handlers/events')[1];
 				const props = require(`./handlers/events/${Event}`);
-				const EventName = Event.split('/')[1].split('.')[0];
-				console.log(EventName);
-				CmdCollection.set(EventName, props);
-				Ultimatum.on(EventName, (...args) => {
+				EvtCollection.set(props.name, props);
+				Ultimatum.on(props.name, (...args) => {
 					props.run(Ultimatum, ...args);
 				});
 			}
