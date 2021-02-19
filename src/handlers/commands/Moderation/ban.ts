@@ -13,8 +13,8 @@ export const run: Run = async (client, message, args, prefix) => {
 	if (
 		!MentionedUser ||
 		!reason ||
-		!message.member?.hasPermission('KICK_MEMBERS') ||
-		!message.guild?.me?.hasPermission('KICK_MEMBERS') ||
+		!message.member?.hasPermission('BAN_MEMBERS') ||
+		!message.guild?.me?.hasPermission('BAN_MEMBERS') ||
 		MentionedUser.roles.highest.position >
 			message.guild.me.roles.highest.position
 	) {
@@ -34,16 +34,16 @@ export const run: Run = async (client, message, args, prefix) => {
 	} else if (
 		MentionedUser &&
 		reason &&
-		message.member?.hasPermission('KICK_MEMBERS') &&
-		message.guild?.me?.hasPermission('KICK_MEMBERS') &&
+		message.member?.hasPermission('BAN_MEMBERS') &&
+		message.guild?.me?.hasPermission('BAN_MEMBERS') &&
 		message.guild.me.roles.highest.position >
 			MentionedUser.roles.highest.position
 	) {
 		const MainChannelEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('👟 Kicked Member')
+			.setTitle('🔨 Banned Member')
 			.setDescription(
-				`Kicked user **${MentionedUser.user.username}**. \n Reason: ${reason}\n\n Lets get some F's in the chat.`
+				`Banned user **${MentionedUser.user.username}**. \n Reason: ${reason}\n\n Lets get some F's in the chat.`
 			)
 			.setColor(Colors.successful)
 			.setTimestamp()
@@ -51,9 +51,9 @@ export const run: Run = async (client, message, args, prefix) => {
 				`User: ${message.author?.tag} • Created by: PraveshK`,
 				message.author.displayAvatarURL()
 			);
-		MentionedUser.kick(reason);
+		MentionedUser.ban();
 		message.channel.send(MainChannelEmbed);
 	}
 };
 
-export const name: string = 'kick';
+export const name: string = 'ban';

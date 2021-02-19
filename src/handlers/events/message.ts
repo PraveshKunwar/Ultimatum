@@ -1,5 +1,5 @@
 import { Run } from '../../interfaces/Event';
-import { CmdCollection } from '../../discord';
+import { CmdCollection } from '../../client/discord';
 import mongoose from 'mongoose';
 import Prefix from '../../models/PrefixModel';
 

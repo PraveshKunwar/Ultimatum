@@ -1,4 +1,4 @@
-import Ultimatum from '../../discord';
+import Ultimatum from '../../client/discord';
 import { Run } from '../../interfaces/Event';
 import MongoInit from '../../functions/Mongoose';
 

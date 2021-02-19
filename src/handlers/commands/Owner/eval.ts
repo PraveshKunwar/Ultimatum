@@ -8,11 +8,9 @@ export const run: Run = async (client, message, args) => {
 	const evaluation = args.join(' ');
 	if (!evaluation || message.member?.id !== '391364111331622912') {
 		const Error = ErrorEmbed(
-			`Please make sure you have the following requirements!
-            ${BlockQuote(`
-            1. Must be OWNER of bot (PraveshK).
-            `)}
-            `,
+			`Please make sure you have the following requirements!\n${BlockQuote(
+				` 1. Must be OWNER of bot (PraveshK).`
+			)}`,
 			client,
 			message
 		);
