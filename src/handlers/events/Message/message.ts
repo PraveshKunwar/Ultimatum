@@ -2,8 +2,9 @@ import { Run } from '../../../interfaces/Event';
 import { Ultimatum } from '../../../discord';
 import mongoose from 'mongoose';
 import Prefix from '../../../models/PrefixModel';
+import { Message } from 'discord.js';
 
-export const run: Run = async (client, message) => {
+export const run: Run = async (client, message: Message) => {
 	const data: any = await Prefix.findOne({
 		GuildId: message.guild?.id,
 	});
@@ -29,7 +30,7 @@ export const run: Run = async (client, message) => {
 		.trim()
 		.split(/ +/g);
 	const cmd: string = args.shift();
-	const command = client.commands.get(cmd.toLowerCase());
+	const command = client.commands.get(cmd);
 	if (!command) return;
 	else {
 		command.run(client, message, args, prefix);

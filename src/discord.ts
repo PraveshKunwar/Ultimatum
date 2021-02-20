@@ -1,20 +1,27 @@
 import { Client, Collection, Message } from 'discord.js';
 import glob from 'glob';
-import { eventNames } from 'process';
+require('dotenv').config();
 
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
 
+import { Mongo } from './functions/Mongoose';
+
 class Ultimatum extends Client {
-	constructor() {
+	public commands: Collection<string | string[], Command> = new Collection();
+	public events: Collection<string | string[], Event> = new Collection();
+	public categories; //working tmrw
+	public client: Client = this;
+	public database: Mongo;
+	public constructor() {
 		super({
 			disableMentions: 'all',
 			fetchAllMembers: true,
 		});
 	}
-	public commands: Collection<string | string[], Command> = new Collection();
-	public events: Collection<string | string[], Event> = new Collection();
 	public async StartClient(config: string | undefined): Promise<void> {
+		this.database = new Mongo();
+		this.database.Init(process.env.MONGO_DB_PASSWORD);
 		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
 			files.map(async (f) => {
@@ -32,11 +39,9 @@ class Ultimatum extends Client {
 			files.map(async (f) => {
 				if (f.endsWith('.js') || f.match(/.*\.js$/)) {
 					const Event = f.split('./dist/handlers/events')[1];
-					const props = require(`./handlers/events/${Event}`);
+					const props: Event = require(`./handlers/events/${Event}`);
 					this.events.set(props.name, props);
-					this.on(props.name, (...args) => {
-						props.run(Ultimatum, ...args);
-					});
+					this.on(props.name, props.run.bind(null, this));
 				}
 			});
 		});

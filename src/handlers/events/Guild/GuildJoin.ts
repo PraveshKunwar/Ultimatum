@@ -1,8 +1,9 @@
 import { Run } from '../../../interfaces/Event';
 import mongoose from 'mongoose';
 import GuildModel from '../../../models/GuildJoin';
+import { Guild } from 'discord.js';
 
-export const run: Run = async (client, message, guild) => {
+export const run: Run = async (client, message, guild: Guild) => {
 	const GuildJoin = new GuildModel({
 		_id: mongoose.Types.ObjectId(),
 		GuildId: guild?.id,
