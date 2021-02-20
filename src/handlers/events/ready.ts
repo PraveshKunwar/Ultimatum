@@ -1,8 +1,8 @@
-import Ultimatum from '../../discord';
+import { Ultimatum } from '../../discord';
 import { Run } from '../../interfaces/Event';
 import MongoInit from '../../functions/Mongoose';
 
-export const run: Run = async (client: typeof Ultimatum) => {
+export const run: Run = async (client) => {
 	MongoInit();
 	client.user?.setPresence({
 		activity: {

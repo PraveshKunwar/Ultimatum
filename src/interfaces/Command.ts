@@ -1,9 +1,9 @@
-import Ultimatum from '../discord';
+import { Ultimatum } from '../discord';
 import { Message } from 'discord.js';
 
 export interface Run {
 	(
-		client: typeof Ultimatum,
+		client: Ultimatum,
 		message: Message,
 		args: string[],
 		prefix?: string | number

@@ -1,4 +1,6 @@
-import { StartClient } from './discord';
+import { Ultimatum } from './discord';
 require('dotenv').config();
 
-StartClient(process.env.BOT_TOKEN);
+const token = process.env.BOT_TOKEN;
+
+new Ultimatum().StartClient(token);

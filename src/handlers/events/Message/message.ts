@@ -1,5 +1,5 @@
 import { Run } from '../../../interfaces/Event';
-import { CmdCollection } from '../../../discord';
+import { Ultimatum } from '../../../discord';
 import mongoose from 'mongoose';
 import Prefix from '../../../models/PrefixModel';
 
@@ -28,8 +28,8 @@ export const run: Run = async (client, message) => {
 		.slice(prefix.length)
 		.trim()
 		.split(/ +/g);
-	const cmd: any = args.shift();
-	const command = CmdCollection.get(cmd);
+	const cmd: string = args.shift();
+	const command = client.commands.get(cmd.toLowerCase());
 	if (!command) return;
 	else {
 		command.run(client, message, args, prefix);

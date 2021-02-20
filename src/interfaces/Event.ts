@@ -1,12 +1,12 @@
-import Ultimatum from '../discord';
+import { Ultimatum } from '../discord';
 import { Guild, Message } from 'discord.js';
 
 export interface Run {
 	(
-		client: typeof Ultimatum,
+		client: Ultimatum,
 		message: Message,
 		guild?: Guild,
-		...args: string[]
+		...args: unknown[]
 	): Promise<void>;
 }
 
