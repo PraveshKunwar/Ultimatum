@@ -65,3 +65,5 @@ export const run: Run = async (client, message, args, prefix) => {
 };
 
 export const name: string = 'github';
+export const category: string = 'profile';
+export const aliases: string[] = ['git'];

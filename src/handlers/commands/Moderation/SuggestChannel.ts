@@ -71,3 +71,4 @@ export const run: Run = async (client, message, args, prefix) => {
 	}
 };
 export const name: string = 'suggest_set';
+export const category: string = 'moderation';

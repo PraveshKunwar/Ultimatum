@@ -63,3 +63,4 @@ export const run: Run = async (client, message, args, prefix) => {
 };
 
 export const name: string = 'prefix';
+export const category: string = 'moderation';

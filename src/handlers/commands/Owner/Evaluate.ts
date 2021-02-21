@@ -41,3 +41,4 @@ export const run: Run = async (client, message, args) => {
 };
 
 export const name: string = 'eval';
+export const category: string = 'owner';

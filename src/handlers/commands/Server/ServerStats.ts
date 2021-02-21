@@ -68,3 +68,4 @@ export const run: Run = async (client, message, args) => {
 };
 
 export const name: string = 'server';
+export const category: string = 'server';

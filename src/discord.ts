@@ -4,13 +4,18 @@ require('dotenv').config();
 
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
+import { Categories } from './interfaces/Categories';
 
 import { Mongo } from './functions/Mongoose';
 
 class Ultimatum extends Client {
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
-	public categories; //working tmrw
+	public aliases: Collection<string, Command> = new Collection();
+	public categories: Collection<
+		string | string[],
+		Categories
+	> = new Collection(); //working tmrw
 	public client: Client = this;
 	public database: Mongo;
 	public constructor() {
@@ -29,6 +34,14 @@ class Ultimatum extends Client {
 					const CommandPath = f.split('./dist/handlers/commands/')[1];
 					const props = require(`./handlers/commands/${CommandPath}`);
 					this.commands.set(props.name, props);
+					if (props.category) {
+						this.categories.set(props.category, props);
+					}
+					if (props.aliases) {
+						props.aliases.map((alias: string) => {
+							this.aliases.set(alias, props);
+						});
+					}
 				}
 			});
 		});

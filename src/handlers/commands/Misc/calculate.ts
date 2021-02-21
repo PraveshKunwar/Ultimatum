@@ -45,3 +45,4 @@ export const run: Run = async (client, message, args) => {
   }*/
 };
 export const name: string = 'calculate';
+export const category: string = 'misc';

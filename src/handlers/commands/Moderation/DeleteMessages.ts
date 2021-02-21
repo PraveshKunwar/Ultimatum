@@ -51,3 +51,4 @@ export const run: Run = async (client, message, args, prefix) => {
 };
 
 export const name: string = 'delete';
+export const category: string = 'moderation';
