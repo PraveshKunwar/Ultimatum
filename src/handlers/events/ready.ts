@@ -4,8 +4,8 @@ import { Run } from '../../interfaces/Event';
 export const run: Run = async (client) => {
 	client.user?.setPresence({
 		activity: {
-			name: `Looking over ${client.users.cache.size} people!`,
-			type: 'CUSTOM_STATUS',
+			name: "to people's commands!",
+			type: 'LISTENING',
 		},
 		status: 'dnd',
 	});

@@ -22,6 +22,7 @@ class Ultimatum extends Client {
 		super({
 			disableMentions: 'all',
 			fetchAllMembers: true,
+			retryLimit: Number.POSITIVE_INFINITY,
 		});
 	}
 	public async StartClient(config: string | undefined): Promise<void> {

@@ -1,4 +1,4 @@
-/*import { Run } from '../../../interfaces/Command';
+import { Run } from '../../../interfaces/Command';
 import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
@@ -95,5 +95,6 @@ export const run: Run = async (client, message, args, prefix) => {
 	}
 };
 
-export const name: string = 'mod-channel'*/
+export const name: string = 'mod-channel';
 export const category: string = 'moderation';
+export const aliases: string[] = ['mod_set', 'mod-set', 'mod_channel'];
