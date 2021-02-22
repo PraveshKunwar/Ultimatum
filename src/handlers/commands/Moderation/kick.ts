@@ -4,7 +4,7 @@ import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 import Colors from '../../../util/Colors';
-import Moderation from '../../../models/Moderation';
+import Moderation from '../../../models/ModerationModel';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const MentionedUser = message.mentions.members?.first();

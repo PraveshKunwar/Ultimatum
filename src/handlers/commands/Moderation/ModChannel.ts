@@ -4,7 +4,7 @@ import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../../util/Colors';
-import Moderation from '../../../models/Moderation';
+import Moderation from '../../../models/ModerationModel';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const MentionedChannel = message.mentions.channels.first();

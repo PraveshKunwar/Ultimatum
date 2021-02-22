@@ -30,8 +30,11 @@ export const run: Run = async (client, message: Message) => {
 		.trim()
 		.split(/ +/g);
 	const cmd: string = args.shift();
-	//@ts-ignore
-	const command = client.commands.get(cmd) || client.aliases.get(cmd);
+	const command = client.commands
+		? client.commands.get(cmd)
+		: false || client.aliases
+		? client.aliases.get(cmd)
+		: false;
 	if (!command) return;
 	else {
 		command.run(client, message, args, prefix);
