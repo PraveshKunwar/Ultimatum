@@ -1,0 +1,7 @@
+{
+	"git.ignoreLimitWarning": true,
+	"files.autoSave": "afterDelay",
+	"editor.formatOnPaste": true,
+	"editor.acceptSuggestionOnEnter": "smart",
+	"editor.fontLigatures": true
+}
