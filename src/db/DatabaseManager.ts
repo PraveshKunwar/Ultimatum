@@ -1,7 +1,7 @@
 import { Guild } from 'discord.js';
 import mongoose, { Document, Model } from 'mongoose';
 
-class DatabaseManger {
+class DatabaseManager {
 	public;
 	public async checkModel(path: string, modelProps: object, guild?: Guild) {
 		const importModel: mongoose.Model<mongoose.Document<any>> = require(path);
@@ -20,4 +20,4 @@ class DatabaseManger {
 	}
 }
 
-export { DatabaseManger };
+export { DatabaseManager };

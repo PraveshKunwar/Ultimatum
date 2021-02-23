@@ -7,7 +7,7 @@ import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 
 import { Mongo } from './functions/Mongoose';
-import { DatabaseManger } from './db/DatabaseManager';
+import { DatabaseManager } from './db/DatabaseManager';
 import { fileURLToPath } from 'url';
 
 class Ultimatum extends Client {
@@ -19,7 +19,7 @@ class Ultimatum extends Client {
 		Categories
 	> = new Collection(); //working tmrw
 	public client: Client = this;
-	public DBManager: DatabaseManger;
+	public DBManager: DatabaseManager;
 	public database: Mongo;
 	public constructor() {
 		super({
@@ -57,7 +57,7 @@ class Ultimatum extends Client {
 					const Event = f.split('./dist/handlers/events')[1];
 					const props: Event = require(`./handlers/events/${Event}`);
 					this.events.set(props.name, props);
-					this.on(props.name, props.run.bind(this));
+					this.on(props.name, props.run.bind(null, this));
 				}
 			});
 		});
