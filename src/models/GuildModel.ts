@@ -11,7 +11,7 @@ const GuildJoin = new mongoose.Schema({
 	GuildRegion: String,
 	GuildOwner: String,
 	createdAt: Date,
-	icon: String,
+	icon: String || null,
 });
 
 const GuildModel = mongoose.model('guilds', GuildJoin);
