@@ -7,6 +7,8 @@ import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 
 import { Mongo } from './functions/Mongoose';
+import { DatabaseManger } from './db/DatabaseManager';
+import { fileURLToPath } from 'url';
 
 class Ultimatum extends Client {
 	public commands: Collection<string | string[], Command> = new Collection();
@@ -17,10 +19,10 @@ class Ultimatum extends Client {
 		Categories
 	> = new Collection(); //working tmrw
 	public client: Client = this;
+	public DBManager: DatabaseManger;
 	public database: Mongo;
 	public constructor() {
 		super({
-			disableMentions: 'all',
 			fetchAllMembers: true,
 			retryLimit: Number.POSITIVE_INFINITY,
 		});
