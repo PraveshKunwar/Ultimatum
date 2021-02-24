@@ -33,7 +33,7 @@ export const run: Run = async (client, message: Message) => {
 	const command =
 		client.commands.get(cmd) || client.aliases
 			? client.aliases.get(cmd)
-			: client.commands.get(cmd);
+			: false;
 
 	if (!command) return;
 	else {

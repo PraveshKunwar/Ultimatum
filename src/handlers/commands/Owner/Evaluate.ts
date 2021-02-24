@@ -22,10 +22,7 @@ export const run: Run = async (client, message, args) => {
 			.addFields({
 				name: 'Evaluation Result',
 				value: `${BlockQuote(
-					`
-        Input = ${evaluation}
-        Result: ${eval(evaluation)}
-        `,
+					`Input = ${evaluation}\nResult: ${eval(evaluation)} `,
 					'js'
 				)}`,
 				inline: true,

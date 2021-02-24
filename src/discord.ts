@@ -7,7 +7,7 @@ import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 
 import { Mongo } from './functions/Mongoose';
-import { DatabaseManager } from './db/DatabaseManager';
+import { DatabaseManager } from './managers/DatabaseManager';
 import { fileURLToPath } from 'url';
 
 class Ultimatum extends Client {
