@@ -8,7 +8,7 @@ import { Categories } from './interfaces/Categories';
 
 import { Mongo } from './functions/Mongoose';
 import { DatabaseManager } from './managers/DatabaseManager';
-import { fileURLToPath } from 'url';
+import { MusicManager } from './managers/MusicManager';
 
 class Ultimatum extends Client {
 	public commands: Collection<string | string[], Command> = new Collection();
@@ -20,6 +20,7 @@ class Ultimatum extends Client {
 	> = new Collection(); //working tmrw
 	public client: Client = this;
 	public DBManager: DatabaseManager;
+	public MusicManager: MusicManager;
 	public database: Mongo;
 	public constructor() {
 		super({
@@ -28,6 +29,8 @@ class Ultimatum extends Client {
 		});
 	}
 	public async StartClient(config: string | undefined): Promise<void> {
+		this.MusicManager = new MusicManager();
+		this.MusicManager.play('https://www.youtube.com/watch?v=uuodbSVO3z0');
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);
 		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {

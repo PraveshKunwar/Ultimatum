@@ -1,11 +1,12 @@
-import { Player } from 'discord-player';
 import { Ultimatum } from '../discord';
+import ytdl from 'ytdl-core';
 
 class MusicManager {
-	public constructor(client: Ultimatum) {
-        
-    }
 	public queue = new Map();
+	public async play(url: string): Promise<void> {
+		const info = await ytdl.getInfo(url);
+		console.log(info);
+	}
 }
 
 export { MusicManager };
