@@ -39,6 +39,7 @@ class Ultimatum extends Client {
 				if (f.endsWith('.js') || f.match(/.*\.js$/)) {
 					const CommandPath = f.split('./dist/handlers/commands/')[1];
 					const props = require(`./handlers/commands/${CommandPath}`);
+					console.log(props);
 					this.commands.set(props.name, props);
 					if (props.category) {
 						this.categories.set(props.category, props);

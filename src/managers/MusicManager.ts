@@ -5,7 +5,6 @@ class MusicManager {
 	public queue = new Map();
 	public async play(url: string): Promise<void> {
 		const info = await ytdl.getInfo(url);
-		console.log(info);
 	}
 }
 
