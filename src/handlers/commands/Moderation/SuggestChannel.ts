@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
@@ -13,7 +12,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		!message.member?.hasPermission('MANAGE_CHANNELS') ||
 		!message.guild?.me?.hasPermission('MANAGE_CHANNELS')
 	) {
-		const Error = ErrorEmbed(
+		const Error = client.ErrorEmbed(
 			`
         Please make sure you have the following requirements in order to set a suggestion channel!
         ${BlockQuote(`

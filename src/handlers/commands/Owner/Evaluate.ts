@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../../util/Colors';
@@ -7,7 +6,7 @@ import Colors from '../../../util/Colors';
 export const run: Run = async (client, message, args) => {
 	const evaluation = args.join(' ');
 	if (!evaluation || message.member?.id !== '391364111331622912') {
-		const Error = ErrorEmbed(
+		const Error = client.ErrorEmbed(
 			`Please make sure you have the following requirements!\n${BlockQuote(
 				` 1. Must be OWNER of bot (PraveshK).`
 			)}`,

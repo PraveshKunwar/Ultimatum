@@ -14,6 +14,6 @@ export interface Command {
 	name: string;
 	category?: string;
 	run: Run;
-	desc?: object;
+	desc?: string;
 	aliases?: string[];
 }

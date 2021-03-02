@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import Prefix from '../../../models/PrefixModel';
 import mongoose from 'mongoose';
@@ -13,7 +12,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		!message.member?.hasPermission('MANAGE_GUILD') ||
 		NewPrefix.endsWith(typeof Number)
 	) {
-		const Error = ErrorEmbed(
+		const Error = client.ErrorEmbed(
 			`Please make sure you meet the following requirements:
         ${BlockQuote(
 					`

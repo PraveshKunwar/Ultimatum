@@ -4,6 +4,8 @@
 		"axios": "^0.21.1",
 		"discord.js": "^12.5.1",
 		"dotenv": "^8.2.0",
+		"ffmpeg": "^0.0.4",
+		"ffmpeg-static": "^4.2.7",
 		"fs": "^0.0.1-security",
 		"glob": "^7.1.6",
 		"mathjs": "^9.2.0",
@@ -24,7 +26,9 @@
 	"scripts": {
 		"start": "nodemon ./dist/index.js",
 		"dev": "node ./src/index.ts",
-		"build": "tsc"
+		"build": "tsc",
+		"typecheck": "tsc",
+		"typecheck:watch": "tsc -w"
 	},
 	"author": "Pravesh Kunwar",
 	"license": "MIT"

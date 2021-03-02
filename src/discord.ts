@@ -5,7 +5,7 @@ require('dotenv').config();
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
-
+import ErrorEmbed from './errors/ErrorEmbed';
 import { Mongo } from './functions/Mongoose';
 import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';
@@ -17,11 +17,14 @@ class Ultimatum extends Client {
 	public categories: Collection<
 		string | string[],
 		Categories
-	> = new Collection(); //working tmrw
+	> = new Collection();
+	public description: Collection<string, Command> = new Collection();
+	//working tmrw
 	public client: Client = this;
 	public DBManager: DatabaseManager;
 	public MusicManager: MusicManager;
 	public database: Mongo;
+	public ErrorEmbed = ErrorEmbed;
 	public constructor() {
 		super({
 			fetchAllMembers: true,
@@ -30,7 +33,7 @@ class Ultimatum extends Client {
 	}
 	public async StartClient(config: string | undefined): Promise<void> {
 		this.MusicManager = new MusicManager();
-		this.MusicManager.play('https://www.youtube.com/watch?v=uuodbSVO3z0');
+		this.MusicManager.play('top lil durk fredo bang');
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);
 		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {
@@ -39,7 +42,6 @@ class Ultimatum extends Client {
 				if (f.endsWith('.js') || f.match(/.*\.js$/)) {
 					const CommandPath = f.split('./dist/handlers/commands/')[1];
 					const props = require(`./handlers/commands/${CommandPath}`);
-					console.log(props);
 					this.commands.set(props.name, props);
 					if (props.category) {
 						this.categories.set(props.category, props);
@@ -48,6 +50,9 @@ class Ultimatum extends Client {
 						props.aliases.map((alias: string) => {
 							this.aliases.set(alias, props);
 						});
+					}
+					if (props.desc) {
+						this.description.set(props.desc, props);
 					}
 				}
 			});

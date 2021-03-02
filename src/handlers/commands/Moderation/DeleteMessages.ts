@@ -1,6 +1,5 @@
 import { Run } from '../../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
-import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import Colors from '../../../util/Colors';
 
@@ -13,7 +12,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		!NumMsgDel ||
 		NumMsgDel > 100
 	) {
-		const Error = ErrorEmbed(
+		const Error = client.ErrorEmbed(
 			`
         Please make sure you have the following requirements to delete a message:
         ${BlockQuote(`

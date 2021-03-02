@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import ErrorEmbed from '../../../errors/ErrorEmbed';
 import BlockQuote from '../../../util/BlockQuote';
 import { MessageEmbed } from 'discord.js';
 import axios from 'axios';
@@ -7,7 +6,7 @@ import axios from 'axios';
 export const run: Run = async (client, message, args, prefix) => {
 	const query = args.join(' ');
 	if (!query) {
-		const Error = ErrorEmbed(
+		const Error = client.ErrorEmbed(
 			`
 		Please make sure you use the command correctly!
 		${BlockQuote(`
