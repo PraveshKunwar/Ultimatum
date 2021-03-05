@@ -8,6 +8,7 @@
 		"rootDir": "./src",
 		"removeComments": true,
 		"noEmit": false,
+		"noEmitOnError": false,
 		"noImplicitAny": false,
 		"noImplicitThis": true,
 		"experimentalDecorators": true,
