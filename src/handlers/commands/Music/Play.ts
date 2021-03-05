@@ -6,13 +6,14 @@ import Colors from '../../../util/Colors';
 import ytdl from 'ytdl-core';
 
 export const run: Run = async (client, message, args, prefix) => {
-	console.log(args);
 	const vc = message.member.voice.channel;
 	const song: string = args.join(' ');
-	const perms: boolean =
+	if (
+		!vc ||
 		!message.guild.me.hasPermission('CONNECT') ||
-		!message.guild.me.hasPermission('SPEAK');
-	if (!vc || perms || song) {
+		!message.guild.me.hasPermission('SPEAK') ||
+		!song
+	) {
 		const Error = client.ErrorEmbed(
 			`
 		Please make sure you meet the following requirements to use this command:
@@ -33,3 +34,4 @@ export const run: Run = async (client, message, args, prefix) => {
 };
 
 export const name: string = 'play';
+export const category: string = 'music';

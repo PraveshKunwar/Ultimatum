@@ -10,7 +10,7 @@ class MusicManager {
 	public client: Ultimatum;
 	public constructor() {
 		const QueueObject = {
-			currentChannel: this.message.channel,
+			//	currentChannel: this.message.channel,
 			connection: false,
 			songs: [],
 			volume: 5,
