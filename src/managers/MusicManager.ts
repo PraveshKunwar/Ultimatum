@@ -16,24 +16,11 @@ class MusicManager {
 			volume: 5,
 			playing: true,
 		};
-		this.queue.set(this.message.guild.id, QueueObject);
 	}
-	public async play(vid: string, guild?: Guild): Promise<void> {
-		const search: MusicTypes = await yts(vid);
-		//first data provided by user :)
-		//const queue: any = this.queue.get(guild.id);
-		//	const songs: any[] | unknown[] = queue.songs;
-		const SearchResults = {
-			title: search.all[0].title,
-			url: search.all[0].url,
-			desc: search.all[0].desc,
-			img: search.all[0].image,
-			timestamp: search.all[0].timestamp,
-			views: search.all[0].views,
-		};
-		console.log(SearchResults);
-		//	songs.push(SearchResults);
-	}
+	public async play(vid: string): Promise<void> {}
 }
-
 export { MusicManager };
+
+const add = <T extends number>(x: T, y: T) => {
+	return x + y;
+};

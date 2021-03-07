@@ -66,7 +66,7 @@ class Ultimatum extends Client {
 					const Event = f.split('./dist/handlers/events')[1];
 					const props: Event = require(`./handlers/events/${Event}`);
 					this.events.set(props.name, props);
-					this.on(props.name, props.run.bind(null, this));
+					this. on(props.name, props.run.bind(null, this));
 				}
 			});
 		});

@@ -31,7 +31,7 @@ export const run: Run = async (client, message, args, prefix) => {
 				const DeletedEmbed = new MessageEmbed()
 					.setColor(Colors.successful)
 					.setTimestamp()
-					.setTitle('🗑️ Messages Deleted')
+					.setTitle('Messages Deleted')
 					.setDescription(
 						`Deleted ${NumMsgDel} messages by ${message.author.tag}`
 					)
