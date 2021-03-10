@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import BlockQuote from '../../../util/BlockQuote';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../../util/Colors';
 
@@ -7,7 +6,7 @@ export const run: Run = async (client, message, args) => {
 	const evaluation = args.join(' ');
 	if (!evaluation || message.member?.id !== '391364111331622912') {
 		const Error = client.ErrorEmbed(
-			`Please make sure you have the following requirements!\n${BlockQuote(
+			`Please make sure you have the following requirements!\n${client.BlockQuote(
 				` 1. Must be OWNER of bot (PraveshK).`
 			)}`,
 			client,
@@ -20,7 +19,7 @@ export const run: Run = async (client, message, args) => {
 			.setTitle('💡 Evaluated!')
 			.addFields({
 				name: 'Evaluation Result',
-				value: `${BlockQuote(
+				value: `${client.BlockQuote(
 					`Input = ${evaluation}\nResult: ${eval(evaluation)} `,
 					'js'
 				)}`,
@@ -39,3 +38,4 @@ export const run: Run = async (client, message, args) => {
 export const name: string = 'eval';
 export const category: string = 'owner';
 export const aliases: string[] = ['e', 'evaluate'];
+export const desc: string = 'Evaluate string.';

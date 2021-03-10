@@ -1,6 +1,5 @@
 import { Run } from '../../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
-import BlockQuote from '../../../util/BlockQuote';
 import Colors from '../../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
@@ -15,7 +14,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = client.ErrorEmbed(
 			`
         Please make sure you have the following requirements to delete a message:
-        ${BlockQuote(`
+        ${client.BlockQuote(`
         1. Must have permission: MANAGE_MESSAGES. (For both you and me!)
         2. Must correctly use this command (Ex: ${prefix}Delete 100)
         3. Number must not be greater than a 100.
@@ -51,3 +50,5 @@ export const run: Run = async (client, message, args, prefix) => {
 
 export const name: string = 'delete';
 export const category: string = 'moderation';
+export const aliases: string[] = ['purge', 'del'];
+export const desc: string = 'Delete x messages from channel.';

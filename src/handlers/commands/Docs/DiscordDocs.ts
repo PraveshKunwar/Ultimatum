@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import BlockQuote from '../../../util/BlockQuote';
 import { MessageEmbed } from 'discord.js';
 import axios from 'axios';
 
@@ -9,7 +8,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = client.ErrorEmbed(
 			`
 		Please make sure you use the command correctly!
-		${BlockQuote(`
+		${client.BlockQuote(`
 		1. ${prefix}djs ClientUser#setPresence() OR ClientUser.setPresence()
 		`)}
 		`,

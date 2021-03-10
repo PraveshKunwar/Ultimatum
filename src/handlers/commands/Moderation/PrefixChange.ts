@@ -1,5 +1,4 @@
 import { Run } from '../../../interfaces/Command';
-import BlockQuote from '../../../util/BlockQuote';
 import Prefix from '../../../models/PrefixModel';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
@@ -14,11 +13,10 @@ export const run: Run = async (client, message, args, prefix) => {
 	) {
 		const Error = client.ErrorEmbed(
 			`Please make sure you meet the following requirements:
-        ${BlockQuote(
+        ${client.BlockQuote(
 					`
-       1. Please make sure to use the command correctly: (ex: ${prefix}Prefix newPrefix).
-	   2. Must have the permission MANAGE_GUILD!
-        `
+       1. Please make sure to use the command correctly: \n(ex: ${prefix}prefix newPrefix).
+	   2. Must have the permission MANAGE_GUILD!`
 				)}
         `,
 			client,
@@ -63,3 +61,4 @@ export const run: Run = async (client, message, args, prefix) => {
 
 export const name: string = 'prefix';
 export const category: string = 'moderation';
+export const desc: string = 'Change the prefix of the bot per server.';

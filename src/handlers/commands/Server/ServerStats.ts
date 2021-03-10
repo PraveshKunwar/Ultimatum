@@ -1,6 +1,5 @@
 import { Run } from '../../../interfaces/Command';
 import ErrorEmbed from '../../../errors/ErrorEmbed';
-import BlockQuote from '../../../util/BlockQuote';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../../util/Colors';
@@ -12,7 +11,7 @@ export const run: Run = async (client, message, args) => {
 	const year = date.getFullYear();
 	const ServerStats = new MessageEmbed()
 		.setColor(Colors.successful)
-		.setThumbnail(`${message.guild?.iconURL()}`)
+		.setThumbnail(`${message.guild.iconURL()}`)
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setTitle('📈 Server Stats:')
 		.setFooter(
@@ -69,3 +68,4 @@ export const run: Run = async (client, message, args) => {
 
 export const name: string = 'server';
 export const category: string = 'server';
+export const desc: string = 'Stats for your server.';

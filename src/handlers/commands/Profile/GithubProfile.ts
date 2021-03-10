@@ -1,6 +1,5 @@
 import { Run } from '../../../interfaces/Command';
 import ErrorEmbed from '../../../errors/ErrorEmbed';
-import BlockQuote from '../../../util/BlockQuote';
 import Colors from '../../../util/Colors';
 import axios from 'axios';
 import { MessageEmbed } from 'discord.js';
@@ -11,7 +10,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = ErrorEmbed(
 			`Please specify a username for me to search! Also, please make sure that the user *exists* on Github as well! \n\n
 		**Examples:**
-			${BlockQuote(
+			${client.BlockQuote(
 				`${prefix}Github John Doe\n${prefix}Github Robert Doe
 				`
 			)}
@@ -67,5 +66,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'github';
 export const category: string = 'profile';
 export const desc: string = 'Check someones Github profile out.';
-
 export const aliases: string[] = ['git'];

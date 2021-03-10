@@ -1,5 +1,5 @@
 import { Run } from '../../../interfaces/Event';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import GuildModel from '../../../models/GuildModel';
 import { Guild } from 'discord.js';
 

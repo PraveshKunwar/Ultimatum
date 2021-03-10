@@ -1,5 +1,4 @@
 import { MessageEmbed } from 'discord.js';
-import BlockQuote from '../../../util/BlockQuote';
 import Colors from '../../../util/Colors';
 import { Run } from '../../../interfaces/Command';
 
@@ -9,7 +8,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = client.ErrorEmbed(
 			`Please specify some params for me to search! \n\n
     **Examples:**
-    ${BlockQuote(
+    ${client.BlockQuote(
 			`
     ${prefix}Google what's the weather today?
     ${prefix}Google latest news!

@@ -7,8 +7,8 @@ import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 import ErrorEmbed from './errors/ErrorEmbed';
 import { Mongo } from './functions/Mongoose';
-import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';
+import BlockQuote from './util/BlockQuote';
 
 class Ultimatum extends Client {
 	public commands: Collection<string | string[], Command> = new Collection();
@@ -21,10 +21,10 @@ class Ultimatum extends Client {
 	public description: Collection<string, Command> = new Collection();
 	//working tmrw
 	public client: Client = this;
-	public DBManager: DatabaseManager;
 	public MusicManager: MusicManager;
 	public database: Mongo;
 	public ErrorEmbed = ErrorEmbed;
+	public BlockQuote = BlockQuote;
 	public constructor() {
 		super({
 			fetchAllMembers: true,
