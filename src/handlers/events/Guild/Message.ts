@@ -1,5 +1,5 @@
 import { Run } from '../../../interfaces/Event';
-import { Ultimatum } from '../../../discord';
+import { Ultimatum } from '../../../client';
 import * as mongoose from 'mongoose';
 import Prefix from '../../../models/PrefixModel';
 import { Message } from 'discord.js';

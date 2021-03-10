@@ -9,8 +9,7 @@ const ErrorEmbed = (
 ) => {
 	const Embed: MessageEmbed = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-		.setTitle('⚠️ Recieved an error:')
-		.setDescription(`Error: **${err}**`)
+		.setDescription(`**${err}**`)
 		.setColor(Colors.error)
 		.setTimestamp()
 		.setFooter(

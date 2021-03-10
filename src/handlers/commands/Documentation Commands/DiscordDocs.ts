@@ -9,7 +9,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			`
 		Please make sure you use the command correctly!
 		${client.BlockQuote(`
-		1. ${prefix}djs ClientUser#setPresence() OR ClientUser.setPresence()
+		➤ 1. ${prefix}djs ClientUser#setPresence() OR ClientUser.setPresence()
 		`)}
 		`,
 			client,

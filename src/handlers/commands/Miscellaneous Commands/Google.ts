@@ -6,7 +6,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	const SearchParams: string | number = args.join('+');
 	if (!SearchParams) {
 		const Error = client.ErrorEmbed(
-			`Please specify some params for me to search! \n\n
+			`➤ 1. Please specify some params for me to search! \n\n
     **Examples:**
     ${client.BlockQuote(
 			`

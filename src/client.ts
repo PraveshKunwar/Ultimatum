@@ -6,11 +6,13 @@ import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 import ErrorEmbed from './errors/ErrorEmbed';
-import { Mongo } from './functions/Mongoose';
-import { MusicManager } from './managers/MusicManager';
+import { Mongo } from './util/Mongoose';
 import BlockQuote from './util/BlockQuote';
 
+import { DatabaseManager } from './managers/DatabaseManager';
+
 class Ultimatum extends Client {
+	public queue = new Map<any, any>();
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
 	public aliases: Collection<string, Command> = new Collection();
@@ -21,8 +23,8 @@ class Ultimatum extends Client {
 	public description: Collection<string, Command> = new Collection();
 	//working tmrw
 	public client: Client = this;
-	public MusicManager: MusicManager;
 	public database: Mongo;
+	public DatabaseManager: DatabaseManager;
 	public ErrorEmbed = ErrorEmbed;
 	public BlockQuote = BlockQuote;
 	public constructor() {
@@ -32,7 +34,7 @@ class Ultimatum extends Client {
 		});
 	}
 	public async StartClient(config: string | undefined): Promise<void> {
-		this.MusicManager = new MusicManager();
+		this.DatabaseManager = new DatabaseManager();
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);
 		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {

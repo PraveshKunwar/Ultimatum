@@ -11,7 +11,6 @@ export const run: Run = async (client, message, args) => {
 	const year = date.getFullYear();
 	const ServerStats = new MessageEmbed()
 		.setColor(Colors.successful)
-		.setThumbnail(`${message.guild.iconURL()}`)
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setTitle('📈 Server Stats:')
 		.setFooter(

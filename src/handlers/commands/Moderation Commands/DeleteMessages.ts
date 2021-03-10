@@ -14,19 +14,19 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = client.ErrorEmbed(
 			`
         Please make sure you have the following requirements to delete a message:
-        ${client.BlockQuote(`
-        1. Must have permission: MANAGE_MESSAGES. (For both you and me!)
-        2. Must correctly use this command (Ex: ${prefix}Delete 100)
-        3. Number must not be greater than a 100.
-        4. Must be a number, nothing else.
-        `)}
+        ${client.BlockQuote(
+					`➤ 1. Command usage: ${prefix}<${aliases.join(
+						'|'
+					)}> \n➤ 2. Permissions - MANAGE_MESSAGES \n➤ 3. Can only delete a max of 100 messages at a time.`
+				)}
         `,
 			client,
 			message
 		);
+		message.channel.send(Error);
 	} else {
 		if (message.channel.type !== 'dm') {
-			message.channel.bulkDelete(NumMsgDel).then(async (msg) => {
+			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
 				const DeletedEmbed = new MessageEmbed()
 					.setColor(Colors.successful)
 					.setTimestamp()

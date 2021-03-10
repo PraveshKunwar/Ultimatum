@@ -1,4 +1,4 @@
-import { Ultimatum } from '../../discord';
+import { Ultimatum } from '../../client';
 import { Run } from '../../interfaces/Event';
 
 export const run: Run = async (client) => {

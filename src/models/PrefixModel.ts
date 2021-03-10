@@ -1,3 +1,4 @@
+import { Client } from 'discord.js';
 import mongoose from 'mongoose';
 
 const PrefixModel = new mongoose.Schema({
