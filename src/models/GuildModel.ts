@@ -1,4 +1,3 @@
-import { Role } from 'discord.js';
 import mongoose from 'mongoose';
 
 const GuildJoin = new mongoose.Schema({
@@ -11,7 +10,7 @@ const GuildJoin = new mongoose.Schema({
 	GuildRegion: String,
 	GuildOwner: String,
 	createdAt: Date,
-	icon: String || null,
+	icon: String,
 });
 
 const GuildModel = mongoose.model('guilds', GuildJoin);

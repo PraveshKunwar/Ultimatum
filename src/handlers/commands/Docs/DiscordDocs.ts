@@ -36,3 +36,6 @@ export const run: Run = async (client, message, args, prefix) => {
 	}
 };
 export const name: string = 'djs';
+export const category: string = 'docs';
+export const desc: string =
+	'Get data from the official Discord.JS documentation.';

@@ -33,7 +33,6 @@ class Ultimatum extends Client {
 	}
 	public async StartClient(config: string | undefined): Promise<void> {
 		this.MusicManager = new MusicManager();
-		this.MusicManager.play('top lil durk fredo bang');
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);
 		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {
@@ -66,7 +65,7 @@ class Ultimatum extends Client {
 					const Event = f.split('./dist/handlers/events')[1];
 					const props: Event = require(`./handlers/events/${Event}`);
 					this.events.set(props.name, props);
-					this. on(props.name, props.run.bind(null, this));
+					this.on(props.name, props.run.bind(null, this));
 				}
 			});
 		});
