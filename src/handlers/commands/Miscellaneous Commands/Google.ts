@@ -38,4 +38,4 @@ export const run: Run = async (client, message, args, prefix) => {
 
 export const name: string = 'google';
 export const category: string = 'misc';
-export const desc: string = 'Google and get a quick link.';
+export const desc: string = 'Google 	and get a quick link.';

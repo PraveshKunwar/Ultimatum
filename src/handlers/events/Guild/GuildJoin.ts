@@ -4,11 +4,12 @@ import GuildModel from '../../../models/GuildModel';
 import { Guild } from 'discord.js';
 
 export const run: Run = async (client, guild: Guild) => {
-	const GuildDB = await GuildModel.findOne({
-		GuildId: guild.id,
-	});
-	if (!GuildDB) {
-		const NewGuild = new GuildModel({
+	client.DatabaseManager.findAndCreate(
+		{
+			GuildId: guild.id,
+		},
+		GuildModel,
+		{
 			_id: mongoose.Types.ObjectId(),
 			GuildId: guild.id,
 			GuildName: guild.name,
@@ -16,14 +17,11 @@ export const run: Run = async (client, guild: Guild) => {
 			GuildChannels: guild.channels.cache.size,
 			GuildRoles: guild.roles.cache.size,
 			GuildRegion: guild.region,
-			GuildOwner: guild.owner?.user.username,
+			GuildOwner: guild.owner.user.username,
 			createdAt: guild.createdAt,
 			icon: guild.iconURL(),
-		});
-		NewGuild.save()
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
-	}
+		}
+	);
 };
 
 export const name: string = 'guildCreate';

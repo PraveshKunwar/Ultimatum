@@ -1,4 +1,4 @@
-import { Client, Collection, Message } from 'discord.js';
+import { Client, Collection, Intents, Message } from 'discord.js';
 import glob from 'glob';
 require('dotenv').config();
 
@@ -31,6 +31,9 @@ class Ultimatum extends Client {
 		super({
 			fetchAllMembers: true,
 			retryLimit: Number.POSITIVE_INFINITY,
+			ws: {
+				intents: Intents.ALL,
+			},
 		});
 	}
 	public async StartClient(config: string | undefined): Promise<void> {
