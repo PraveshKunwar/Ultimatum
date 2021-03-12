@@ -4,6 +4,7 @@ const MongoInit = (): void => {
 	const options = {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		useFindAndModify: false,
 		poolSize: 5,
 	};
 	mongoose.connect(

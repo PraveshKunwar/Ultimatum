@@ -19,7 +19,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		);
 		message.channel.send(Error);
 	} else if (NewPrefix && message.member.hasPermission('MANAGE_GUILD')) {
-		client.DatabaseManager.findCreateUpdateOne(
+		client.DatabaseManager.findCreateUpdate(
 			{
 				GuildId: message.guild?.id,
 			},

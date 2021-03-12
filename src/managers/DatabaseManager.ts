@@ -12,7 +12,15 @@ class DatabaseManager {
 			NewModel.save().catch((err) => console.log(err));
 		}
 	}
-	public async findCreateUpdateOne(
+	public async findUpdateOne(
+		findBy: object,
+		model: mongoose.Model<mongoose.Document<any>>,
+		toUpdate: object
+	) {
+		mongoose.set('useFindAndModify', false);
+		return await model.findOneAndUpdate(findBy, toUpdate);
+	}
+	public async findCreateUpdate(
 		findBy: object,
 		model: mongoose.Model<mongoose.Document<any>>,
 		props: object,

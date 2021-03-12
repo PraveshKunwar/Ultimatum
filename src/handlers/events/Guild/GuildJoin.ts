@@ -20,6 +20,7 @@ export const run: Run = async (client, guild: Guild) => {
 			GuildOwner: guild.owner.user.username,
 			createdAt: guild.createdAt,
 			icon: guild.iconURL(),
+			DiscordLink: false,
 		}
 	);
 	const Welcome = new MessageEmbed()

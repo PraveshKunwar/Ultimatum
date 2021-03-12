@@ -13,7 +13,9 @@ export const run: Run = async (client, message, args, prefix) => {
 	) {
 		const Error = client.ErrorEmbed(
 			`
-        Please make sure you have the following requirements to delete a message:\n\n**➤ Specify the amount of messages you would like me to delete. **\n**➤ Permissions - MANAGE_MESSAGES **\n**➤ Can only delete a max of 100 messages at a time.**
+        ➤ Please make sure you have the following requirements to delete a message:\n\n**🔰 Specify the amount of messages you would like me to delete. **\n**🔰 Permissions - ${client.OneQuote(
+					'MANAGE_MESSAGES'
+				)} **\n**🔰 Can only delete a max of 100 messages at a time.**
         `,
 			client,
 			message

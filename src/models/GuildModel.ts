@@ -11,6 +11,7 @@ const GuildJoin = new mongoose.Schema({
 	GuildOwner: String,
 	createdAt: Date,
 	icon: String || null,
+	DiscordLink: Boolean
 });
 
 const GuildModel = mongoose.model('guilds', GuildJoin);
