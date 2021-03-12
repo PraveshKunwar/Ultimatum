@@ -32,6 +32,7 @@ export const run: Run = async (client, message: Message) => {
 	const cmd: string = args.shift();
 	const command = client.commands.get(cmd) || client.aliases.get(cmd);
 
+	const reg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
 	if (!command) return;
 	else {
 		command.run(client, message, args, prefix);

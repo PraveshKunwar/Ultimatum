@@ -12,7 +12,6 @@ import { BlockQuote, OneQuote } from './util/Quote';
 import { DatabaseManager } from './managers/DatabaseManager';
 
 class Ultimatum extends Client {
-	public queue = new Map<any, any>();
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
 	public aliases: Collection<string, Command> = new Collection();
