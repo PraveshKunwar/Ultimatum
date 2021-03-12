@@ -1,31 +1,35 @@
 import { Run } from '../../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
 import Colors from '../../../util/Colors';
+import { inspect } from 'util';
 
 export const run: Run = async (client, message, args) => {
 	const evaluation = args.join(' ');
+	let evaled;
+	const start = process.hrtime();
+	const stop = process.hrtime(start);
+	evaled = eval(evaluation);
 	if (!evaluation || message.member?.id !== '391364111331622912') {
 		const Error = client.ErrorEmbed(
-			`Please make sure you have the following requirements!\n${client.BlockQuote(
-				` ➤ 1. Must be OWNER of bot (PraveshK).`
-			)}`,
+			`**➤ Cannot use this command. Not owner of bot.**`,
 			client,
 			message
 		);
 		message.channel.send(Error);
 	} else if (evaluation && message.member?.id === '391364111331622912') {
+		const result = client.BlockQuote(`${inspect(evaled, { depth: 0 })}`, 'js');
+		const taken = client.BlockQuote(
+			`${(stop[0] * 1e9 + stop[1]) / 1e6}ms taken!`,
+			'js'
+		);
 		const EvalEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('💡 Evaluated!')
-			.addFields({
-				name: 'Evaluation Result',
-				value: `${client.BlockQuote(
-					`Input = ${evaluation}\nResult: ${eval(evaluation)} `,
-					'js'
-				)}`,
-				inline: true,
-			})
-			.setColor(Colors.error)
+			.setDescription(
+				`
+			**Result:**\n${result}\n**Time Taken:**\n${taken}
+			`
+			)
+			.setColor("RANDOM")
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,

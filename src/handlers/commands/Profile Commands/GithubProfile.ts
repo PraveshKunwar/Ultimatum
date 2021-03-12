@@ -8,7 +8,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	const username = args.join(' ');
 	if (!username) {
 		const Error = ErrorEmbed(
-			`Please specify a username for me to search! Also, please make sure that the user *exists* on Github as well!`,
+			`**➤ Please specify a username for me to search!** \n **➤ Please make sure that the user *exists* on Github as well!**`,
 			client,
 			message
 		);

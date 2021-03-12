@@ -9,7 +9,7 @@ const ErrorEmbed = (
 ) => {
 	const Embed: MessageEmbed = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-		.setDescription(`**${err}**`)
+		.setDescription(`${err}`)
 		.setColor(Colors.error)
 		.setTimestamp()
 		.setFooter(

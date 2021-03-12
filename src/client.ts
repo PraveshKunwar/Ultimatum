@@ -7,7 +7,7 @@ import { Event } from './interfaces/Event';
 import { Categories } from './interfaces/Categories';
 import ErrorEmbed from './errors/ErrorEmbed';
 import { Mongo } from './util/Mongoose';
-import BlockQuote from './util/BlockQuote';
+import { BlockQuote, OneQuote } from './util/Quote';
 
 import { DatabaseManager } from './managers/DatabaseManager';
 
@@ -27,6 +27,7 @@ class Ultimatum extends Client {
 	public DatabaseManager: DatabaseManager;
 	public ErrorEmbed = ErrorEmbed;
 	public BlockQuote = BlockQuote;
+	public OneQuote = OneQuote;
 	public constructor() {
 		super({
 			fetchAllMembers: true,
@@ -36,7 +37,12 @@ class Ultimatum extends Client {
 			},
 		});
 	}
-	public async StartClient(config: string | undefined): Promise<void> {
+	public async StartClient<T extends Promise<T>>(
+		config: string | undefined
+	): Promise<void> {
+		process.on('unhandledRejection', (res: Error, promise: T) => {
+			console.log(`Error: ${res}\n Where: ${promise}`);
+		});
 		this.DatabaseManager = new DatabaseManager();
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);

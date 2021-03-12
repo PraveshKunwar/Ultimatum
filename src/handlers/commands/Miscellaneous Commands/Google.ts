@@ -6,14 +6,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	const SearchParams: string | number = args.join('+');
 	if (!SearchParams) {
 		const Error = client.ErrorEmbed(
-			`➤ 1. Please specify some params for me to search! \n\n
-    **Examples:**
-    ${client.BlockQuote(
-			`
-    ${prefix}Google what's the weather today?
-    ${prefix}Google latest news!
-    `
-		)}
+			`**➤ Please specify some params for me to search!** \n\n
     `,
 			client,
 			message
@@ -22,11 +15,11 @@ export const run: Run = async (client, message, args, prefix) => {
 	} else {
 		const GoogleLink = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('↠ Google Search:')
+			.setTitle('🔍 Google Search:')
 			.setDescription(
-				`↠ [🔗Link](http://www.google.com/search?q=${SearchParams})`
+				`**[🔗Link](http://www.google.com/search?q=${SearchParams})**`
 			)
-			.setColor(Colors.successful)
+			.setColor('RANDOM')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,

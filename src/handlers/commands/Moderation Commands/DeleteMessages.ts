@@ -13,12 +13,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	) {
 		const Error = client.ErrorEmbed(
 			`
-        Please make sure you have the following requirements to delete a message:
-        ${client.BlockQuote(
-					`➤ 1. Command usage: ${prefix}<${aliases.join(
-						'|'
-					)}> \n➤ 2. Permissions - MANAGE_MESSAGES \n➤ 3. Can only delete a max of 100 messages at a time.`
-				)}
+        Please make sure you have the following requirements to delete a message:\n\n**➤ Specify the amount of messages you would like me to delete. **\n**➤ Permissions - MANAGE_MESSAGES **\n**➤ Can only delete a max of 100 messages at a time.**
         `,
 			client,
 			message
@@ -28,7 +23,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		if (message.channel.type !== 'dm') {
 			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
 				const DeletedEmbed = new MessageEmbed()
-					.setColor(Colors.successful)
+					.setColor('RANDOM')
 					.setTimestamp()
 					.setTitle('Messages Deleted')
 					.setDescription(
@@ -50,5 +45,5 @@ export const run: Run = async (client, message, args, prefix) => {
 
 export const name: string = 'delete';
 export const category: string = 'moderation';
-export const aliases: string[] = ['purge', 'del'];
+export const aliases: string[] = ['purge', 'del', 'clear'];
 export const desc: string = 'Delete x messages from channel.';

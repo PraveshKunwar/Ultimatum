@@ -10,7 +10,7 @@ export const run: Run = async (client, message, args) => {
 	const day = date.getDate();
 	const year = date.getFullYear();
 	const ServerStats = new MessageEmbed()
-		.setColor(Colors.successful)
+		.setColor('RANDOM')
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setTitle('📈 Server Stats:')
 		.setFooter(

@@ -13,11 +13,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		NewPrefix.endsWith(typeof Number)
 	) {
 		const Error = client.ErrorEmbed(
-			`Please make sure you meet the following requirements:
-        ${client.BlockQuote(
-					` ➤ 1. Command Usage: ${prefix}prefix <NewPrefix>\n ➤ 2. Permissions - MANAGE_GUILD`
-				)}
-        `,
+			`Please make sure you meet the following requirements: \n**➤ Command Usage: ${prefix}prefix <NewPrefix>**\n **➤ Permissions - MANAGE_GUILD**`,
 			client,
 			message
 		);
@@ -41,7 +37,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 			.setTitle('Changed server prefix:')
 			.setDescription(`New Prefix: **${NewPrefix}**`)
-			.setColor(Colors.successful)
+			.setColor('RANDOM')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,
