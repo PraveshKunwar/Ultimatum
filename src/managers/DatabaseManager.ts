@@ -1,6 +1,12 @@
 import mongoose, { Model } from 'mongoose';
 
 class DatabaseManager {
+	public async findOne(
+		findBy: object,
+		model: mongoose.Model<mongoose.Document<any>>
+	) {
+		return await model.findOne(findBy);
+	}
 	public async findAndCreate(
 		findBy: object,
 		model: mongoose.Model<mongoose.Document<any>>,

@@ -34,13 +34,55 @@ export const run: Run = async (client, message, args, prefix) => {
 			)
 		);
 	}
-	if (link === 'on') {
+	if (
+		link === 'on' &&
+		message.member.hasPermission('MANAGE_MESSAGES') &&
+		message.guild.me.hasPermission('MANAGE_MESSAGES')
+	) {
 		client.DatabaseManager.findUpdateOne(
 			{ GuildId: message.guild.id },
 			GuildModel,
 			{ DiscordLink: true }
 		).then((res) => {
-			message.channel.send('updated');
+			const OnEmbed = new MessageEmbed()
+				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+				.setDescription(
+					`🔰 **Discord invite link banner turned on.** By: ${client.OneQuote(
+						message.author.username
+					)}`
+				)
+				.setColor(Colors.error)
+				.setTimestamp()
+				.setFooter(
+					`User: ${message.author?.tag} • Created by: PraveshK`,
+					message.author.displayAvatarURL()
+				);
+			message.channel.send(OnEmbed);
+		});
+	} else if (
+		link === 'off' &&
+		message.member.hasPermission('MANAGE_MESSAGES') &&
+		message.guild.me.hasPermission('MANAGE_MESSAGES')
+	) {
+		client.DatabaseManager.findUpdateOne(
+			{ GuildId: message.guild.id },
+			GuildModel,
+			{ DiscordLink: false }
+		).then((res) => {
+			const OffEmbed = new MessageEmbed()
+				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+				.setDescription(
+					`🔰 **Discord invite link banner turned off.** By: ${client.OneQuote(
+						message.author.username
+					)}`
+				)
+				.setColor(Colors.error)
+				.setTimestamp()
+				.setFooter(
+					`User: ${message.author?.tag} • Created by: PraveshK`,
+					message.author.displayAvatarURL()
+				);
+			message.channel.send(OffEmbed);
 		});
 	}
 };
