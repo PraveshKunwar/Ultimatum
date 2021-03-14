@@ -4,7 +4,7 @@ class DatabaseManager {
 	public async findOne(
 		findBy: object,
 		model: mongoose.Model<mongoose.Document<any>>
-	) {
+	): Promise<mongoose.Document<any>> {
 		return await model.findOne(findBy);
 	}
 	public async findAndCreate(
