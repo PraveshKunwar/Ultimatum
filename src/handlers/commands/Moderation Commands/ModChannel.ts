@@ -51,7 +51,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					`🔰 **Mod channel updated: ${client.OneQuote(
 						channel.name
 					)} is now the mod channel.** By: ${client.OneQuote(
-						message.author.username
+						message.author.tag
 					)}`
 				)
 				.setColor('RANDOM')

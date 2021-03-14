@@ -98,12 +98,14 @@ export const run: Run = async (client, message, args, prefix) => {
 				);
 
 				const updatedEmbed = new MessageEmbed()
+					.setTitle('AUDITS / UPDATES')
 					.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 					.setDescription(
-						`🔰 **Discord invite link banner was turned on.** By: ${client.OneQuote(
-							message.author.username
-						)} \n
-						Was updated at: ${client.OneQuote(
+						`🔰 **Discord invite link banner was turned on.** .\n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+							'MANAGE_MESSAGES'
+						)}  \n\nBy: ${client.OneQuote(
+							message.author.tag
+						)} at ${client.OneQuote(
 							moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
 						)}
 						`
