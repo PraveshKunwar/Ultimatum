@@ -51,7 +51,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						message.author.username
 					)}`
 				)
-				.setColor(Colors.error)
+				.setColor('RANDOM')
 				.setTimestamp()
 				.setFooter(
 					`User: ${message.author?.tag} • Created by: PraveshK`,

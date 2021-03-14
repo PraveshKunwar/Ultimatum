@@ -34,12 +34,13 @@ class Ultimatum extends Client {
 			ws: {
 				intents: Intents.ALL,
 			},
+			partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
 		});
 	}
 	public async StartClient<T extends Promise<T>>(
 		config: string | undefined
 	): Promise<void> {
-		process.on('unhandledRejection', (res: Error, promise: T) => {
+		process.on('unhandledRejection', (res: any, promise: T) => {
 			console.log(`Error: ${res}\n Where: ${promise}`);
 		});
 		this.DatabaseManager = new DatabaseManager();

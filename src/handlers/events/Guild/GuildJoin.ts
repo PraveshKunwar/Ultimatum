@@ -21,6 +21,8 @@ export const run: Run = async (client, guild: Guild) => {
 			createdAt: guild.createdAt,
 			icon: guild.iconURL(),
 			DiscordLink: false,
+			ModChannel: null,
+			ModChannelName: null
 		}
 	);
 	const Welcome = new MessageEmbed()
