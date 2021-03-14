@@ -1,8 +1,9 @@
 import { Run } from '../../../interfaces/Command';
 import GuildModel from '../../../models/GuildModel';
 import mongoose from 'mongoose';
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed, TextChannel } from 'discord.js';
 import Colors from '../../../util/Colors';
+import moment from 'moment';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const link = args[0];
@@ -83,6 +84,38 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.author.displayAvatarURL()
 				);
 			message.channel.send(OffEmbed);
+		});
+		const mod: any = client.DatabaseManager.findOne(
+			{ GuildId: message.guild.id },
+			GuildModel
+		);
+		mod.then((res) => {
+			if (res.ModChannel === null || res.ModChannelName === null) {
+				return;
+			} else {
+				const updated = message.guild.channels.cache.find(
+					(n) => n.name === res.ModChannelName
+				);
+
+				const updatedEmbed = new MessageEmbed()
+					.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+					.setDescription(
+						`🔰 **Discord invite link banner was turned on.** By: ${client.OneQuote(
+							message.author.username
+						)} \n
+						Was updated at: ${client.OneQuote(
+							moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+						)}
+						`
+					)
+					.setColor('RANDOM')
+					.setTimestamp()
+					.setFooter(
+						`User: ${message.author?.tag} • Created by: PraveshK`,
+						message.author.displayAvatarURL()
+					);
+				(updated as TextChannel).send(updatedEmbed);
+			}
 		});
 	}
 };

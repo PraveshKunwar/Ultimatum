@@ -3,9 +3,11 @@ import ErrorEmbed from '../../../errors/ErrorEmbed';
 import Colors from '../../../util/Colors';
 import axios from 'axios';
 import { MessageEmbed } from 'discord.js';
+import GuildModel from '../../../models/GuildModel';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const username = args.join(' ');
+
 	if (!username) {
 		const Error = ErrorEmbed(
 			`**➤ Please specify a username for me to search!** \n **➤ Please make sure that the user *exists* on Github as well!**`,

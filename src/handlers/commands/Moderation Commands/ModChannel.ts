@@ -39,29 +39,28 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ GuildId: message.guild.id },
 			GuildModel,
 			{ ModChannel: channel.id }
+		);
+		client.DatabaseManager.findUpdateOne(
+			{ GuildId: message.guild.id },
+			GuildModel,
+			{ ModChannelName: channel.name }
 		).then((res) => {
-			client.DatabaseManager.findUpdateOne(
-				{ GuildId: message.guild.id },
-				GuildModel,
-				{ ModChannelname: channel.name }
-			).then((res) => {
-				const SetEmbed = new MessageEmbed()
-					.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-					.setDescription(
-						`🔰 **Mod channel updated: ${client.OneQuote(
-							channel.name
-						)} is now the mod channel.** By: ${client.OneQuote(
-							message.author.username
-						)}`
-					)
-					.setColor('RANDOM')
-					.setTimestamp()
-					.setFooter(
-						`User: ${message.author?.tag} • Created by: PraveshK`,
-						message.author.displayAvatarURL()
-					);
-				message.channel.send(SetEmbed);
-			});
+			const SetEmbed = new MessageEmbed()
+				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+				.setDescription(
+					`🔰 **Mod channel updated: ${client.OneQuote(
+						channel.name
+					)} is now the mod channel.** By: ${client.OneQuote(
+						message.author.username
+					)}`
+				)
+				.setColor('RANDOM')
+				.setTimestamp()
+				.setFooter(
+					`User: ${message.author?.tag} • Created by: PraveshK`,
+					message.author.displayAvatarURL()
+				);
+			message.channel.send(SetEmbed);
 		});
 	}
 };
