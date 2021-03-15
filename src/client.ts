@@ -1,4 +1,4 @@
-import { Client, Collection, Intents, Message } from 'discord.js';
+import { Client, Collection, Guild, Intents, Message } from 'discord.js';
 import glob from 'glob';
 require('dotenv').config();
 
@@ -25,6 +25,7 @@ class Ultimatum extends Client {
 	public database: Mongo;
 	public DatabaseManager: DatabaseManager;
 	public ErrorEmbed = ErrorEmbed;
+	public queue = new Map<string, object>();
 	public BlockQuote = BlockQuote;
 	public OneQuote = OneQuote;
 	public constructor() {
