@@ -25,7 +25,6 @@ class Ultimatum extends Client {
 	public database: Mongo;
 	public DatabaseManager: DatabaseManager;
 	public ErrorEmbed = ErrorEmbed;
-	public queue = new Map<string, object>();
 	public BlockQuote = BlockQuote;
 	public OneQuote = OneQuote;
 	public constructor() {
