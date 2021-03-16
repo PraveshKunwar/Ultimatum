@@ -4,11 +4,11 @@ import { Run } from '../../../interfaces/Command';
 import { MusicTypes } from '../../../interfaces/Music';
 import yts from 'yt-search';
 import ytdl from 'ytdl-core';
-//@ts-ignore
+
 export const run: Run = async (client, message, args, prefix) => {
 	const searchFor = args.join(' ');
 	const queue = client.queue;
-	const GuildQueue: any = client.queue.get(message.guild.id);
+	const GuildQueue: any = queue.get(message.guild.id);
 	const vcmember = message.member.voice.channel;
 	if (
 		!message.guild.me.hasPermission('SPEAK') ||
@@ -43,6 +43,34 @@ export const run: Run = async (client, message, args, prefix) => {
 				message
 			)
 		);
+	}
+	const search: MusicTypes = await yts(searchFor);
+	const results = {
+		title: search.all[0].title,
+		url: search.all[0].url,
+		desc: search.all[0].desc,
+		img: search.all[0].image,
+		timestamp: search.all[0].timestamp,
+		views: search.all[0].views,
+	};
+	if (!GuildQueue) {
+		const QueueObj = {
+			channel: message.channel,
+			vc: vcmember,
+			connection: null,
+			songs: [],
+			volume: 5,
+			playing: true,
+		};
+		queue.set(message.guild.id, results);
+		QueueObj.songs.push(results);
+
+		const connection = await vcmember
+			.join()
+			.then(async (connection: VoiceConnection) => {
+				await connection.play(ytdl(results.url), {});
+			});
+		QueueObj.connection = connection;
 	}
 };
 

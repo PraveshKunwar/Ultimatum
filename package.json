@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"@discordjs/opus": "^0.4.0",
 		"@types/glob": "^7.1.3",
 		"axios": "^0.21.1",
 		"discord.js": "^12.5.1",
@@ -13,6 +14,8 @@
 		"moment": "^2.29.1",
 		"mongoose": "^5.11.15",
 		"node-fetch": "^2.6.1",
+		"node-opus": "^0.3.3",
+		"opusscript": "^0.0.8",
 		"typescript": "^4.1.3",
 		"yt-search": "^2.7.3",
 		"ytdl": "^1.4.1",
