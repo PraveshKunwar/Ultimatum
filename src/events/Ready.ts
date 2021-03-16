@@ -1,5 +1,5 @@
-import { Ultimatum } from '../../client';
-import { Run } from '../../interfaces/Event';
+import { Ultimatum } from '../client';
+import { Run } from '../interfaces/Event';
 
 export const run: Run = async (client) => {
 	client.user?.setPresence({

@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../../util/Colors';
-import { Run } from '../../../interfaces/Command';
+import Colors from '../../util/Colors';
+import { Run } from '../../interfaces/Command';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const SearchParams: string | number = args.join('+');

@@ -1,4 +1,4 @@
-import { Run } from '../../../interfaces/Event';
+import { Run } from '../../interfaces/Event';
 
 export const run: Run = async (client, err) => {
 	//console.error(`Error: ${err}`);

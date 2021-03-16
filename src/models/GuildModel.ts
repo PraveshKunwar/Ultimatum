@@ -11,7 +11,7 @@ const GuildJoin = new mongoose.Schema({
 	GuildOwner: String,
 	createdAt: Date,
 	icon: String || null,
-	DiscordLink: Boolean,
+	DiscordLink: Boolean || null,
 	ModChannel: Number || null,
 	ModChannelName: String || null,
 });

@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../../util/Colors';
-import { Run } from '../../../interfaces/Command';
+import Colors from '../../util/Colors';
+import { Run } from '../../interfaces/Command';
 import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 

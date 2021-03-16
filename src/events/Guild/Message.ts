@@ -1,8 +1,8 @@
-import { Run } from '../../../interfaces/Event';
-import { Ultimatum } from '../../../client';
+import { Run } from '../../interfaces/Event';
+import { Ultimatum } from '../../client';
 import * as mongoose from 'mongoose';
-import Prefix from '../../../models/PrefixModel';
-import GuildModel from '../../../models/GuildModel';
+import Prefix from '../../models/PrefixModel';
+import GuildModel from '../../models/GuildModel';
 import { Message, MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message: Message) => {

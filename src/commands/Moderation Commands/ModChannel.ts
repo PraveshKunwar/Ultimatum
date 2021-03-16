@@ -1,8 +1,8 @@
-import { Run } from '../../../interfaces/Command';
-import GuildModel from '../../../models/GuildModel';
+import { Run } from '../../interfaces/Command';
+import GuildModel from '../../models/GuildModel';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../../util/Colors';
+import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const channel = message.mentions.channels.first();

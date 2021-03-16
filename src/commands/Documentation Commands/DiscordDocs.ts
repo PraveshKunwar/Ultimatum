@@ -1,4 +1,4 @@
-import { Run } from '../../../interfaces/Command';
+import { Run } from '../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
 import axios, { AxiosResponse } from 'axios';
 

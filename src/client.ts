@@ -46,12 +46,12 @@ class Ultimatum extends Client {
 		this.DatabaseManager = new DatabaseManager();
 		this.database = new Mongo();
 		this.database.Init(process.env.MONGO_DB_PASSWORD);
-		glob(`./dist/handlers/commands/**/*{.js,.ts}`, (err, files) => {
+		glob(`./dist/commands/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
 			files.map(async (f) => {
 				if (f.endsWith('.js') || f.match(/.*\.js$/)) {
-					const CommandPath = f.split('./dist/handlers/commands/')[1];
-					const props = require(`./handlers/commands/${CommandPath}`);
+					const CommandPath = f.split('./dist/commands/')[1];
+					const props = require(`./commands/${CommandPath}`);
 					this.commands.set(props.name, props);
 					if (props.category) {
 						this.categories.set(props.category, props);
@@ -69,12 +69,12 @@ class Ultimatum extends Client {
 		});
 
 		//evt handler
-		glob(`./dist/handlers/events/**/*{.js,.ts}`, (err, files) => {
+		glob(`./dist/events/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
 			files.map(async (f) => {
 				if (f.endsWith('.js') || f.match(/.*\.js$/)) {
-					const Event = f.split('./dist/handlers/events')[1];
-					const props: Event = require(`./handlers/events/${Event}`);
+					const Event = f.split('./dist/events')[1];
+					const props: Event = require(`./events/${Event}`);
 					this.events.set(props.name, props);
 					this.on(props.name, props.run.bind(null, this));
 				}

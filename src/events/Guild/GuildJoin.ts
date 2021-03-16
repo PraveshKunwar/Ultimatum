@@ -1,6 +1,6 @@
-import { Run } from '../../../interfaces/Event';
+import { Run } from '../../interfaces/Event';
 import mongoose from 'mongoose';
-import GuildModel from '../../../models/GuildModel';
+import GuildModel from '../../models/GuildModel';
 import { Guild, MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, guild: Guild) => {
@@ -20,9 +20,9 @@ export const run: Run = async (client, guild: Guild) => {
 			GuildOwner: guild.owner.user.username,
 			createdAt: guild.createdAt,
 			icon: guild.iconURL(),
-			DiscordLink: false,
+			DiscordLink: null,
 			ModChannel: null,
-			ModChannelName: null
+			ModChannelName: null,
 		}
 	);
 	const Welcome = new MessageEmbed()
