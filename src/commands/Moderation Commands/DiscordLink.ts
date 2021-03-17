@@ -7,6 +7,10 @@ import moment from 'moment';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const link = args[0];
+	const mod: any = client.DatabaseManager.findOne(
+		{ GuildId: message.guild.id },
+		GuildModel
+	);
 	if (!link) {
 		message.channel.send(
 			client.ErrorEmbed(
@@ -59,6 +63,36 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.author.displayAvatarURL()
 				);
 			message.channel.send(OnEmbed);
+			mod.then((res) => {
+				if (res.ModChannel === null || res.ModChannelName === null) {
+					return;
+				} else {
+					const updated = message.guild.channels.cache.find(
+						(n) => n.name === res.ModChannelName
+					);
+
+					const updatedEmbed = new MessageEmbed()
+						.setTitle('AUDITS / UPDATES')
+						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+						.setDescription(
+							`🔰 **Discord invite link banner was turned on.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+								'MANAGE_MESSAGES'
+							)}  \n\nBy: ${client.OneQuote(
+								message.author.tag
+							)} at ${client.OneQuote(
+								moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+							)}
+						`
+						)
+						.setColor('RANDOM')
+						.setTimestamp()
+						.setFooter(
+							`User: ${message.author?.tag} • Created by: PraveshK`,
+							message.author.displayAvatarURL()
+						);
+					(updated as TextChannel).send(updatedEmbed);
+				}
+			});
 		});
 	} else if (
 		link === 'off' &&
@@ -84,40 +118,36 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.author.displayAvatarURL()
 				);
 			message.channel.send(OffEmbed);
-		});
-		const mod: any = client.DatabaseManager.findOne(
-			{ GuildId: message.guild.id },
-			GuildModel
-		);
-		mod.then((res) => {
-			if (res.ModChannel === null || res.ModChannelName === null) {
-				return;
-			} else {
-				const updated = message.guild.channels.cache.find(
-					(n) => n.name === res.ModChannelName
-				);
-
-				const updatedEmbed = new MessageEmbed()
-					.setTitle('AUDITS / UPDATES')
-					.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-					.setDescription(
-						`🔰 **Discord invite link banner was updated.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
-							'MANAGE_MESSAGES'
-						)}  \n\nBy: ${client.OneQuote(
-							message.author.tag
-						)} at ${client.OneQuote(
-							moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
-						)}
-						`
-					)
-					.setColor('RANDOM')
-					.setTimestamp()
-					.setFooter(
-						`User: ${message.author?.tag} • Created by: PraveshK`,
-						message.author.displayAvatarURL()
+			mod.then((res) => {
+				if (res.ModChannel === null || res.ModChannelName === null) {
+					return;
+				} else {
+					const updated = message.guild.channels.cache.find(
+						(n) => n.name === res.ModChannelName
 					);
-				(updated as TextChannel).send(updatedEmbed);
-			}
+
+					const updatedEmbed = new MessageEmbed()
+						.setTitle('AUDITS / UPDATES')
+						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+						.setDescription(
+							`🔰 **Discord invite link banner was turned off.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+								'MANAGE_MESSAGES'
+							)}  \n\nBy: ${client.OneQuote(
+								message.author.tag
+							)} at ${client.OneQuote(
+								moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+							)}
+						`
+						)
+						.setColor('RANDOM')
+						.setTimestamp()
+						.setFooter(
+							`User: ${message.author?.tag} • Created by: PraveshK`,
+							message.author.displayAvatarURL()
+						);
+					(updated as TextChannel).send(updatedEmbed);
+				}
+			});
 		});
 	}
 };

@@ -75,7 +75,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						.setTitle('AUDITS / UPDATES')
 						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 						.setDescription(
-							`🔰 **Bad word banner was updated.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+							`🔰 **Bad word banner was turned on.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
 								'MANAGE_MESSAGES'
 							)}  \n\nBy: ${client.OneQuote(
 								message.author.tag
@@ -130,7 +130,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						.setTitle('AUDITS / UPDATES')
 						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 						.setDescription(
-							`🔰 **Bad word banner was updated.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+							`🔰 **Bad word banner was turned off.** \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
 								'MANAGE_MESSAGES'
 							)}  \n\nBy: ${client.OneQuote(
 								message.author.tag
