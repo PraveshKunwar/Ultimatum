@@ -1,6 +1,5 @@
 import { Run } from '../../interfaces/Command';
 import GuildModel from '../../models/GuildModel';
-import mongoose from 'mongoose';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import Colors from '../../util/Colors';
 import moment from 'moment';
