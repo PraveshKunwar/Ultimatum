@@ -1,4 +1,5 @@
 import { Run } from '../../interfaces/Event';
+import { GuildType } from '../../interfaces/GuildInterface';
 import { Ultimatum } from '../../client';
 import * as mongoose from 'mongoose';
 import Prefix from '../../models/PrefixModel';
@@ -30,7 +31,7 @@ export const run: Run = async (client, message: Message) => {
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
-	badwordsBanner.then((res) => {
+	badwordsBanner.then((res: GuildType | any) => {
 		words.forEach((item) => {
 			if (
 				res.BadWords === true &&
@@ -68,7 +69,7 @@ export const run: Run = async (client, message: Message) => {
 	});
 
 	const discReg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
-	discordBanner.then((res) => {
+	discordBanner.then((res: GuildType | any) => {
 		if (
 			res.DiscordLink === true &&
 			message.content.match(discReg) &&
