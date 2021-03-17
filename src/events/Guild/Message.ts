@@ -4,9 +4,10 @@ import * as mongoose from 'mongoose';
 import Prefix from '../../models/PrefixModel';
 import GuildModel from '../../models/GuildModel';
 import { Message, MessageEmbed } from 'discord.js';
+import { words } from '../../util/BadWords';
 
 export const run: Run = async (client, message: Message) => {
-	const data: any = await Prefix.findOne({
+	const data: Promise<mongoose.Document<any>> | any = await Prefix.findOne({
 		GuildId: message.guild?.id,
 	});
 	if (!data) {
@@ -20,10 +21,52 @@ export const run: Run = async (client, message: Message) => {
 			.catch((err) => console.log(err));
 	}
 	const prefix = data ? data.prefix : 'ult!';
-	const discordBanner: any = client.DatabaseManager.findOne(
+	const discordBanner: Promise<
+		mongoose.Document<any> | any
+	> = client.DatabaseManager.findOne({ GuildId: message.guild.id }, GuildModel);
+	const badwordsBanner:
+		| Promise<mongoose.Document<any>>
+		| any = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
+	badwordsBanner.then((res) => {
+		words.forEach((item) => {
+			if (
+				res.BadWords === true &&
+				message.content.includes(item) &&
+				!message.content.startsWith(prefix)
+			) {
+				if (message.deletable) {
+					message.delete().then(async (msg) => {
+						const badEmbed = new MessageEmbed()
+							.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+							.setDescription(
+								`🔰 ${client.OneQuote(
+									msg.author.tag
+								)} -  Please **DO NOT** send bad words here. Thank you!`
+							)
+							.setColor('RANDOM')
+							.setTimestamp()
+							.setFooter(
+								`User: ${msg.author?.tag} • Created by: PraveshK`,
+								msg.author.displayAvatarURL()
+							);
+						await msg.channel.send(badEmbed).then(async (mesg) => {
+							await mesg.delete({ timeout: 5000 });
+						});
+					});
+				} else if (
+					res.BadWords === false &&
+					message.content.includes(item) &&
+					!message.content.startsWith(prefix)
+				) {
+					return;
+				}
+			}
+		});
+	});
+
 	const discReg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
 	discordBanner.then((res) => {
 		if (
@@ -33,12 +76,12 @@ export const run: Run = async (client, message: Message) => {
 		) {
 			if (message.deletable) {
 				message.delete().then(async (msg) => {
-					const deleteEmbed = new MessageEmbed()
+					const badEmbed = new MessageEmbed()
 						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 						.setDescription(
 							`🔰 ${client.OneQuote(
 								msg.author.tag
-							)} -  Please **DO NOT** send invite links here! Thank you!`
+							)} -  Please **DO NOT** send say bad words here! Thank you!`
 						)
 						.setColor('RANDOM')
 						.setTimestamp()
@@ -46,7 +89,7 @@ export const run: Run = async (client, message: Message) => {
 							`User: ${msg.author?.tag} • Created by: PraveshK`,
 							msg.author.displayAvatarURL()
 						);
-					await msg.channel.send(deleteEmbed).then(async (mesg) => {
+					await msg.channel.send(badEmbed).then(async (mesg) => {
 						await mesg.delete({ timeout: 5000 });
 					});
 				});
@@ -67,8 +110,6 @@ export const run: Run = async (client, message: Message) => {
 		.split(/ +/g);
 	const cmd: string = args.shift();
 	const command = client.commands.get(cmd) || client.aliases.get(cmd);
-
-	const reg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
 	if (!command) return;
 	else {
 		command.run(client, message, args, prefix);

@@ -3,6 +3,7 @@
 		"@discordjs/opus": "^0.4.0",
 		"@types/glob": "^7.1.3",
 		"axios": "^0.21.1",
+		"bad-words": "^3.0.4",
 		"discord.js": "^12.5.1",
 		"dotenv": "^8.2.0",
 		"ffmpeg": "^0.0.4",

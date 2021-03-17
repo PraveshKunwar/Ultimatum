@@ -23,6 +23,7 @@ export const run: Run = async (client, guild: Guild) => {
 			DiscordLink: null,
 			ModChannel: null,
 			ModChannelName: null,
+			BadWords: null,
 		}
 	);
 	const Welcome = new MessageEmbed()

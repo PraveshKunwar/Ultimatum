@@ -14,6 +14,7 @@ const GuildJoin = new mongoose.Schema({
 	DiscordLink: Boolean || null,
 	ModChannel: Number || null,
 	ModChannelName: String || null,
+	BadWords: Boolean || null,
 });
 
 const GuildModel = mongoose.model('guilds', GuildJoin);
