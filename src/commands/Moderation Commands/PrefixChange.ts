@@ -88,3 +88,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'prefix';
 export const category: string = 'moderation';
 export const desc: string = 'Change the prefix of the bot per server.';
+export const perms: string[] = ['MANAGE_GUILD'];

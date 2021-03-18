@@ -16,4 +16,5 @@ export interface Command {
 	run: Run;
 	desc?: string;
 	aliases?: string[];
+	perms?: string[];
 }

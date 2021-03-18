@@ -92,3 +92,4 @@ export const name: string = 'delete';
 export const category: string = 'moderation';
 export const aliases: string[] = ['purge', 'del', 'clear'];
 export const desc: string = 'Delete x messages from channel.';
+export const perms: string[] = ['MANAGE_MESSAGES'];

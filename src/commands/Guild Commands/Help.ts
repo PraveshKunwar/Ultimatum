@@ -19,7 +19,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			);
 		message.channel.send(HelpEmbed);
 	}
-	console.log(client.commands.get(helpwith));
+	client.commands.forEach((i) => {});
 };
 
 export const name: string = 'help';

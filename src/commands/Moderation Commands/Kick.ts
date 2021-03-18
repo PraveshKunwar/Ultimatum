@@ -113,3 +113,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'kick';
 export const category: string = 'moderation';
 export const desc: string = 'Delete discord invite links immediatly.';
+export const perms: string[] = ['KICK_MEMBERS'];

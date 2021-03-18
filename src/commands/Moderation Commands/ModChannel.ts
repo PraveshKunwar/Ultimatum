@@ -69,3 +69,4 @@ export const name: string = 'mod-set';
 export const aliases: string[] = ['mod-channel', 'mod-change'];
 export const category: string = 'moderation';
 export const desc: string = 'Delete discord invite links immediatly.';
+export const perms: string[] = ['MANAGE_CHANNELS'];

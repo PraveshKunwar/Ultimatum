@@ -12,4 +12,12 @@ export interface GuildType {
 	ModChannel: number | null;
 	ModChannelName: string | null;
 	BadWords: boolean | null;
+	Warns:
+		| [
+				{
+					userId: number;
+					GuildId: number;
+				}
+		  ]
+		| null;
 }

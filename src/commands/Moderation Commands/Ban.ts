@@ -50,15 +50,15 @@ export const run: Run = async (client, message, args, prefix) => {
 		message.member.hasPermission('BAN_MEMBERS') &&
 		message.guild.me.hasPermission('BAN_MEMBERS') &&
 		message.guild.me.roles.highest.position > member.roles.highest.position &&
-		message.member.roles.highest.position > member.roles.highest.position
-        && member.kickable
+		message.member.roles.highest.position > member.roles.highest.position &&
+		member.kickable
 	) {
 		const optreason = args
 			.join(' ')
 			.replace(member.id, '')
 			.replace('<@!>', '')
 			.trim();
-		await member.ban({reason: optreason}).then((member: GuildMember) => {
+		await member.ban({ reason: optreason }).then((member: GuildMember) => {
 			const BannedEmbed = new MessageEmbed()
 				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 				.setDescription(
@@ -113,3 +113,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'ban';
 export const category: string = 'moderation';
 export const desc: string = 'Delete discord invite links immediatly.';
+export const perms: string[] = ['BAN_MEMBERS'];

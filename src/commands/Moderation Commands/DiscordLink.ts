@@ -154,3 +154,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'discord-link';
 export const category: string = 'moderation';
 export const desc: string = 'Delete discord invite links immediatly.';
+export const perms: string[] = ['MANAGE_MESSAGES'];

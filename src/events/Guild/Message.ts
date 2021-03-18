@@ -1,7 +1,5 @@
 import { Run } from '../../interfaces/Event';
 import { GuildType } from '../../interfaces/GuildInterface';
-import { Ultimatum } from '../../client';
-import mongoose from 'mongoose';
 import GuildModel from '../../models/GuildModel';
 import { Message, MessageEmbed } from 'discord.js';
 import { words } from '../../util/BadWords';
@@ -10,7 +8,7 @@ export const run: Run = async (client, message: Message) => {
 	client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
-	).then((res: any) => {
+	).then((res: GuildType | any) => {
 		const prefix = res.Prefix ? res.Prefix : 'ult!';
 		if (
 			message.author.bot ||

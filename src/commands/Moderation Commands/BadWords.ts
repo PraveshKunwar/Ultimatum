@@ -155,3 +155,4 @@ export const run: Run = async (client, message, args, prefix) => {
 export const name: string = 'bad-words';
 export const category: string = 'moderation';
 export const desc: string = 'Delete bad-words immediatly.';
+export const perms: string[] = ['MANAGE_MESSAGES'];
