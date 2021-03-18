@@ -5,6 +5,7 @@ import { MessageEmbed } from 'discord.js';
 import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args) => {
+	console.log(client.categories);
 	const date = new Date(Date.parse(`${message.guild?.createdAt}`));
 	const month = date.getMonth() + 1;
 	const day = date.getDate();

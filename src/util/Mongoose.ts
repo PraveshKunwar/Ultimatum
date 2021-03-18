@@ -8,7 +8,7 @@ const MongoInit = (): void => {
 		poolSize: 5,
 	};
 	mongoose.connect(
-		`mongodb+srv://PraveshK:${process.env.MONGO_DB_PASSWORD}@ultimatum.5xc7g.mongodb.net/ultimatum`,
+		`mongodb+srv://PraveshK:${process.env.MONGO_DB_URI}@ultimatum.5xc7g.mongodb.net/ultimatum`,
 		options
 	);
 	mongoose.connection.on('connected', () => {

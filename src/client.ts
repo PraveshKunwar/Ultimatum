@@ -4,7 +4,6 @@ require('dotenv').config();
 
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
-import { Categories } from './interfaces/Categories';
 import ErrorEmbed from './errors/ErrorEmbed';
 import { Mongo } from './util/Mongoose';
 import { BlockQuote, OneQuote } from './util/Quote';
@@ -15,12 +14,8 @@ class Ultimatum extends Client {
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
 	public aliases: Collection<string, Command> = new Collection();
-	public categories: Collection<
-		string | string[],
-		Categories
-	> = new Collection();
+	public categories: Set<string> = new Set();
 	public description: Collection<string, Command> = new Collection();
-	//working tmrw
 	public client: Client = this;
 	public database: Mongo;
 	public DatabaseManager: DatabaseManager;
@@ -53,9 +48,7 @@ class Ultimatum extends Client {
 					const CommandPath = f.split('./dist/commands/')[1];
 					const props = require(`./commands/${CommandPath}`);
 					this.commands.set(props.name, props);
-					if (props.category) {
-						this.categories.set(props.category, props);
-					}
+					this.categories.add(props.category);
 					if (props.aliases) {
 						props.aliases.map((alias: string) => {
 							this.aliases.set(alias, props);
@@ -67,7 +60,6 @@ class Ultimatum extends Client {
 				}
 			});
 		});
-
 		//evt handler
 		glob(`./dist/events/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
