@@ -108,6 +108,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			});
 		});
 	}
+	
 };
 
 export const name: string = 'kick';

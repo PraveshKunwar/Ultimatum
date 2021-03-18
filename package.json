@@ -30,8 +30,9 @@
 		"@types/node": "^14.14.25"
 	},
 	"scripts": {
-		"start": "nodemon ./dist/index.js",
-		"dev": "node ./src/index.ts",
+		"start": "node dist/index.js",
+		"done": "nodemon dist/index.js",
+		"postinstall": "tsc",
 		"build": "tsc",
 		"typecheck": "tsc",
 		"typecheck:watch": "tsc -w"
