@@ -1,6 +1,4 @@
 import { Run } from '../../interfaces/Command';
-import Prefix from '../../models/PrefixModel';
-import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
 import GuildModel from '../../models/GuildModel';
 import moment from 'moment';
@@ -34,19 +32,10 @@ export const run: Run = async (client, message, args, prefix) => {
 			);
 		}
 	} else if (NewPrefix && message.member.hasPermission('MANAGE_GUILD')) {
-		client.DatabaseManager.findCreateUpdate(
-			{
-				GuildId: message.guild?.id,
-			},
-			Prefix,
-			{
-				_id: mongoose.Types.ObjectId(),
-				prefix: 'ult!',
-				GuildId: message.guild?.id,
-			},
-			{
-				prefix: NewPrefix,
-			}
+		client.DatabaseManager.findUpdateOne(
+			{ GuildId: message.guild.id },
+			GuildModel,
+			{ Prefix: NewPrefix }
 		);
 		const NewPrefixEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())

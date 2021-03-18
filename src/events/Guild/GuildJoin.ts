@@ -11,6 +11,7 @@ export const run: Run = async (client, guild: Guild) => {
 		GuildModel,
 		{
 			_id: mongoose.Types.ObjectId(),
+			Prefix: 'ult',
 			GuildId: guild.id,
 			GuildName: guild.name,
 			GuildMembers: guild.memberCount,
