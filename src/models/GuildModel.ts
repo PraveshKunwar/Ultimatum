@@ -1,14 +1,8 @@
 import mongoose from 'mongoose';
-
-interface Warns {
-	userId: number;
-	guildId: number;
-}
-
 const GuildJoin = new mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
 	Prefix: String || Number,
-	GuildId: Number,
+	GuildId: String,
 	GuildName: String,
 	GuildMembers: Number,
 	GuildChannels: Number,
@@ -18,7 +12,7 @@ const GuildJoin = new mongoose.Schema({
 	createdAt: Date,
 	icon: String || null,
 	DiscordLink: Boolean || null,
-	ModChannel: Number || null,
+	ModChannel: String || null,
 	ModChannelName: String || null,
 	BadWords: Boolean || null,
 	Warns:

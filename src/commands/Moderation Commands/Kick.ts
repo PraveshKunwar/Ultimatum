@@ -80,7 +80,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					return;
 				} else {
 					const updated = message.guild.channels.cache.find(
-						(n) => n.name === res.ModChannelName
+						(n) => n.id === res.ModChannel
 					);
 					const removeEmbed = new MessageEmbed()
 						.setTitle('AUDITS / UPDATES')

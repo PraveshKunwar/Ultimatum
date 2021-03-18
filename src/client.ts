@@ -35,12 +35,12 @@ class Ultimatum extends Client {
 	public async StartClient<T extends Promise<T>>(
 		config: string | undefined
 	): Promise<void> {
-		process.on('unhandledRejection', (res: any, promise: T) => {
+		process.on('unhandledRejection', (res: any, promise) => {
 			console.log(`Error: ${res}\n Where: ${promise}`);
 		});
 		this.DatabaseManager = new DatabaseManager();
 		this.database = new Mongo();
-		this.database.Init(process.env.MONGO_DB_PASSWORD);
+		this.database.Init();
 		glob(`./dist/commands/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
 			files.map(async (f) => {

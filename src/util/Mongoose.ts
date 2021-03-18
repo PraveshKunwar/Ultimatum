@@ -1,37 +1,19 @@
 import mongoose from 'mongoose';
-
-const MongoInit = (): void => {
-	const options = {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-		poolSize: 5,
-	};
-	mongoose.connect(
-		`mongodb+srv://PraveshK:${process.env.MONGO_DB_URI}@ultimatum.5xc7g.mongodb.net/ultimatum`,
-		options
-	);
-	mongoose.connection.on('connected', () => {
-		console.log('Database has been connected.');
-	});
-	mongoose.connection.on('disconnected', () => {
-		console.log('Database has been disconnected.');
-	});
-	mongoose.connection.on('error', (err) => {
-		console.error(`Error: ${err.stack}`);
-	});
-	mongoose.Promise = global.Promise;
-};
+require('dotenv').config();
 
 class Mongo {
 	private mongoose = mongoose;
 	public options = {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		autoIndex: false,
+		reconnectTries: Number.MAX_VALUE,
+		reconnectInterval: 500,
+		connectTimeoutMS: 10000,
 		poolSize: 5,
 	};
 
-	public Init(password: string | undefined) {
+	public Init() {
 		this.mongoose = mongoose;
 		this.mongoose.Promise = global.Promise;
 		mongoose.connection.on('connected', () => {
@@ -44,10 +26,7 @@ class Mongo {
 			console.error(`Error: ${err.stack}`);
 		});
 		mongoose
-			.connect(
-				`mongodb+srv://PraveshK:${password}@ultimatum.5xc7g.mongodb.net/ultimatum`,
-				this.options
-			)
+			.connect(process.env.MONGO_DB_URI, this.options)
 			.catch((err) => console.log(err));
 	}
 }

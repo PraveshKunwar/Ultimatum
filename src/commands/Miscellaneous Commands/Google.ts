@@ -15,9 +15,8 @@ export const run: Run = async (client, message, args, prefix) => {
 	} else {
 		const GoogleLink = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('🔍 Google Search:')
 			.setDescription(
-				`**[🔗Link](http://www.google.com/search?q=${SearchParams})**`
+				`**[Link to ${SearchParams}](http://www.google.com/search?q=${SearchParams})**`
 			)
 			.setColor('RANDOM')
 			.setTimestamp()

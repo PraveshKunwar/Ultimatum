@@ -4,7 +4,7 @@ import { Run } from '../interfaces/Event';
 export const run: Run = async (client) => {
 	client.user?.setPresence({
 		activity: {
-			name: "people's commands!",
+			name: 'to ult!help',
 			type: 'LISTENING',
 		},
 		status: 'dnd',
