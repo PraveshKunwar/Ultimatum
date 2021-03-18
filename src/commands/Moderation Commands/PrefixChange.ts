@@ -2,22 +2,37 @@ import { Run } from '../../interfaces/Command';
 import Prefix from '../../models/PrefixModel';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../util/Colors';
+import GuildModel from '../../models/GuildModel';
+import moment from 'moment';
+import { TextChannel } from 'discord.js';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NewPrefix: string | number = args[0];
-
-	if (
-		!NewPrefix ||
-		!message.member?.hasPermission('MANAGE_GUILD') ||
-		NewPrefix.endsWith(typeof Number)
-	) {
-		const Error = client.ErrorEmbed(
-			`Please make sure you meet the following requirements: \n**➤ Command Usage: ${prefix}prefix <NewPrefix>**\n **➤ Permissions - MANAGE_GUILD**`,
-			client,
-			message
+	const mod: any = client.DatabaseManager.findOne(
+		{ GuildId: message.guild.id },
+		GuildModel
+	);
+	if (!NewPrefix) {
+		message.channel.send(
+			client.ErrorEmbed(
+				`➤ Please make sure you specify a new prefix: \n\n 🔰 **${prefix}prefix !** ${client.OneQuote(
+					'Sets the prefix to !'
+				)}`,
+				client,
+				message
+			)
 		);
-		message.channel.send(Error);
+		if (!message.member.hasPermission('MANAGE_GUILD')) {
+			message.channel.send(
+				client.ErrorEmbed(
+					`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
+						`MANAGE_GUILD`
+					)}`,
+					client,
+					message
+				)
+			);
+		}
 	} else if (NewPrefix && message.member.hasPermission('MANAGE_GUILD')) {
 		client.DatabaseManager.findCreateUpdate(
 			{
@@ -35,8 +50,11 @@ export const run: Run = async (client, message, args, prefix) => {
 		);
 		const NewPrefixEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setTitle('Changed server prefix:')
-			.setDescription(`New Prefix: **${NewPrefix}**`)
+			.setDescription(
+				`🔰 **New prefix was set to: ${client.OneQuote(
+					NewPrefix
+				)}** By: ${client.OneQuote(message.author.username)}`
+			)
 			.setColor('RANDOM')
 			.setTimestamp()
 			.setFooter(
@@ -44,6 +62,37 @@ export const run: Run = async (client, message, args, prefix) => {
 				message.author.displayAvatarURL()
 			);
 		message.channel.send(NewPrefixEmbed);
+		mod.then((res) => {
+			if (res.ModChannel === null || res.ModChannelName === null) {
+				return;
+			} else {
+				const updated = message.guild.channels.cache.find(
+					(n) => n.name === res.ModChannelName
+				);
+				const updatedEmbed = new MessageEmbed()
+					.setTitle('AUDITS / UPDATES')
+					.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+					.setDescription(
+						`🔰New prefix was set to: ${client.OneQuote(
+							NewPrefix
+						)} \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+							'MANAGE_GUILD'
+						)} \n\nUpdated By: ${client.OneQuote(
+							message.author.tag
+						)} at ${client.OneQuote(
+							moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+						)}
+						`
+					)
+					.setColor('RANDOM')
+					.setTimestamp()
+					.setFooter(
+						`User: ${message.author?.tag} • Created by: PraveshK`,
+						message.author.displayAvatarURL()
+					);
+				(updated as TextChannel).send(updatedEmbed);
+			}
+		});
 	}
 };
 

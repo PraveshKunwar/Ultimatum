@@ -5,6 +5,6 @@ export const BlockQuote = (text: string | number, lang?: string) => {
 	return `\`\`\`${lang}\n${text}\`\`\``;
 };
 
-export const OneQuote = (text: string) => {
+export const OneQuote = (text: string | number) => {
 	return `\`${text}\``;
 };

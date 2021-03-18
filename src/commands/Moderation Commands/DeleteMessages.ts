@@ -1,26 +1,38 @@
 import { Run } from '../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
+import GuildModel from '../../models/GuildModel';
+import { TextChannel } from 'discord.js';
+import moment from 'moment';
 import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NumMsgDel = parseInt(args[0]);
-	if (
-		isNaN(NumMsgDel) ||
-		!message.member?.hasPermission('MANAGE_MESSAGES') ||
-		!message.guild?.me?.hasPermission('MANAGE_MESSAGES') ||
-		!NumMsgDel ||
-		NumMsgDel > 100
-	) {
-		const Error = client.ErrorEmbed(
-			`
-        ➤ Please make sure you have the following requirements to delete a message:\n\n**🔰 Specify the amount of messages you would like me to delete. **\n**🔰 Permissions - ${client.OneQuote(
-					'MANAGE_MESSAGES'
-				)} **\n**🔰 Can only delete a max of 100 messages at a time.**
-        `,
-			client,
-			message
+	const mod: any = client.DatabaseManager.findOne(
+		{ GuildId: message.guild.id },
+		GuildModel
+	);
+	if (!isNaN(NumMsgDel) || NumMsgDel > 100 || !NumMsgDel) {
+		message.channel.send(
+			client.ErrorEmbed(
+				`➤ Please make sure you specify a number (less than or equal to 100).`,
+				client,
+				message
+			)
 		);
-		message.channel.send(Error);
+	}
+	if (
+		!message.member?.hasPermission('MANAGE_MESSAGES') ||
+		!message.guild?.me?.hasPermission('MANAGE_MESSAGES')
+	) {
+		message.channel.send(
+			client.ErrorEmbed(
+				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
+					`MANAGE_MESSAGES`
+				)}`,
+				client,
+				message
+			)
+		);
 	} else {
 		if (message.channel.type !== 'dm') {
 			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
@@ -36,9 +48,40 @@ export const run: Run = async (client, message, args, prefix) => {
 						message.author.displayAvatarURL()
 					)
 					.setAuthor(client.user?.tag, client.user?.displayAvatarURL());
-				message.channel
-					.send(DeletedEmbed)
-					.then((msg) => msg.delete({ timeout: 3000 }));
+				message.channel.send(DeletedEmbed).then((msg) => {
+					mod.then((res) => {
+						if (res.ModChannel === null || res.ModChannelName === null) {
+							return;
+						} else {
+							const updated = message.guild.channels.cache.find(
+								(n) => n.name === res.ModChannelName
+							);
+							const updatedEmbed = new MessageEmbed()
+								.setTitle('AUDITS / UPDATES')
+								.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+								.setDescription(
+									`🔰Messages deleted: ${client.OneQuote(
+										NumMsgDel
+									)} \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+										'MANAGE_MESSAGES'
+									)} \n\nDeleted By: ${client.OneQuote(
+										message.author.tag
+									)} at ${client.OneQuote(
+										moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+									)}
+						`
+								)
+								.setColor('RANDOM')
+								.setTimestamp()
+								.setFooter(
+									`User: ${message.author?.tag} • Created by: PraveshK`,
+									message.author.displayAvatarURL()
+								);
+							(updated as TextChannel).send(updatedEmbed);
+						}
+					});
+					msg.delete({ timeout: 5000 });
+				});
 				await message.react('🗑️');
 			});
 		}
