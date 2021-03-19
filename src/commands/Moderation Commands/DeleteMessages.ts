@@ -11,7 +11,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
-	if (!isNaN(NumMsgDel) || NumMsgDel > 100 || !NumMsgDel) {
+	if (isNaN(NumMsgDel) || NumMsgDel > 100 || !NumMsgDel) {
 		message.channel.send(
 			client.ErrorEmbed(
 				`➤ Please make sure you specify a number (less than or equal to 100).`,
@@ -37,7 +37,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		if (message.channel.type !== 'dm') {
 			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
 				const DeletedEmbed = new MessageEmbed()
-					.setColor('RANDOM')
+					.setColor('#333')
 					.setTimestamp()
 					.setTitle('Messages Deleted')
 					.setDescription(
@@ -71,7 +71,7 @@ export const run: Run = async (client, message, args, prefix) => {
 									)}
 						`
 								)
-								.setColor('RANDOM')
+								.setColor('#333')
 								.setTimestamp()
 								.setFooter(
 									`User: ${message.author?.tag} • Created by: PraveshK`,

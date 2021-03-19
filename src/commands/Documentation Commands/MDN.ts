@@ -21,7 +21,7 @@ export const run: Run = async (client, message, args) => {
 			.then((res: AxiosResponse) => {
 				if (res.data.documents.length !== 0) {
 					const MDNEmbed = new MessageEmbed()
-						.setColor('#000000')
+						.setColor('#333')
 						.setTitle(res.data.documents[0].title)
 						.setURL(
 							`https://developer.mozilla.org/${res.data.documents[0].mdn_url}`

@@ -11,7 +11,7 @@ export const run: Run = async (client, message, args) => {
 			.setDescription(
 				`*${randomArr.text}* \n ➤ Author: ${client.OneQuote(randomArr.author)}`
 			)
-			.setColor('RANDOM')
+			.setColor('#333')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,

@@ -18,7 +18,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			.setDescription(
 				`**[Link to ${SearchParams}](http://www.google.com/search?q=${SearchParams})**`
 			)
-			.setColor('RANDOM')
+			.setColor('#333')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,

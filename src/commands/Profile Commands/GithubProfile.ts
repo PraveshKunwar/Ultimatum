@@ -3,7 +3,6 @@ import ErrorEmbed from '../../errors/ErrorEmbed';
 import Colors from '../../util/Colors';
 import axios, { AxiosResponse } from 'axios';
 import { MessageEmbed } from 'discord.js';
-import GuildModel from '../../models/GuildModel';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const username = args.join(' ');

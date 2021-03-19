@@ -44,7 +44,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					NewPrefix
 				)}** By: ${client.OneQuote(message.author.username)}`
 			)
-			.setColor('RANDOM')
+			.setColor('#333')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,
@@ -73,7 +73,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						)}
 						`
 					)
-					.setColor('RANDOM')
+					.setColor('#333')
 					.setTimestamp()
 					.setFooter(
 						`User: ${message.author?.tag} • Created by: PraveshK`,

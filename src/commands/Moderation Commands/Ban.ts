@@ -68,7 +68,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						optreason ? optreason : 'No Reason!'
 					)} \n\n➤ Pay respects in the chat.`
 				)
-				.setColor('RANDOM')
+				.setColor('#333')
 				.setTimestamp()
 				.setFooter(
 					`User: ${message.author?.tag} • Created by: PraveshK`,
@@ -97,7 +97,7 @@ export const run: Run = async (client, message, args, prefix) => {
 							)}
 						`
 						)
-						.setColor('RANDOM')
+						.setColor('#333')
 						.setTimestamp()
 						.setFooter(
 							`User: ${message.author?.tag} • Created by: PraveshK`,

@@ -23,7 +23,7 @@ export const run: Run = async (client, message, args) => {
 			.then((res: AxiosResponse) => {
 				if (res.data.list[0]) {
 					const ResultEmbed = new MessageEmbed()
-						.setColor('RANDOM')
+						.setColor('#333')
 						.setTimestamp()
 						.setTitle('📚 Urban Dictionary')
 						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())

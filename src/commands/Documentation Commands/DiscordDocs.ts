@@ -16,7 +16,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			.get(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${query}`)
 			.then((res: AxiosResponse) => {
 				const DjsEmbed = new MessageEmbed()
-					.setColor(res.data.color)
+					.setColor('#333')
 					.setAuthor(
 						res.data.author.name,
 						res.data.author.icon_url,

@@ -29,7 +29,7 @@ export const run: Run = async (client, message, args) => {
 			**Result:**\n${result}\n**Time Taken:**\n${taken}
 			`
 			)
-			.setColor('RANDOM')
+			.setColor('#333')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,
