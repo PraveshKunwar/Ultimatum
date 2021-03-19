@@ -7,8 +7,6 @@ class Mongo {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		autoIndex: false,
-		reconnectTries: Number.MAX_VALUE,
-		reconnectInterval: 500,
 		connectTimeoutMS: 10000,
 		poolSize: 5,
 	};

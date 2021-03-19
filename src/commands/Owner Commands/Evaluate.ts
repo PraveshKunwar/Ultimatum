@@ -29,7 +29,7 @@ export const run: Run = async (client, message, args) => {
 			**Result:**\n${result}\n**Time Taken:**\n${taken}
 			`
 			)
-			.setColor("RANDOM")
+			.setColor('RANDOM')
 			.setTimestamp()
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,
@@ -43,3 +43,4 @@ export const name: string = 'eval';
 export const category: string = 'owner';
 export const aliases: string[] = ['e', 'evaluate'];
 export const desc: string = 'Evaluate string.';
+export const perms: string[] = ['BOT_OWNER'];

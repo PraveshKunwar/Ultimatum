@@ -52,7 +52,14 @@ export const run: Run = async (client, message, args, prefix) => {
 								value: res.data.following,
 								inline: true,
 							},
-							{ name: '⭐ Location', value: res.data.location, inline: true },
+							{
+								name: '⭐ Location',
+								value:
+									res.data.location === null
+										? 'No location!'
+										: res.data.location,
+								inline: true,
+							},
 							{
 								name: '⭐ Repos',
 								value: res.data.public_repos,
