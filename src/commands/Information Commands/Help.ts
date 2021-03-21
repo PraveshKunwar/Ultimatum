@@ -118,7 +118,10 @@ export const run: Run = async (client, message, args, prefix) => {
 				`User: ${message.author?.tag} • Created by: PraveshK`,
 				message.author.displayAvatarURL()
 			);
-		message.channel.send(HelpEmbed);
+		message.channel.send(HelpEmbed).then(async (msg) => {
+			await msg.react('👍');
+			await msg.react('👎');
+		});
 	}
 };
 

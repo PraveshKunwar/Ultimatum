@@ -18,6 +18,14 @@ export const run: Run = async (client, message, args, prefix) => {
 		axios
 			.get(`https://api.github.com/users/${username}`)
 			.then((res: AxiosResponse) => {
+				if (res.status === 404) {
+					const Error = ErrorEmbed(
+						`➤ **${username}** does not exist on Github. Try again?`,
+						client,
+						message
+					);
+					message.channel.send(Error);
+				}
 				if (res.status === 200) {
 					const date = new Date(Date.parse(res.data.created_at));
 					const month = date.getMonth() + 1;

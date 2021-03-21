@@ -29,14 +29,17 @@ export const run: Run = async (client, guild: Guild) => {
 	);
 	const Welcome = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+		.setThumbnail(guild.owner.user.displayAvatarURL())
 		.setDescription(
-			`➤ Welcome to **Ultimatum.** The all in one Discord Bot. *Seriously.* Check out the info to get the bot set up! \n\n➤ To get started, please check out the help commands to get the bot set up! \n\n➤ The default prefix is ${client.OneQuote(
+			`➤ Welcome to **Ultimatum.** The all in one Discord Bot. *Seriously.* Check out the info to get the bot set up! \n\n➤ To get started, please check out the help commands to get the bot set up! To do this, type ${client.OneQuote(
+				`ult!help`
+			)} in the channel. \n\n➤ The default prefix is ${client.OneQuote(
 				'ult!'
 			)} \n\n➤ You can customize it using ${client.OneQuote(
 				'ult!prefix'
 			)} \n\n ➤Please also give me sufficient permissions as most of my commands use a lot of the permissions!. \n **Have fun!** `
 		)
-		.setColor('RANDOM')
+		.setColor('#333')
 		.setTimestamp()
 		.setFooter(
 			`User: ${guild.owner.user.username} • Created by: PraveshK`,
