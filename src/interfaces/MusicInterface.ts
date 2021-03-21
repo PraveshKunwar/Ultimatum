@@ -16,8 +16,8 @@ export interface MusicInterface {
 export interface GuildQueue {
 	channel: TextChannel;
 	vc: VoiceChannel;
-	connection: VoiceConnection | null;
-	songs: MusicInterface[];
+	connection: VoiceConnection;
+	songs: any[];
 	volume: number;
 	playing: boolean;
 }
