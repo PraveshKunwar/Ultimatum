@@ -1,16 +1,15 @@
 import { Run } from '../../interfaces/Command';
-import { MessageEmbed, VoiceConnection } from 'discord.js';
+import { Message, MessageEmbed, VoiceConnection } from 'discord.js';
 import Colors from '../../util/Colors';
 import ytdl from 'ytdl-core';
 import yts from 'yt-search';
 import { MusicInterface } from '../../interfaces/MusicInterface';
-import { glob } from 'glob';
 
 export const run: Run = async (client, message, args) => {
 	const searchFor = args.join(' ');
 	const search: MusicInterface = searchFor ? await yts(searchFor) : false;
 	const globQueue = client.queue;
-	const guildQueue = globQueue.get(message.guild.id);
+	const guildQueue: any = globQueue.get(message.guild.id);
 	const voice = message.member.voice.channel;
 	const QueueObj = {
 		channel: message.channel,
@@ -20,7 +19,14 @@ export const run: Run = async (client, message, args) => {
 		volume: 5,
 		playing: true,
 	};
-
+	const results = {
+		title: search.all[0].title,
+		url: search.all[0].url,
+		desc: search.all[0].desc,
+		img: search.all[0].image,
+		timestamp: search.all[0].timestamp,
+		views: search.all[0].views,
+	};
 	if (!voice || !searchFor) {
 		message.channel.send(
 			client.ErrorEmbed(
@@ -47,23 +53,23 @@ export const run: Run = async (client, message, args) => {
 		);
 	}
 	if (!guildQueue && voice && searchFor) {
-		const results = {
-			title: search.all[0].title,
-			url: search.all[0].url,
-			desc: search.all[0].desc,
-			img: search.all[0].image,
-			timestamp: search.all[0].timestamp,
-			views: search.all[0].views,
-		};
 		QueueObj.songs.push(results);
 		await voice.join().then(async (connection: VoiceConnection) => {
 			QueueObj.connection = connection;
 			globQueue.set(message.guild.id, QueueObj);
-			await connection.play(ytdl(results.url, { filter: 'audioonly' }));
+			//@ts-ignore
+			globQueue.get(message.guild.id).connection.play(
+				//@ts-ignore
+				ytdl(globQueue.get(message.guild.id).songs[0].url, {
+					filter: 'audioonly',
+				})
+			);
 		});
+	} else if (guildQueue && voice && searchFor) {
+		guildQueue.songs.push(results);
+		message.channel.send(`${results.title} has been added to the queue`);
 	}
 };
-
 export const name: string = 'play';
 export const category: string = 'music';
 export const desc: string = 'Play some music from YouTube.';

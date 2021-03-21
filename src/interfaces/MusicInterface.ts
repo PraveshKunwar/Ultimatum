@@ -1,3 +1,5 @@
+import { TextChannel, VoiceChannel, VoiceConnection } from 'discord.js';
+
 export interface MusicInterface {
 	all: [
 		{
@@ -9,4 +11,13 @@ export interface MusicInterface {
 			views?: number;
 		}
 	];
+}
+
+export interface GuildQueue {
+	channel: TextChannel;
+	vc: VoiceChannel;
+	connection: VoiceConnection | null;
+	songs: MusicInterface[];
+	volume: number;
+	playing: boolean;
 }
