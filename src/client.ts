@@ -11,7 +11,7 @@ import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';
 
 class Ultimatum extends Client {
-	public queue: Map<string, object> = new Map();
+	public queue: Map<string, object>;
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
 	public aliases: Collection<string, Command> = new Collection();
@@ -39,6 +39,7 @@ class Ultimatum extends Client {
 	): Promise<void> {
 		this.DatabaseManager = new DatabaseManager();
 		this.MusicManager = new MusicManager();
+		this.queue = this.MusicManager.queue;
 		this.database = new Mongo();
 		this.database.Init();
 		glob(`./dist/commands/**/*{.js,.ts}`, (err, files) => {

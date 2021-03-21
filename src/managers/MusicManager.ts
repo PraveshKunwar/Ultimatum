@@ -3,12 +3,11 @@ import { Ultimatum } from '../client';
 import ytdl from 'ytdl-core';
 
 class MusicManager {
+	public queue: Map<string, object> = new Map();
 	public client: Ultimatum;
-	public queue: Map<string, object>;
 	public dispatcher: VoiceConnection;
 	public thing: {};
-	public play(msg: Message, songs: { url: string; title: string }) {
-		this.queue = this.client.queue;
+	public play(msg: Message, songs) {
 		const guildQueue: any = this.queue.get(msg.guild.id);
 		if (!songs) {
 			guildQueue.vc.leave();
@@ -17,7 +16,8 @@ class MusicManager {
 		this.dispatcher = guildQueue.connection;
 
 		this.dispatcher
-			.play(ytdl(songs[0].url))
+			//@ts-ignore
+			.play(ytdl(songs.url))
 			.on('finish', () => {
 				guildQueue.songs.shift();
 				this.play(msg, guildQueue.songs[0]);
