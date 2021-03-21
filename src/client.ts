@@ -1,6 +1,5 @@
 import { Client, Collection, Guild, Intents, Message } from 'discord.js';
 import glob from 'glob';
-require('dotenv').config();
 
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
@@ -11,6 +10,7 @@ import { BlockQuote, OneQuote } from './util/Quote';
 import { DatabaseManager } from './managers/DatabaseManager';
 
 class Ultimatum extends Client {
+	public queue: Map<string, object> = new Map();
 	public commands: Collection<string | string[], Command> = new Collection();
 	public events: Collection<string | string[], Event> = new Collection();
 	public aliases: Collection<string, Command> = new Collection();

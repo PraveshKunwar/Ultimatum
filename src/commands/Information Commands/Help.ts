@@ -33,6 +33,12 @@ export const run: Run = async (client, message, args, prefix) => {
 		.map((z) => {
 			return z.name;
 		});
+
+	const music = Array.from(client.commands.values())
+		.filter((i) => i.category === 'music')
+		.map((z) => {
+			return z.name;
+		});
 	if (!helpwith) {
 		const HelpEmbed = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
@@ -43,6 +49,8 @@ export const run: Run = async (client, message, args, prefix) => {
 					docs.join(' | ')
 				)}\n\n **⚙️ Server**: ${client.OneQuote(
 					server.join(' | ')
+				)}\n\n **🎵 Music**:  ${client.OneQuote(
+					music.join(' | ')
 				)}\n\n **📎 Info**: ${client.OneQuote(
 					info.join(' | ')
 				)}\n\n **🏆 Miscellanous**: ${client.OneQuote(
