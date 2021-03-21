@@ -57,13 +57,7 @@ export const run: Run = async (client, message, args) => {
 		await voice.join().then(async (connection: VoiceConnection) => {
 			QueueObj.connection = connection;
 			globQueue.set(message.guild.id, QueueObj);
-			//@ts-ignore
-			globQueue.get(message.guild.id).connection.play(
-				//@ts-ignore
-				ytdl(globQueue.get(message.guild.id).songs[0].url, {
-					filter: 'audioonly',
-				})
-			);
+			client.MusicManager.play(message, QueueObj.songs[0]);
 		});
 	} else if (guildQueue && voice && searchFor) {
 		guildQueue.songs.push(results);

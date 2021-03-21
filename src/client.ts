@@ -8,6 +8,7 @@ import { Mongo } from './util/Mongoose';
 import { BlockQuote, OneQuote } from './util/Quote';
 
 import { DatabaseManager } from './managers/DatabaseManager';
+import { MusicManager } from './managers/MusicManager';
 
 class Ultimatum extends Client {
 	public queue: Map<string, object> = new Map();
@@ -19,6 +20,7 @@ class Ultimatum extends Client {
 	public client: Client = this;
 	public database: Mongo;
 	public DatabaseManager: DatabaseManager;
+	public MusicManager: MusicManager;
 	public ErrorEmbed = ErrorEmbed;
 	public BlockQuote = BlockQuote;
 	public OneQuote = OneQuote;
@@ -35,10 +37,8 @@ class Ultimatum extends Client {
 	public async StartClient<T extends Promise<T>>(
 		config: string | undefined
 	): Promise<void> {
-		process.on('unhandledRejection', (res: any, promise) => {
-			console.log(`Error: ${res}\n Where: ${promise}`);
-		});
 		this.DatabaseManager = new DatabaseManager();
+		this.MusicManager = new MusicManager();
 		this.database = new Mongo();
 		this.database.Init();
 		glob(`./dist/commands/**/*{.js,.ts}`, (err, files) => {
