@@ -7,7 +7,6 @@ class MusicManager {
 	public queue: Map<string, GuildQueue> = new Map();
 	public client: Ultimatum;
 	public dispatcher: VoiceConnection;
-	public thing: {};
 	public play(msg: Message, songs) {
 		const guildQueue = this.queue.get(msg.guild.id);
 		if (!songs) {
@@ -26,7 +25,7 @@ class MusicManager {
 				console.log(err);
 			});
 		const PlayingEmbed = new MessageEmbed()
-
+			.setThumbnail(songs.img)
 			.setDescription(`➤ Started Playing: ${songs.title}`)
 			.addFields(
 				{
@@ -57,7 +56,7 @@ class MusicManager {
 			.setFooter(
 				`User: ${msg.author?.tag} • Created by: PraveshK`,
 				msg.author.displayAvatarURL()
-			); //@ts-ignore
+			);
 		guildQueue.channel.send(PlayingEmbed);
 	}
 }

@@ -9,7 +9,7 @@ export const run: Run = async (client, message, args) => {
 	const searchFor = args.join(' ');
 	const search: MusicInterface = searchFor ? await yts(searchFor) : false;
 	const globQueue = client.queue;
-	const guildQueue: any = globQueue.get(message.guild.id);
+	const guildQueue: any | object = globQueue.get(message.guild.id);
 	const voice = message.member.voice.channel;
 	const QueueObj = {
 		channel: message.channel,
@@ -30,7 +30,7 @@ export const run: Run = async (client, message, args) => {
 	if (!voice || !searchFor) {
 		message.channel.send(
 			client.ErrorEmbed(
-				`➤ Please make sure you are connected to a voice channel for me to join. Then, make sure you specify something for me to play (results based off YouTube).`,
+				`➤  Please make sure you have the following requirements: \n **🔰 Make sure you are connected to a voice channel.** \n**🔰 Search something for me to play (results based o**`,
 				client,
 				message
 			)
@@ -61,7 +61,41 @@ export const run: Run = async (client, message, args) => {
 		});
 	} else if (guildQueue && voice && searchFor) {
 		guildQueue.songs.push(results);
-		message.channel.send(`${results.title} has been added to the queue`);
+		const PlayingEmbed = new MessageEmbed()
+			.setThumbnail(results.img)
+			.setDescription(`➤ **${results.title}** has been added to the queue.`)
+			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+			.addFields(
+				{
+					name: 'Url',
+					value: `[Link](${results.url})`,
+					inline: true,
+				},
+				{
+					name: 'Description',
+					value: results.desc ? results.desc : 'No description!',
+					inline: true,
+				},
+				{
+					name: 'Timestamp',
+					value: results.timestamp
+						? results.timestamp
+						: 'No timestamp provided. May be a livestream you are trying to listen!',
+					inline: true,
+				},
+				{
+					name: 'Views',
+					value: results.views ? results.views : "Couldn't load views.",
+					inline: true,
+				}
+			)
+			.setColor('#333')
+			.setTimestamp()
+			.setFooter(
+				`User: ${message.author?.tag} • Created by: PraveshK`,
+				message.author.displayAvatarURL()
+			);
+		guildQueue.channel.send(PlayingEmbed);
 	}
 };
 export const name: string = 'play';
