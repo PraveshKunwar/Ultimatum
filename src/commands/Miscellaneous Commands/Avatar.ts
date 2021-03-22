@@ -8,7 +8,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	const AvatarEmbed = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setDescription(`Avatar of: ${client.OneQuote(user.tag)}`)
-		.setImage(user.displayAvatarURL({ size: 256 }))
+		.setImage(user.displayAvatarURL({ size: 512 }))
 		.setColor('#333')
 		.setTimestamp()
 		.setFooter(
