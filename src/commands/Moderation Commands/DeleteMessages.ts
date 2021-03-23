@@ -38,16 +38,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
 				const DeletedEmbed = new MessageEmbed()
 					.setColor('#333')
-					.setTimestamp()
-					.setTitle('Messages Deleted')
 					.setDescription(
-						`Deleted ${NumMsgDel} messages by ${message.author.tag}`
-					)
-					.setFooter(
-						`User: ${message.author?.tag} • Created by: PraveshK`,
-						message.author.displayAvatarURL()
-					)
-					.setAuthor(client.user?.tag, client.user?.displayAvatarURL());
+						`**❯ Deleted ${client.OneQuote(NumMsgDel)} messages.**`
+					);
 				message.channel.send(DeletedEmbed).then((msg) => {
 					mod.then((res) => {
 						if (res.ModChannel === null || res.ModChannelName === null) {

@@ -5,18 +5,28 @@ import { inspect } from 'util';
 
 export const run: Run = async (client, message, args) => {
 	const evaluation = args.join(' ');
-	let evaled;
-	const start = process.hrtime();
-	const stop = process.hrtime(start);
-	evaled = eval(evaluation);
-	if (!evaluation || message.member?.id !== '391364111331622912') {
+	if (message.member?.id !== '391364111331622912') return;
+	if (!evaluation) {
 		const Error = client.ErrorEmbed(
-			`**➤ Cannot use this command. Not owner of bot.**`,
+			`**➤ Write something for me to evaluate.**`,
 			client,
 			message
 		);
 		message.channel.send(Error);
-	} else if (evaluation && message.member?.id === '391364111331622912') {
+	}
+	let evaled;
+	const start = process.hrtime();
+	const stop = process.hrtime(start);
+	evaled = eval(evaluation);
+	if (evaluation.includes('process') || evaluation.includes('process.exit()')) {
+		const Error = client.ErrorEmbed(
+			`**➤ Cannot exit process.**`,
+			client,
+			message
+		);
+		message.channel.send(Error);
+	}
+	if (evaluation && message.member?.id === '391364111331622912') {
 		const result = client.BlockQuote(`${inspect(evaled, { depth: 0 })}`, 'js');
 		const taken = client.BlockQuote(
 			`${(stop[0] * 1e9 + stop[1]) / 1e6}ms taken!`,

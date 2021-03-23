@@ -49,18 +49,8 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ DiscordLink: true }
 		).then((res) => {
 			const OnEmbed = new MessageEmbed()
-				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-				.setDescription(
-					`🔰 **Discord invite link banner turned on.** By: ${client.OneQuote(
-						message.author.username
-					)}`
-				)
-				.setColor('RANDOM')
-				.setTimestamp()
-				.setFooter(
-					`User: ${message.author?.tag} • Created by: PraveshK`,
-					message.author.displayAvatarURL()
-				);
+				.setDescription(`**❯ Discord link banner turned on.**`)
+				.setColor('#333');
 			message.channel.send(OnEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {

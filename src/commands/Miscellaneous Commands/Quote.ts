@@ -9,7 +9,9 @@ export const run: Run = async (client, message, args) => {
 		const QuoteLink = new MessageEmbed()
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 			.setDescription(
-				`*${randomArr.text}* \n ➤ Author: ${client.OneQuote(randomArr.author)}`
+				`*${randomArr.text}* \n ➤ Author: ${client.OneQuote(
+					randomArr.author ? randomArr.author : 'Unknown'
+				)}`
 			)
 			.setColor('#333')
 			.setTimestamp()

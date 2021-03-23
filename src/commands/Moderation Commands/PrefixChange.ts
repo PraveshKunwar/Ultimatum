@@ -38,18 +38,8 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ Prefix: NewPrefix }
 		);
 		const NewPrefixEmbed = new MessageEmbed()
-			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setDescription(
-				`🔰 **New prefix was set to: ${client.OneQuote(
-					NewPrefix
-				)}** By: ${client.OneQuote(message.author.username)}`
-			)
-			.setColor('#333')
-			.setTimestamp()
-			.setFooter(
-				`User: ${message.author?.tag} • Created by: PraveshK`,
-				message.author.displayAvatarURL()
-			);
+			.setDescription(`**❯ Saved new prefix:** ${client.OneQuote(NewPrefix)}`)
+			.setColor('#333');
 		message.channel.send(NewPrefixEmbed);
 		mod.then((res) => {
 			if (res.ModChannel === null || res.ModChannelName === null) {

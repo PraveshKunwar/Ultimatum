@@ -46,20 +46,10 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ ModChannelName: channel.name }
 		).then((res) => {
 			const SetEmbed = new MessageEmbed()
-				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 				.setDescription(
-					`🔰 **Mod channel updated: ${client.OneQuote(
-						channel.name
-					)} is now the mod channel.** By: ${client.OneQuote(
-						message.author.tag
-					)}`
+					`**❯ Saved new mod channel: ${client.OneQuote(channel.name)}`
 				)
-				.setColor('#333')
-				.setTimestamp()
-				.setFooter(
-					`User: ${message.author?.tag} • Created by: PraveshK`,
-					message.author.displayAvatarURL()
-				);
+				.setColor('#333');
 			message.channel.send(SetEmbed);
 		});
 	}

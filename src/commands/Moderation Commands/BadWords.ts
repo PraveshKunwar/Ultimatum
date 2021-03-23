@@ -50,18 +50,8 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ BadWords: true }
 		).then((res) => {
 			const OnEmbed = new MessageEmbed()
-				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-				.setDescription(
-					`🔰 **Bad word banner turned on.** By: ${client.OneQuote(
-						message.author.username
-					)}`
-				)
-				.setColor('#333')
-				.setTimestamp()
-				.setFooter(
-					`User: ${message.author?.tag} • Created by: PraveshK`,
-					message.author.displayAvatarURL()
-				);
+				.setDescription(`**❯ Bad words banner turned on.**`)
+				.setColor('#333');
 			message.channel.send(OnEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
