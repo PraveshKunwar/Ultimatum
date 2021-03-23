@@ -50,8 +50,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ BadWords: true }
 		).then((res) => {
 			const OnEmbed = new MessageEmbed()
-				.setDescription(`**❯ Bad words banner turned on.**`)
-				.setColor('#333');
+				.setDescription(`❯ Bad words banner turned on. 🔞`)
+				.setColor('#333')
+				.setFooter('\u3000'.repeat(10));
 			message.channel.send(OnEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
@@ -95,18 +96,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ BadWords: false }
 		).then((res) => {
 			const OffEmbed = new MessageEmbed()
-				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-				.setDescription(
-					`🔰 **Bad word banner turned off.** By: ${client.OneQuote(
-						message.author.username
-					)}`
-				)
+				.setDescription(`❯ Bad words banner turned off. 🔞`)
 				.setColor('#333')
-				.setTimestamp()
-				.setFooter(
-					`User: ${message.author?.tag} • Created by: PraveshK`,
-					message.author.displayAvatarURL()
-				);
+				.setFooter('\u3000'.repeat(10));
 			message.channel.send(OffEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {

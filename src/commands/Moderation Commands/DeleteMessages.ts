@@ -38,9 +38,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			message.channel.bulkDelete(NumMsgDel, true).then(async (msg) => {
 				const DeletedEmbed = new MessageEmbed()
 					.setColor('#333')
-					.setDescription(
-						`**❯ Deleted ${client.OneQuote(NumMsgDel)} messages.**`
-					);
+					.setDescription(`❯ Deleted ${NumMsgDel} messages. 🗑`);
 				message.channel.send(DeletedEmbed).then((msg) => {
 					mod.then((res) => {
 						if (res.ModChannel === null || res.ModChannelName === null) {

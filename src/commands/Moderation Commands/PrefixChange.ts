@@ -38,8 +38,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ Prefix: NewPrefix }
 		);
 		const NewPrefixEmbed = new MessageEmbed()
-			.setDescription(`**❯ Saved new prefix:** ${client.OneQuote(NewPrefix)}`)
-			.setColor('#333');
+			.setDescription(`❯ Saved new prefix: ${client.OneQuote(NewPrefix)} 🛠`)
+			.setColor('#333')
+			.setFooter('\u3000'.repeat(10));
 		message.channel.send(NewPrefixEmbed);
 		mod.then((res) => {
 			if (res.ModChannel === null || res.ModChannelName === null) {

@@ -10,6 +10,47 @@ export const run: Run = async (client, message: Message) => {
 		GuildModel
 	).then((res: GuildType | any) => {
 		const prefix = res.Prefix ? res.Prefix : 'ult!';
+		const discReg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
+		if (
+			res.DiscordLink === true &&
+			message.content.match(discReg) &&
+			!message.content.startsWith(prefix)
+		) {
+			if (message.deletable) {
+				message.delete().then(async (msg) => {
+					const badEmbed = new MessageEmbed()
+						.setDescription(
+							`🔰 ${client.OneQuote(
+								msg.author.tag
+							)} -  Please **DO NOT** send say bad words here! Thank you!`
+						)
+						.setColor('#333');
+					await msg.channel.send(badEmbed).then(async (mesg) => {
+						await mesg.delete({ timeout: 5000 });
+					});
+				});
+			}
+		} else if (res.DiscordLink === false) {
+			return;
+		}
+		if (res.BadWords === true && !message.content.startsWith(prefix)) {
+			words.forEach((item) => {
+				if (message.deletable && message.content.includes(item)) {
+					message.delete().then(async (msg) => {
+						const badEmbed = new MessageEmbed()
+							.setDescription(
+								`🔰 ${client.OneQuote(
+									msg.author.tag
+								)} -  Please **DO NOT** send bad words here. Thank you!`
+							)
+							.setColor('#333');
+						await msg.channel.send(badEmbed).then(async (mesg) => {
+							await mesg.delete({ timeout: 5000 });
+						});
+					});
+				}
+			});
+		}
 		if (
 			message.author.bot ||
 			!message.guild ||
@@ -25,69 +66,6 @@ export const run: Run = async (client, message: Message) => {
 		if (!command) return;
 		else {
 			command.run(client, message, args, prefix);
-		}
-		words.forEach((item) => {
-			if (
-				res.BadWords === true &&
-				message.content.includes(item) &&
-				!message.content.startsWith(prefix)
-			) {
-				if (message.deletable) {
-					message.delete().then(async (msg) => {
-						const badEmbed = new MessageEmbed()
-							.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-							.setDescription(
-								`🔰 ${client.OneQuote(
-									msg.author.tag
-								)} -  Please **DO NOT** send bad words here. Thank you!`
-							)
-							.setColor('RANDOM')
-							.setTimestamp()
-							.setFooter(
-								`User: ${msg.author?.tag} • Created by: PraveshK`,
-								msg.author.displayAvatarURL()
-							);
-						await msg.channel.send(badEmbed).then(async (mesg) => {
-							await mesg.delete({ timeout: 5000 });
-						});
-					});
-				} else if (
-					res.BadWords === false &&
-					message.content.includes(item) &&
-					!message.content.startsWith(prefix)
-				) {
-					return;
-				}
-			}
-		});
-		const discReg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
-		if (
-			res.DiscordLink === true &&
-			message.content.match(discReg) &&
-			!message.content.startsWith(prefix)
-		) {
-			if (message.deletable) {
-				message.delete().then(async (msg) => {
-					const badEmbed = new MessageEmbed()
-						.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-						.setDescription(
-							`🔰 ${client.OneQuote(
-								msg.author.tag
-							)} -  Please **DO NOT** send say bad words here! Thank you!`
-						)
-						.setColor('RANDOM')
-						.setTimestamp()
-						.setFooter(
-							`User: ${msg.author?.tag} • Created by: PraveshK`,
-							msg.author.displayAvatarURL()
-						);
-					await msg.channel.send(badEmbed).then(async (mesg) => {
-						await mesg.delete({ timeout: 5000 });
-					});
-				});
-			}
-		} else if (res.DiscordLink === false) {
-			return;
 		}
 	});
 };

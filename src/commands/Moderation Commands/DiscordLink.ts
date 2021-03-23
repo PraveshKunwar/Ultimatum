@@ -49,8 +49,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ DiscordLink: true }
 		).then((res) => {
 			const OnEmbed = new MessageEmbed()
-				.setDescription(`**❯ Discord link banner turned on.**`)
-				.setColor('#333');
+				.setDescription(`❯ Discord link banner turned on. 🛠`)
+				.setColor('#333')
+				.setFooter('\u3000'.repeat(10));
 			message.channel.send(OnEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
@@ -94,18 +95,9 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ DiscordLink: false }
 		).then((res) => {
 			const OffEmbed = new MessageEmbed()
-				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-				.setDescription(
-					`🔰 **Discord invite link banner turned off.** By: ${client.OneQuote(
-						message.author.username
-					)}`
-				)
-				.setColor(Colors.error)
-				.setTimestamp()
-				.setFooter(
-					`User: ${message.author?.tag} • Created by: PraveshK`,
-					message.author.displayAvatarURL()
-				);
+				.setDescription(`❯ Discord link banner turned off. 🛠`)
+				.setColor('#333')
+				.setFooter('\u3000'.repeat(10));
 			message.channel.send(OffEmbed);
 			mod.then((res) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {

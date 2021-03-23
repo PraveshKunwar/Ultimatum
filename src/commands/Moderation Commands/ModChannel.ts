@@ -47,9 +47,10 @@ export const run: Run = async (client, message, args, prefix) => {
 		).then((res) => {
 			const SetEmbed = new MessageEmbed()
 				.setDescription(
-					`**❯ Saved new mod channel: ${client.OneQuote(channel.name)}`
+					`❯ Saved new mod channel: ${client.OneQuote(channel.name)} 🛠`
 				)
-				.setColor('#333');
+				.setColor('#333')
+				.setFooter('\u3000'.repeat(10));
 			message.channel.send(SetEmbed);
 		});
 	}
