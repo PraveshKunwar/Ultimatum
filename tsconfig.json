@@ -6,7 +6,6 @@
 		"allowJs": true,
 		"checkJs": true,
 		"outDir": "./dist",
-		"rootDir": "./src",
 		"removeComments": true,
 		"noEmit": false,
 		"noEmitOnError": false,
@@ -17,6 +16,11 @@
 		"esModuleInterop": true,
 		"strictPropertyInitialization": false,
 		"moduleResolution": "node",
-		"forceConsistentCasingInFileNames": true
-	}
+		"forceConsistentCasingInFileNames": true,
+		"paths": {
+			"@ultimatum/src": ["./src/*"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["@official_website"]
 }
