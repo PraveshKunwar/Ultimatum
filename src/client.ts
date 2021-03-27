@@ -61,7 +61,6 @@ class Ultimatum extends Client {
 				}
 			});
 		});
-		//evt handler
 		glob(`./dist/events/**/*{.js,.ts}`, (err, files) => {
 			err ? console.log(err) : false;
 			files.map(async (f) => {
