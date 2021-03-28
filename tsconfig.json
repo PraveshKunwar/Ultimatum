@@ -16,11 +16,8 @@
 		"esModuleInterop": true,
 		"strictPropertyInitialization": false,
 		"moduleResolution": "node",
-		"forceConsistentCasingInFileNames": true,
-		"paths": {
-			"@ultimatum/src": ["./src/*"]
-		}
+		"forceConsistentCasingInFileNames": true
 	},
-	"include": ["src"],
+	"include": ["src/**"],
 	"exclude": ["@official_website"]
 }
