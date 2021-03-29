@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "btoa": "^1.2.1",
     "next": "10.0.9",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
