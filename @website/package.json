@@ -8,9 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/btoa": "^1.2.3",
+    "@types/node-fetch": "^2.5.8",
     "axios": "^0.21.1",
     "btoa": "^1.2.1",
     "next": "10.0.9",
+    "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
     "react": "17.0.2",
