@@ -49,7 +49,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 		.then((res) => res.json())
 		.then(async (data: ReturnTokens) => {
 			await fetch(`https://discord.com/api/users/@me`, {
-				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${data.access_token}`,
 				},
