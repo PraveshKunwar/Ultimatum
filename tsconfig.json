@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ES2017",
+		"target": "ESNext",
 		"lib": ["ES2015"],
 		"module": "CommonJS",
 		"allowJs": true,
@@ -18,6 +18,6 @@
 		"moduleResolution": "node",
 		"forceConsistentCasingInFileNames": true
 	},
-	"include": ["src/**"],
+	"include": ["src"],
 	"exclude": ["@official_website"]
 }
