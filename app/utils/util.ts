@@ -21,6 +21,17 @@ export interface ReturnTokens {
 	token_type: string;
 }
 
+export interface ReturnUser {
+	id: string;
+	username: string;
+	avatar: string;
+	discriminator: string;
+	public_flags: number;
+	flags: number;
+	locale: string;
+	mfa_enabled: boolean;
+}
+
 export const auths: URLS = {
 	base: 'https://discord.com/api/oauth2/authorize',
 	token: 'https://discord.com/api/oauth2/token',

@@ -1,6 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
-import { auths, DataProps, scopes, ReturnTokens } from '../../utils/util';
+import {
+	auths,
+	DataProps,
+	scopes,
+	ReturnTokens,
+	ReturnUser,
+} from '../../utils/util';
+import auth from './auth';
 require('dotenv').config();
 
 const btoa = require('btoa');
@@ -32,7 +39,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 		scope: SCOPES.join('%20'),
 	};
 
-	await fetch(auths.token, {
+	const authed = await fetch(auths.token, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -45,17 +52,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 			redirect_uri: data.redirect_uri,
 			scope: SCOPES.join('%20'),
 		}),
-	})
-		.then((res) => res.json())
-		.then(async (data: ReturnTokens) => {
-			await fetch(`https://discord.com/api/users/@me`, {
-				headers: {
-					Authorization: `Bearer ${data.access_token}`,
-				},
-			})
-				.then((res) => res.json())
-				.then((data) => console.log(data))
-				.catch(console.error);
-		})
-		.catch(console.error);
+	});
+	res.redirect('/');
 }
