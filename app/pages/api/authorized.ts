@@ -9,6 +9,7 @@ import {
 } from '../../utils/util';
 import auth from './auth';
 import store from '../../redux/store';
+import { setToken } from '../../redux/actions/actions';
 require('dotenv').config();
 
 const btoa = require('btoa');
@@ -56,8 +57,15 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	})
 		.then((res) => res.json())
 		.then((data: ReturnTokens) => {
-			res.status(200).send(data);
+			if (data.access_token) {
+				store.dispatch(setToken);
+				store.dispatch({
+					type: 'SET_TOKEN',
+					token: data.access_token,
+				});
+			}
 		})
 		.catch(console.error);
-	res.redirect('/');
+	res.send("asd")
+	res.redirect("/authed")
 }

@@ -3,7 +3,7 @@ const isToken = (state = null, action) => {
 		case 'SET_TOKEN':
 			return {
 				...state,
-				token: action.token,
+				token: action.access_token,
 			};
 		default:
 			return state;
