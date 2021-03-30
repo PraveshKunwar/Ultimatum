@@ -20,6 +20,6 @@ const CombReducers: Reducer<
 	isLogged,
 });
 
-const Store = createStore(CombReducers, composeWithDevTools());
+const store = createStore(CombReducers, composeWithDevTools());
 
-export default Store;
+export default store;

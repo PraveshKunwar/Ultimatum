@@ -8,6 +8,7 @@ import {
 	ReturnUser,
 } from '../../utils/util';
 import auth from './auth';
+import store from '../../redux/store';
 require('dotenv').config();
 
 const btoa = require('btoa');
@@ -39,7 +40,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 		scope: SCOPES.join('%20'),
 	};
 
-	const authed = await fetch(auths.token, {
+	await fetch(auths.token, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -52,6 +53,11 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 			redirect_uri: data.redirect_uri,
 			scope: SCOPES.join('%20'),
 		}),
-	});
+	})
+		.then((res) => res.json())
+		.then((data: ReturnTokens) => {
+			res.status(200).send(data);
+		})
+		.catch(console.error);
 	res.redirect('/');
 }
