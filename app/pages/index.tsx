@@ -1,6 +1,7 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 
-export default function Index() {
+const Index: NextPage = () => {
 	return (
 		<div className="#home">
 			<Head>
@@ -16,4 +17,6 @@ export default function Index() {
 			</Head>
 		</div>
 	);
-}
+};
+
+export default Index;
