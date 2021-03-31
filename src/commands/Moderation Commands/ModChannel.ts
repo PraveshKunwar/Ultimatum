@@ -12,7 +12,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you are using the command correctly. \n\n 🔰 **${prefix}<${aliases.join(
 					' | '
 				)}> #channelName** `,
-				client,
 				message
 			)
 		);
@@ -25,7 +24,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`MANAGE_CHANNELS`
 				)}`,
-				client,
 				message
 			)
 		);

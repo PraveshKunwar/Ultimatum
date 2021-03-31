@@ -31,7 +31,6 @@ export const run: Run = async (client, message, args) => {
 		message.channel.send(
 			client.ErrorEmbed(
 				`➤  Please make sure you have the following requirements: \n **🔰 Make sure you are connected to a voice channel.** \n**🔰 Search something for me to play (results based o**`,
-				client,
 				message
 			)
 		);
@@ -47,7 +46,6 @@ export const run: Run = async (client, message, args) => {
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`SPEAK | CONNECT`
 				)}`,
-				client,
 				message
 			)
 		);

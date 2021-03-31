@@ -16,7 +16,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you specify a new prefix: \n\n 🔰 **${prefix}prefix !** ${client.OneQuote(
 					'Sets the prefix to !'
 				)}`,
-				client,
 				message
 			)
 		);
@@ -26,7 +25,6 @@ export const run: Run = async (client, message, args, prefix) => {
 					`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 						`MANAGE_GUILD`
 					)}`,
-					client,
 					message
 				)
 			);

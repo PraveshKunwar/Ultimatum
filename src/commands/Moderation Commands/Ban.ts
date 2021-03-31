@@ -18,7 +18,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`BAN_MEMBERS`
 				)}`,
-				client,
 				message
 			)
 		);
@@ -28,7 +27,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you specify someone for me to ban: \n\n 🔰 **${prefix}ban @user#123 <reason>** ${client.OneQuote(
 					'Bans user#123 for some reason. (Reason is optional).'
 				)}`,
-				client,
 				message
 			)
 		);
@@ -41,7 +39,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Cannot ban ${client.OneQuote(
 					member.user.username
 				)}. I must have a higher role than the mentioned user and you must have a higher role than the user as well.`,
-				client,
 				message
 			)
 		);

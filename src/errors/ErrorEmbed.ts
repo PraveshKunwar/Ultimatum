@@ -1,12 +1,7 @@
-import { MessageEmbed, Client, Message } from 'discord.js';
+import { MessageEmbed, Message } from 'discord.js';
 import Colors from '../util/Colors';
-
-const ErrorEmbed = (
-	err: string,
-	client: Client,
-	message: Message,
-	external?: string | any
-) => {
+import client from '../index';
+const ErrorEmbed = (err: string, message: Message, external?: string | any) => {
 	const Embed: MessageEmbed = new MessageEmbed()
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setDescription(`${err}`)

@@ -82,7 +82,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you specify a valid command to get help on. If you are stuck, try ${client.OneQuote(
 					`${prefix}help`
 				)} to get a list of commands you can get help on!`,
-				client,
 				message
 			)
 		);

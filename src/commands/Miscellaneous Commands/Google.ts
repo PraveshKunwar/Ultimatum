@@ -8,7 +8,6 @@ export const run: Run = async (client, message, args, prefix) => {
 		const Error = client.ErrorEmbed(
 			`**➤ Please specify some params for me to search!** \n\n
     `,
-			client,
 			message
 		);
 		message.channel.send(Error);

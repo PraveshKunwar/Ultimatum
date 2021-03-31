@@ -3,4 +3,7 @@ require('dotenv').config();
 
 const token = process.env.BOT_TOKEN;
 
-new Ultimatum().StartClient(token);
+const bot = new Ultimatum();
+bot.StartClient(token);
+
+export default bot;

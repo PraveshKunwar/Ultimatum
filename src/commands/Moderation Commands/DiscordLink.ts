@@ -20,7 +20,6 @@ export const run: Run = async (client, message, args, prefix) => {
 					'Turns the discord link banner off.'
 				)}
                         `,
-				client,
 				message
 			)
 		);
@@ -33,7 +32,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`MANAGE_MESSAGES`
 				)}`,
-				client,
 				message
 			)
 		);
