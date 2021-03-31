@@ -7,7 +7,6 @@ export const run: Run = async (client, message, args) => {
 	if (!query) {
 		const Error = client.ErrorEmbed(
 			'**➤ Please make sure you specify something for me to search.**',
-			client,
 			message
 		);
 		message.channel.send(Error);
@@ -44,7 +43,6 @@ export const run: Run = async (client, message, args) => {
 					return message.channel.send(
 						client.ErrorEmbed(
 							`➤ Couldn't find **${query}** on the MDN Docs. Perhpaps, try again?`,
-							client,
 							message
 						)
 					);

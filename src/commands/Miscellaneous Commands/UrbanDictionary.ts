@@ -10,7 +10,6 @@ export const run: Run = async (client, message, args) => {
 		message.channel.send(
 			client.ErrorEmbed(
 				'**➤ Please make sure you specify something for me to search.**',
-				client,
 				message
 			)
 		);
@@ -76,7 +75,6 @@ export const run: Run = async (client, message, args) => {
 					message.channel.send(
 						client.ErrorEmbed(
 							`➤ Could not search for **${search}.**`,
-							client,
 							message
 						)
 					);

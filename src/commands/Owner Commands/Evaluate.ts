@@ -9,7 +9,6 @@ export const run: Run = async (client, message, args) => {
 	if (!evaluation) {
 		const Error = client.ErrorEmbed(
 			`**➤ Write something for me to evaluate.**`,
-			client,
 			message
 		);
 		message.channel.send(Error);
@@ -21,7 +20,6 @@ export const run: Run = async (client, message, args) => {
 	if (evaluation.includes('process') || evaluation.includes('process.exit()')) {
 		const Error = client.ErrorEmbed(
 			`**➤ Cannot exit process.**`,
-			client,
 			message
 		);
 		message.channel.send(Error);

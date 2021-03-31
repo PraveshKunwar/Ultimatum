@@ -15,7 +15,6 @@ export const run: Run = async (client, message, args, prefix) => {
 		message.channel.send(
 			client.ErrorEmbed(
 				`➤ Please make sure you specify a number (less than or equal to 100).`,
-				client,
 				message
 			)
 		);
@@ -29,7 +28,6 @@ export const run: Run = async (client, message, args, prefix) => {
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`MANAGE_MESSAGES`
 				)}`,
-				client,
 				message
 			)
 		);
