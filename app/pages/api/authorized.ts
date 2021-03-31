@@ -57,15 +57,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	})
 		.then((res) => res.json())
 		.then((data: ReturnTokens) => {
-			if (data.access_token) {
-				store.dispatch(setToken);
-				store.dispatch({
-					type: 'SET_TOKEN',
-					token: data.access_token,
-				});
-			}
+			res.redirect(`/user/${data.access_token}`);
 		})
 		.catch(console.error);
-	res.send("asd")
-	res.redirect("/authed")
 }
