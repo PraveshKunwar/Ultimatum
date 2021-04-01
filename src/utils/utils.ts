@@ -1,3 +1,35 @@
+import { Collection } from 'discord.js';
+import { Ultimatum } from '../client';
+import { Command } from '../interfaces/Command';
+
+export const ReturnMappedVals = (
+	commands: Collection<string | string[], Command>,
+	filterBy: string
+) => {
+	return Array.from(commands.values())
+		.filter((i) => i.category === filterBy)
+		.map((x) => {
+			return x.name;
+		});
+};
+
+export const BlockQuote = (text: string | number, lang?: string) => {
+	return `\`\`\`${lang}\n${text}\`\`\``;
+};
+
+export const OneQuote = (text: string | number | void) => {
+	return `\`${text}\``;
+};
+
+const Colors = {
+	error: '#7d2323',
+	successful: '#237d23',
+	github_color_palette: '#333',
+	disconnect_connect: '#569aba',
+};
+
+export default Colors;
+
 export const words = [
 	'ahole',
 	'anus',

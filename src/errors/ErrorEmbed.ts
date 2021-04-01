@@ -1,5 +1,5 @@
 import { MessageEmbed, Client, Message } from 'discord.js';
-import Colors from '../util/Colors';
+import Colors from '../utils/utils';
 
 const ErrorEmbed = (
 	err: string,

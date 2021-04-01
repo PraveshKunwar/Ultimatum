@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"lib": ["ES2015"],
+		"target": "ES6",
+		"lib": ["ES2015", "ESNext"],
 		"module": "CommonJS",
 		"allowJs": true,
 		"checkJs": true,
@@ -19,5 +19,5 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["src"],
-	"exclude": ["@official_website"]
+	"exclude": ["app"]
 }

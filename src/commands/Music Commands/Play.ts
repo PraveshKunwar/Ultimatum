@@ -1,6 +1,5 @@
 import { Run } from '../../interfaces/Command';
 import { Message, MessageEmbed, VoiceConnection } from 'discord.js';
-import Colors from '../../util/Colors';
 import ytdl from 'ytdl-core';
 import yts from 'yt-search';
 import { MusicInterface } from '../../interfaces/MusicInterface';

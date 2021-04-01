@@ -2,7 +2,7 @@ import { Run } from '../../interfaces/Event';
 import { GuildType } from '../../interfaces/GuildInterface';
 import GuildModel from '../../models/GuildModel';
 import { Message, MessageEmbed } from 'discord.js';
-import { words } from '../../util/BadWords';
+import { words } from '../../utils/utils';
 //@ts-ignore
 export const run: Run = async (client, message: Message) => {
 	client.DatabaseManager.findOne(

@@ -1,5 +1,5 @@
 import { MessageEmbed, Client, Message, Guild } from 'discord.js';
-import Colors from '../util/Colors';
+import Colors from '../utils/utils';
 
 const DisconnectEmbed = (client?: Client, message?: Message, guild?: Guild) => {
 	const Embed: MessageEmbed = new MessageEmbed()

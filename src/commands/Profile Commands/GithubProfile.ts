@@ -1,8 +1,8 @@
 import { Run } from '../../interfaces/Command';
 import ErrorEmbed from '../../errors/ErrorEmbed';
-import Colors from '../../util/Colors';
 import axios, { AxiosResponse } from 'axios';
 import { MessageEmbed } from 'discord.js';
+import Colors from '../../utils/utils';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const username = args.join(' ');

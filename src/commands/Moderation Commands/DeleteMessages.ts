@@ -3,7 +3,6 @@ import { MessageEmbed } from 'discord.js';
 import GuildModel from '../../models/GuildModel';
 import { TextChannel } from 'discord.js';
 import moment from 'moment';
-import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NumMsgDel = parseInt(args[0]);

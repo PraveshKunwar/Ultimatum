@@ -2,7 +2,7 @@ import { Run } from '../../interfaces/Command';
 import GuildModel from '../../models/GuildModel';
 import mongoose from 'mongoose';
 import { MessageEmbed, TextChannel } from 'discord.js';
-import Colors from '../../util/Colors';
+import Colors from '../../utils/utils';
 import moment from 'moment';
 
 export const run: Run = async (client, message, args, prefix) => {

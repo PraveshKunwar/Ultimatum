@@ -1,6 +1,5 @@
 import { Run } from '../../interfaces/Command';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../util/Colors';
 import { inspect } from 'util';
 
 export const run: Run = async (client, message, args) => {

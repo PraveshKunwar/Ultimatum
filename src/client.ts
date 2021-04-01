@@ -4,8 +4,8 @@ import glob from 'glob';
 import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
 import ErrorEmbed from './errors/ErrorEmbed';
-import { Mongo } from './util/Mongoose';
-import { BlockQuote, OneQuote } from './util/Quote';
+import { Mongo } from './utils/Mongoose';
+import { BlockQuote, OneQuote } from './utils/utils';
 
 import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';

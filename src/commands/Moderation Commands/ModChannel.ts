@@ -1,8 +1,6 @@
 import { Run } from '../../interfaces/Command';
 import GuildModel from '../../models/GuildModel';
-import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../util/Colors';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const channel = message.mentions.channels.first();
@@ -61,4 +59,3 @@ export const aliases: string[] = ['mod-channel', 'mod-change'];
 export const category: string = 'moderation';
 export const desc: string = 'Delete discord invite links immediatly.';
 export const perms: string[] = ['MANAGE_CHANNELS'];
-

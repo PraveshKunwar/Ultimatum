@@ -2,10 +2,9 @@ import { Run } from '../../interfaces/Command';
 import ErrorEmbed from '../../errors/ErrorEmbed';
 import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../util/Colors';
+import Colors from '../../utils/utils';
 
 export const run: Run = async (client, message, args) => {
-	console.log(client.categories);
 	const date = new Date(Date.parse(`${message.guild?.createdAt}`));
 	const month = date.getMonth() + 1;
 	const day = date.getDate();
