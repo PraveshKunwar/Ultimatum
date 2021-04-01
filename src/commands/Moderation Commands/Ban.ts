@@ -51,7 +51,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		message.guild.me.hasPermission('BAN_MEMBERS') &&
 		message.guild.me.roles.highest.position > member.roles.highest.position &&
 		message.member.roles.highest.position > member.roles.highest.position &&
-		member.kickable
+		member.bannable
 	) {
 		const optreason = args
 			.join(' ')
