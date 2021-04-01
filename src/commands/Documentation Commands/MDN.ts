@@ -5,12 +5,13 @@ import axios, { AxiosResponse } from 'axios';
 export const run: Run = async (client, message, args) => {
 	const query = args.join(' ');
 	if (!query) {
-		const Error = client.ErrorEmbed(
-			'**➤ Please make sure you specify something for me to search.**',
-			client,
-			message
+		message.channel.send(
+			client.ErrorEmbed(
+				'**➤ Please make sure you specify something for me to search.**',
+				client,
+				message
+			)
 		);
-		message.channel.send(Error);
 	} else {
 		axios
 			.get(

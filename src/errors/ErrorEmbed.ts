@@ -3,8 +3,8 @@ import Colors from '../utils/utils';
 
 const ErrorEmbed = (
 	err: string,
-	client: Client,
-	message: Message,
+	client?: Client,
+	message?: Message,
 	external?: string | any
 ) => {
 	const Embed: MessageEmbed = new MessageEmbed()
@@ -18,4 +18,5 @@ const ErrorEmbed = (
 		);
 	return Embed;
 };
+
 export default ErrorEmbed;

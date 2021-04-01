@@ -21,7 +21,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					'Turns the bad-words banner off.'
 				)}
                         `,
-				client,
+						client,
 				message
 			)
 		);

@@ -1,8 +1,5 @@
 import { Run } from '../../interfaces/Command';
-import ErrorEmbed from '../../errors/ErrorEmbed';
-import mongoose from 'mongoose';
 import { MessageEmbed } from 'discord.js';
-import Colors from '../../utils/utils';
 
 export const run: Run = async (client, message, args) => {
 	const date = new Date(Date.parse(`${message.guild?.createdAt}`));
