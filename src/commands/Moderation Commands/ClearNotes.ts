@@ -18,9 +18,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			client.ErrorEmbed(
 				`➤ Please make sure you specify someone for me to clear a note for: \n\n 🔰 **${prefix}<${name} | ${aliases.join(
 					' | '
-				)}> @user#123 <note>** ${client.OneQuote(
-					'Clears the note for user#123.'
-				)}`,
+				)}> @user#123** ${client.OneQuote('Clears the note for user#123.')}`,
 				client,
 				message
 			)
