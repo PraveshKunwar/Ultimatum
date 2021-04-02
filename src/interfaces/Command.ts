@@ -7,7 +7,7 @@ export interface Run {
 		message: Message,
 		args: string[],
 		prefix?: string | number
-	): Promise<void>;
+	): Promise<unknown>;
 }
 
 export interface Command {

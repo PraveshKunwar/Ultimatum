@@ -17,6 +17,11 @@
 			"@ultimatum/util": ["./utils/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../src/utils/BadWords.ts"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"../src/utils/BadWords.ts"
+	],
 	"exclude": ["node_modules"]
 }

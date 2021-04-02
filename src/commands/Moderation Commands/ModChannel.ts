@@ -7,7 +7,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	if (!channel) {
 		message.channel.send(
 			client.ErrorEmbed(
-				`➤ Please make sure you are using the command correctly. \n\n 🔰 **${prefix}<${aliases.join(
+				`➤ Please make sure you are using the command correctly. \n\n 🔰 **${prefix}<${name} | ${aliases.join(
 					' | '
 				)}> #channelName** `,
 				client,

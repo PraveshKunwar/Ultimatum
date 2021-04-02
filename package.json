@@ -36,7 +36,8 @@
 		"postinstall": "tsc",
 		"build": "tsc",
 		"typecheck": "tsc",
-		"typecheck:watch": "tsc -w"
+		"typecheck:watch": "tsc -w",
+		"lint": "prettier --write ."
 	},
 	"author": "Pravesh Kunwar",
 	"license": "MIT"

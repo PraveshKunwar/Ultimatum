@@ -2,7 +2,7 @@ import { Ultimatum } from '../client';
 import { Guild, Message } from 'discord.js';
 
 export interface Run {
-	(client: Ultimatum, ...args: unknown[]): Promise<void>;
+	(client: Ultimatum, ...args: unknown[]): Promise<unknown>;
 }
 
 export interface Event {
