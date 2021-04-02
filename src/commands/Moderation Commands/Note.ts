@@ -19,9 +19,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			client.ErrorEmbed(
 				`➤ Please make sure you specify someone for me to set a note for: \n\n 🔰 **${prefix}<${name} | ${aliases.join(
 					' | '
-				)}> @user#123 <note>** ${client.OneQuote(
-					'Bans user#123 for some reason. (Reason is optional).'
-				)}`,
+				)}> @user#123 <note>** ${client.OneQuote('Sets a note for user#123.')}`,
 				client,
 				message
 			)
@@ -45,7 +43,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	} else if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 		return message.channel.send(
 			client.ErrorEmbed(
-				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
+				`➤ Please make sure you have the following permissions: \n\n 🔰${client.OneQuote(
 					`MANAGE_MESSAGES`
 				)}`,
 				client,
@@ -117,7 +115,9 @@ export const run: Run = async (client, message, args, prefix) => {
 					{ note: note }
 				).then((res) => {
 					const NoteEmbed = new MessageEmbed()
-						.setDescription(`❯ Set note for ${client.OneQuote(user.tag)}. 📝`)
+						.setDescription(
+							`❯ Updated note for ${client.OneQuote(user.tag)}. 📝`
+						)
 						.setColor('#333')
 						.setFooter('\u3000'.repeat(10));
 					message.channel.send(NoteEmbed);
