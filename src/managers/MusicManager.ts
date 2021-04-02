@@ -16,13 +16,26 @@ class MusicManager {
 		this.dispatcher = guildQueue.connection;
 
 		this.dispatcher
+			.on('disconnect', () => {
+				this.queue.delete(msg.guild.id);
+				const DC = new MessageEmbed()
+					.setDescription(`❯ Left vc and deleted queue. 📝`)
+					.setColor('#333')
+					.setFooter('\u3000'.repeat(10));
+				return guildQueue.channel.send(DC);
+			})
 			.play(ytdl(songs.url))
 			.on('finish', () => {
 				guildQueue.songs.shift();
 				this.play(msg, guildQueue.songs[0]);
 			})
 			.on('error', (err: Error) => {
-				console.log(err);
+				this.queue.delete(msg.guild.id);
+				const DC = new MessageEmbed()
+					.setDescription(`❯ ERROR: Left vc and deleted queue. 📝`)
+					.setColor('#333')
+					.setFooter('\u3000'.repeat(10));
+				return guildQueue.channel.send(DC);
 			});
 		const PlayingEmbed = new MessageEmbed()
 			.setThumbnail(songs.img)
@@ -58,6 +71,9 @@ class MusicManager {
 				msg.author.displayAvatarURL()
 			);
 		guildQueue.channel.send(PlayingEmbed);
+	}
+	public getQueue(msg: Message) {
+		return this.queue.get(msg.guild.id);
 	}
 }
 
