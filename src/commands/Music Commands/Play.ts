@@ -18,30 +18,30 @@ export const run: Run = async (client, message, args) => {
 		volume: 5,
 		playing: true,
 	};
-	const results = {
-		title: search.all[0].title,
-		url: search.all[0].url,
-		desc: search.all[0].desc,
-		img: search.all[0].image,
-		timestamp: search.all[0].timestamp,
-		views: search.all[0].views,
-	};
-	if (!voice || !searchFor) {
-		message.channel.send(
+
+	if (!voice) {
+		return message.channel.send(
 			client.ErrorEmbed(
-				`➤  Please make sure you have the following requirements: \n **🔰 Make sure you are connected to a voice channel.** \n**🔰 Search something for me to play (results based o**`,
+				`➤  Please make sure you are connected to a voice channel. `,
 				client,
 				message
 			)
 		);
-	}
-	if (
+	} else if (voice && !searchFor) {
+		return message.channel.send(
+			client.ErrorEmbed(
+				`➤  Please make sure you specify something for me to play. `,
+				client,
+				message
+			)
+		);
+	} else if (
 		!message.member?.hasPermission('CONNECT') ||
 		!message.member?.hasPermission('SPEAK') ||
 		!message.guild?.me?.hasPermission('CONNECT') ||
 		!message.guild?.me?.hasPermission('SPEAK')
 	) {
-		message.channel.send(
+		return message.channel.send(
 			client.ErrorEmbed(
 				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
 					`SPEAK | CONNECT`
@@ -50,8 +50,15 @@ export const run: Run = async (client, message, args) => {
 				message
 			)
 		);
-	}
-	if (!guildQueue && voice && searchFor) {
+	} else if (!guildQueue && voice && searchFor) {
+		const results = {
+			title: search.all[0].title,
+			url: search.all[0].url,
+			desc: search.all[0].desc,
+			img: search.all[0].image,
+			timestamp: search.all[0].timestamp,
+			views: search.all[0].views,
+		};
 		QueueObj.songs.push(results);
 		await voice.join().then(async (connection: VoiceConnection) => {
 			QueueObj.connection = connection;
@@ -59,6 +66,14 @@ export const run: Run = async (client, message, args) => {
 			client.MusicManager.play(message, QueueObj.songs[0]);
 		});
 	} else if (guildQueue && voice && searchFor) {
+		const results = {
+			title: search.all[0].title,
+			url: search.all[0].url,
+			desc: search.all[0].desc,
+			img: search.all[0].image,
+			timestamp: search.all[0].timestamp,
+			views: search.all[0].views,
+		};
 		guildQueue.songs.push(results);
 		const PlayingEmbed = new MessageEmbed()
 			.setThumbnail(results.img)

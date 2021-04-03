@@ -1,24 +1,22 @@
 import { Run } from '../../interfaces/Command';
-import { Message, MessageEmbed, VoiceConnection } from 'discord.js';
-import ytdl from 'ytdl-core';
-import yts from 'yt-search';
-import { MusicInterface } from '../../interfaces/MusicInterface';
+import { MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message, args) => {
 	const currentQueue = client.MusicManager.getQueue(message);
-	if (currentQueue === undefined || null) {
+
+	if (!message.member.voice.channel) {
 		message.channel.send(
 			client.ErrorEmbed(
-				`➤ There are no current songs playing.`,
+				`➤  Please make sure you are connected to a voice channel. `,
 				client,
 				message
 			)
 		);
 	}
-	if (!message.member.voice.channel) {
+	if ((message.member.voice.channel && currentQueue === undefined) || null) {
 		message.channel.send(
 			client.ErrorEmbed(
-				`➤  Please make sure you are connected to a voice channel. `,
+				`➤ There are no current songs playing.`,
 				client,
 				message
 			)
