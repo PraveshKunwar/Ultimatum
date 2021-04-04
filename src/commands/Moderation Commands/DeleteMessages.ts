@@ -35,76 +35,59 @@ export const run: Run = async (client, message, args, prefix) => {
 		);
 	} else {
 		if (message.channel.type !== 'dm') {
-			try {
-				await message.channel.messages
-					.fetch({ limit: NumMsgDel })
-					.then((msg) => {
-						(message.channel as TextChannel)
-							.bulkDelete(msg)
-							.catch((e) => {
-								if (e) {
-									const DeletedEmbed = new MessageEmbed()
-										.setColor('#333')
-										.setDescription(`❯ ${e}`);
-									message.channel.send(DeletedEmbed);
-								}
-							})
-
-							.then((msg) => {
-								const DeletedEmbed = new MessageEmbed()
-									.setColor('#333')
-									.setDescription(`❯ Deleted ${NumMsgDel} messages. 🗑`);
-								message.channel.send(DeletedEmbed).then((msg) => {
-									mod.then((res) => {
-										if (
-											res.ModChannel === null ||
-											res.ModChannelName === null
-										) {
-											return;
-										} else {
-											const updated = message.guild.channels.cache.find(
-												(n) => n.id === res.ModChannel
-											);
-											const updatedEmbed = new MessageEmbed()
-												.setTitle('AUDITS / UPDATES')
-												.setAuthor(
-													client.user?.tag,
-													client.user?.displayAvatarURL()
-												)
-												.setDescription(
-													`🔰Messages deleted: ${client.OneQuote(
-														NumMsgDel
-													)} in ${client.OneQuote(
-														`#${(message.channel as TextChannel).name}.`
-													)} \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
-														'MANAGE_MESSAGES'
-													)} \n\nDeleted By: ${client.OneQuote(
-														message.author.tag
-													)} at ${client.OneQuote(
-														moment(message.createdAt).format(
-															'MMMM Do YYYY, h:mm:ss a'
-														)
-													)}
+			await message.channel
+				.bulkDelete(NumMsgDel)
+				.then((msg) => {
+					const DeletedEmbed = new MessageEmbed()
+						.setColor('#333')
+						.setDescription(`❯ Deleted ${NumMsgDel} messages. 🗑`);
+					message.channel
+						.send(DeletedEmbed)
+						.then(async (msg) => await msg.delete({ timeout: 5000 }));
+					mod.then((res) => {
+						if (res.ModChannel === null || res.ModChannelName === null) {
+							return;
+						} else {
+							const updated = message.guild.channels.cache.find(
+								(n) => n.id === res.ModChannel
+							);
+							const updatedEmbed = new MessageEmbed()
+								.setTitle('AUDITS / UPDATES')
+								.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+								.setDescription(
+									`🔰Messages deleted: ${client.OneQuote(
+										NumMsgDel
+									)} in ${client.OneQuote(
+										`#${(message.channel as TextChannel).name}.`
+									)} \n\n **➤ Description?**: ${desc} \n**➤ REQUIRED PERMS:** ${client.OneQuote(
+										'MANAGE_MESSAGES'
+									)} \n\nDeleted By: ${client.OneQuote(
+										message.author.tag
+									)} at ${client.OneQuote(
+										moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+									)}
 						`
-												)
-												.setColor('#333')
-												.setTimestamp()
-												.setFooter(
-													`User: ${message.author?.tag} • Created by: PraveshK`,
-													message.author.displayAvatarURL()
-												);
-											(updated as TextChannel).send(updatedEmbed);
-										}
-									});
-								});
-								message.react('🗑️');
-							});
+								)
+								.setColor('#333')
+								.setTimestamp()
+								.setFooter(
+									`User: ${message.author?.tag} • Created by: PraveshK`,
+									message.author.displayAvatarURL()
+								);
+							(updated as TextChannel).send(updatedEmbed);
+						}
 					});
-			} catch (e) {
-				if (e) {
-					return;
-				}
-			}
+				})
+				.catch((err) => {
+					if (err) {
+						const DeletedEmbed = new MessageEmbed()
+							.setColor('#333')
+							.setDescription(`❯ ${err}`);
+						message.channel
+							.send(DeletedEmbed)
+							.then(async (msg) => await msg.delete({ timeout: 5000 }));
+					}
+				});
 		}
 	}
 };
