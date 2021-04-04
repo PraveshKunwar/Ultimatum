@@ -16,7 +16,6 @@ export const run: Run = async (client, message, args) => {
 	let evaled;
 	const start = process.hrtime();
 	const stop = process.hrtime(start);
-	evaled = eval(evaluation);
 	if (evaluation.includes('process') || evaluation.includes('process.exit()')) {
 		const Error = client.ErrorEmbed(
 			`**➤ Cannot exit process.**`,
@@ -26,25 +25,40 @@ export const run: Run = async (client, message, args) => {
 		message.channel.send(Error);
 	}
 	if (evaluation && message.member?.id === '391364111331622912') {
-		const result = client.BlockQuote(`${inspect(evaled, { depth: 0 })}`, 'js');
-		const taken = client.BlockQuote(
-			`${(stop[0] * 1e9 + stop[1]) / 1e6}ms taken!`,
-			'js'
-		);
-		const EvalEmbed = new MessageEmbed()
-			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.setDescription(
-				`
+		try {
+			evaled = eval(evaluation);
+			const result = client.BlockQuote(
+				`${inspect(evaled, { depth: 0 })}`,
+				'js'
+			);
+			const taken = client.BlockQuote(
+				`${(stop[0] * 1e9 + stop[1]) / 1e6}ms taken!`,
+				'js'
+			);
+			const EvalEmbed = new MessageEmbed()
+				.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+				.setDescription(
+					`
 			**Result:**\n${result}\n**Time Taken:**\n${taken}
 			`
-			)
-			.setColor('#333')
-			.setTimestamp()
-			.setFooter(
-				`User: ${message.author?.tag} • Created by: PraveshK`,
-				message.author.displayAvatarURL()
-			);
-		message.channel.send(EvalEmbed);
+				)
+				.setColor('#333')
+				.setTimestamp()
+				.setFooter(
+					`User: ${message.author?.tag} • Created by: PraveshK`,
+					message.author.displayAvatarURL()
+				);
+			message.channel.send(EvalEmbed);
+		} catch (e) {
+			if (e) {
+				const DeletedEmbed = new MessageEmbed()
+					.setColor('#333')
+					.setDescription(`❯ ${e}`);
+				message.channel
+					.send(DeletedEmbed)
+					.then(async (msg) => await msg.delete({ timeout: 5000 }));
+			}
+		}
 	}
 };
 
