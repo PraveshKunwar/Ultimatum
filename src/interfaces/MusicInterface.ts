@@ -1,5 +1,9 @@
 import { TextChannel, VoiceChannel, VoiceConnection } from 'discord.js';
 
+export interface Name {
+	name?: string;
+}
+
 export interface MusicInterface {
 	all: [
 		{
@@ -9,6 +13,7 @@ export interface MusicInterface {
 			image?: string;
 			timestamp?: string;
 			views?: number;
+			author?: Name;
 		}
 	];
 }

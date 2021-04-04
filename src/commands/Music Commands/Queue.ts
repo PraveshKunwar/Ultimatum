@@ -1,5 +1,5 @@
 import { Run } from '../../interfaces/Command';
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message, args) => {
 	const currentQueue = client.MusicManager.getQueue(message);
@@ -27,13 +27,12 @@ export const run: Run = async (client, message, args) => {
 	) {
 		let queue = `**Current Queue (Requested By: ${message.author.tag})**\n\n `;
 		for (let i = 0; i < currentQueue.songs.length; i++) {
-			queue += `${i} - **${currentQueue.songs[i].title}** - ${currentQueue.songs[i].timestamp}\n`;
+			queue += `${i} - **[${currentQueue.songs[i].title}](${currentQueue.songs[i].url})** - ${currentQueue.songs[i].timestamp}\n`;
 		}
 		const DC = new MessageEmbed()
 			.setColor('#333')
 			.setTimestamp()
 			.setThumbnail(currentQueue.songs[0].img)
-			.setTitle('🎵  Queue of Songs  🎵')
 			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 			.setFooter(
 				`User: ${message.author?.tag} • Created by: PraveshK`,
@@ -42,6 +41,7 @@ export const run: Run = async (client, message, args) => {
 			.setDescription(queue);
 		message.channel.send(DC);
 	}
+
 };
 
 export const name: string = 'queue';

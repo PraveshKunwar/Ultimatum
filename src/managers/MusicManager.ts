@@ -9,12 +9,13 @@ import {
 import { Ultimatum } from '../client';
 import { GuildQueue } from '../interfaces/MusicInterface';
 import ytdl from 'ytdl-core';
+import fetch from 'node-fetch';
 
 class MusicManager {
 	public queue: Map<string, GuildQueue> = new Map();
 	public client: Ultimatum;
 	public dispatcher: VoiceConnection;
-	public play(msg: Message, songs) {
+	public play(msg: Message, songs): Promise<Message> {
 		const guildQueue = this.queue.get(msg.guild.id);
 		if (!songs) {
 			guildQueue.vc.leave();
@@ -23,7 +24,9 @@ class MusicManager {
 				.setDescription(`❯ Finished queue of songs. 🎵`)
 				.setColor('#333')
 				.setFooter('\u3000'.repeat(10));
-			return guildQueue.channel.send(DC);
+			return guildQueue.channel
+				.send(DC)
+				.then(async (msg) => await msg.delete({ timeout: 5000 }));
 		}
 		this.dispatcher = guildQueue.connection;
 
@@ -34,7 +37,9 @@ class MusicManager {
 					.setDescription(`❯ Left vc and deleted queue. 🎵`)
 					.setColor('#333')
 					.setFooter('\u3000'.repeat(10));
-				return guildQueue.channel.send(DC);
+				return guildQueue.channel
+					.send(DC)
+					.then(async (msg) => await msg.delete({ timeout: 5000 }));
 			})
 			.play(ytdl(songs.url))
 			.on('finish', () => {
@@ -47,7 +52,9 @@ class MusicManager {
 					.setDescription(`❯ ERROR: Left vc and deleted queue. 🎵`)
 					.setColor('#333')
 					.setFooter('\u3000'.repeat(10));
-				return guildQueue.channel.send(DC);
+				return guildQueue.channel
+					.send(DC)
+					.then(async (msg) => await msg.delete({ timeout: 5000 }));
 			});
 		const PlayingEmbed = new MessageEmbed()
 			.setThumbnail(songs.img)
@@ -87,10 +94,10 @@ class MusicManager {
 	public getQueue(msg: Message) {
 		return this.queue.get(msg.guild.id);
 	}
-	public async stop(msg: Message) {
+	public async stop(msg: Message): Promise<void> {
 		const Stop = new MessageEmbed()
 			.setDescription(
-				`❯ Choose the following options below: \n\n **1.** If you want me to stop the bot, but leave the queue of songs the same, react with THUMBS_UP. 👍\n\n **2.** If you want me to stop the bot and delete the queue of songs, react with THUMBS_DOWN. 👎\n\n **You have 10 seconds to react.**`
+				`❯ Are you sure you want me to leave? If I leave, the queue will also be terminated. \n\n1. React with 👍 if you want me to leave. \n\n 2. React with 👎 if you want me to stay. \n\n **You have 15 seconds to react. 🎶**`
 			)
 			.setColor('#333')
 			.setFooter('\u3000'.repeat(10));
@@ -113,39 +120,48 @@ class MusicManager {
 				const reaction = collected.first();
 
 				if (reaction.emoji.name === '👍') {
-					const DC = new MessageEmbed()
-						.setDescription(
-							`❯ Stopped playing the music, but kept the queue. 🎵`
-						)
-						.setColor('#333')
-						.setFooter('\u3000'.repeat(10));
-					this.queue.get(msg.guild.id).channel.send(DC);
+					if (sendit.deletable) {
+						sendit.delete();
+					}
 					this.queue.get(msg.guild.id).vc.leave();
 				} else if (reaction.emoji.name === '👎') {
+					if (sendit.deletable) {
+						sendit.delete();
+					}
 					const DC = new MessageEmbed()
 						.setDescription(
-							`❯ Stopped playing the music, but deleted the queue. 🎵`
+							`❯ Continuing to play **${
+								this.queue.get(msg.guild.id).songs[0].title
+							}.** 🎵`
 						)
 						.setColor('#333')
 						.setFooter('\u3000'.repeat(10));
-					this.queue.get(msg.guild.id).channel.send(DC);
-					this.queue.get(msg.guild.id).vc.leave();
-					this.queue.delete(msg.guild.id);
+					this.queue
+						.get(msg.guild.id)
+						.channel.send(DC)
+						.then(async (msg) => await msg.delete({ timeout: 5000 }));
 				}
 			})
 			.catch(async (collected) => {
-				await sendit.delete().then((msg) => {
-					const DC = new MessageEmbed()
-						.setDescription(
-							`❯ No one reacted, continuing to play ${
-								this.queue.get(msg.guild.id).songs[0].title
-							}. 🎵`
-						)
-						.setColor('#333')
-						.setFooter('\u3000'.repeat(10));
-					this.queue.get(msg.guild.id).channel.send(DC);
-				});
+				if (sendit.deletable) {
+					sendit.delete();
+				}
+				const DC = new MessageEmbed()
+					.setDescription(
+						`❯ No one reacted, continuing to play **${
+							this.queue.get(msg.guild.id).songs[0].title
+						}.** 🎵`
+					)
+					.setColor('#333')
+					.setFooter('\u3000'.repeat(10));
+				this.queue
+					.get(msg.guild.id)
+					.channel.send(DC)
+					.then(async (msg) => await msg.delete({ timeout: 5000 }));
 			});
+	}
+	public async lyrics(msg: Message) {
+		const lyrics = await fetch(`https://api.lyrics.ovh/v1/${this.queue.get(msg.guild.id).songs[0].author.name}/${this.queue.get(msg.guild.id).songs[0].title} `);
 	}
 }
 

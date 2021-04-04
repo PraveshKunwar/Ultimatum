@@ -29,5 +29,5 @@ export const run: Run = async (client, message, args) => {
 
 export const name: string = 'stop';
 export const category: string = 'music';
-export const desc: string = 'Stop playing some music from queue..';
+export const desc: string = 'Stop playing some music from queue.';
 export const perms: string[] = ['SPEAK', 'CONNECT'];
