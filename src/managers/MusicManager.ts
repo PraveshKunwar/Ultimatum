@@ -47,14 +47,7 @@ class MusicManager {
 				this.play(msg, guildQueue.songs[0]);
 			})
 			.on('error', (err: Error) => {
-				this.queue.delete(msg.guild.id);
-				const DC = new MessageEmbed()
-					.setDescription(`❯ ERROR: Left vc and deleted queue. 🎵`)
-					.setColor('#333')
-					.setFooter('\u3000'.repeat(10));
-				return guildQueue.channel
-					.send(DC)
-					.then(async (msg) => await msg.delete({ timeout: 5000 }));
+			console.log(err);
 			});
 		const PlayingEmbed = new MessageEmbed()
 			.setThumbnail(songs.img)
