@@ -1,6 +1,6 @@
 import { Run } from '../../interfaces/Command';
-import NoteModel from '../../models/NoteModel';
-import GuildModel from '../../models/GuildModel';
+import NoteModel from '../../models/note.model';
+import GuildModel from '../../models/guild.model';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import moment from 'moment';
 

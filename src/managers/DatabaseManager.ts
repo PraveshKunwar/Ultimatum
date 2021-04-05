@@ -3,13 +3,13 @@ import mongoose, { Model } from 'mongoose';
 class DatabaseManager {
 	public async findOne(
 		findBy: object,
-		model: mongoose.Model<mongoose.Document<any>>
-	): Promise<mongoose.Document<any>> {
+		model: mongoose.Model<mongoose.Document>
+	): Promise<mongoose.Document> {
 		return await model.findOne(findBy);
 	}
 	public async findAndCreate(
 		findBy: object,
-		model: mongoose.Model<mongoose.Document<any>>,
+		model: mongoose.Model<mongoose.Document>,
 		props: object
 	) {
 		const check = await model.findOne(findBy);
@@ -20,7 +20,7 @@ class DatabaseManager {
 	}
 	public async findUpdateOne(
 		findBy: object,
-		model: mongoose.Model<mongoose.Document<any>>,
+		model: mongoose.Model<mongoose.Document>,
 		toUpdate: object
 	) {
 		mongoose.set('useFindAndModify', false);
@@ -28,7 +28,7 @@ class DatabaseManager {
 	}
 	public async findCreateUpdate(
 		findBy: object,
-		model: mongoose.Model<mongoose.Document<any>>,
+		model: mongoose.Model<mongoose.Document>,
 		props: object,
 		toUpdate: object
 	) {
@@ -39,11 +39,11 @@ class DatabaseManager {
 				NewModel.save().catch((err) => console.log(err));
 			}
 		});
-		await check.updateOne(toUpdate);
+		(await check).updateOne(toUpdate);
 	}
 	public async findOneAndRemove(
 		findBy: object,
-		model: mongoose.Model<mongoose.Document<any>>
+		model: mongoose.Model<mongoose.Document>
 	) {
 		model.findOneAndDelete(findBy).catch((err) => console.log(err));
 	}

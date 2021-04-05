@@ -1,5 +1,5 @@
 import { Run } from '../../interfaces/Command';
-import NoteModel from '../../models/NoteModel';
+import NoteModel from '../../models/note.model';
 import { MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message, args, prefix) => {

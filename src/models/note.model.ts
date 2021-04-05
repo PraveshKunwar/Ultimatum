@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Notes = new mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
 	UserId: String,
@@ -8,3 +9,4 @@ const Notes = new mongoose.Schema({
 
 const NoteModel = mongoose.model('notes', Notes);
 export default NoteModel;
+

@@ -1,6 +1,6 @@
 import { Run } from '../../interfaces/Event';
 import mongoose from 'mongoose';
-import GuildModel from '../../models/GuildModel';
+import GuildModel from '../../models/guild.model';
 import { Guild } from 'discord.js';
 
 export const run: Run = async (client, guild: Guild) => {

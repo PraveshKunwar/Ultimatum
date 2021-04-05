@@ -1,5 +1,5 @@
 import { Run } from '../../interfaces/Command';
-import GuildModel from '../../models/GuildModel';
+import GuildModel from '../../models/guild.model';
 import { MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message, args, prefix) => {
