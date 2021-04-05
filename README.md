@@ -1,6 +1,6 @@
 # ⭐ Ultimatum ⭐
 
-[![Top language](https://img.shields.io/github/languages/top/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum) [![Last commit](https://img.shields.io/github/last-commit/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum) [![Code size](https://img.shields.io/github/languages/code-size/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum) [![CodeFactor](https://www.codefactor.io/repository/github/PraveshKunwar/Ultimatum/badge/master)](https://www.codefactor.io/repository/github/PraveshKunwar/Ultimatum/overview/master)
+[![Top language](https://img.shields.io/github/languages/top/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum) [![Last commit](https://img.shields.io/github/last-commit/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum) [![Code size](https://img.shields.io/github/languages/code-size/PraveshKunwar/Ultimatum)](https://github.com/PraveshKunwar/Ultimatum)
 
 [![](https://tokei.rs/b1/github/PraveshKunwar/Ultimatum?category=lines)](https://github.com/PraveshKunwar/Ultimatum) [![](https://tokei.rs/b1/github/PraveshKunwar/Ultimatum?category=code)](https://github.com/PraveshKunwar/Ultimatum) [![](https://tokei.rs/b1/github/PraveshKunwar/Ultimatum?category=comments)](https://github.com/PraveshKunwar/Ultimatum) [![](https://tokei.rs/b1/github/PraveshKunwar/Ultimatum?category=blanks)](https://github.com/PraveshKunwar/Ultimatum) [![](https://tokei.rs/b1/github/PraveshKunwar/Ultimatum?category=files)](https://github.com/PraveshKunwar/Ultimatum)
 
