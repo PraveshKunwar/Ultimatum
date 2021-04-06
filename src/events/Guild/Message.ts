@@ -22,7 +22,7 @@ export const run: Run = async (client, message: Message) => {
 						.setDescription(
 							`🔰 ${client.OneQuote(
 								msg.author.tag
-							)} -  Please **DO NOT** send say bad words here! Thank you!`
+							)} -  Please **DO NOT** send discord links in here! Thank you!`
 						)
 						.setColor('#333');
 					await msg.channel.send(badEmbed).then(async (mesg) => {
