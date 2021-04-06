@@ -13,32 +13,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = __importDefault(require("inquirer"));
-const ora_1 = __importDefault(require("ora"));
-const prompt = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield inquirer_1.default.prompt([
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
+const util_1 = __importDefault(require("util"));
+const writeFileAsync = util_1.default.promisify(fs_1.default.writeFile);
+const readFileAsync = util_1.default.promisify(fs_1.default.readFile);
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    const client = path_1.default.join(process.cwd(), "source", "pkg", "typescript", "Client.ts");
+    const read = yield (yield readFileAsync(client, { encoding: null })).toString();
+    const questions = [
         {
-            type: 'list',
-            name: 'reptile',
-            message: 'Which is better?',
-            choices: ['alligator', 'crocodile'],
+            name: "checks",
+            type: "list",
+            message: "Which language would you like to make the template for?",
+            choices: ["Javascript", "Typescript"]
         }
-    ]).then(res => {
-        console.log(res.reptile);
-    });
-});
-const spin = () => __awaiter(void 0, void 0, void 0, function* () {
-    const spinner = ora_1.default();
-    spinner.start('Spinning');
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            spinner.succeed();
-            resolve();
-        }, 10000);
-    });
-});
-const init = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield prompt();
-    yield spin();
-    console.log("DONE");
-});
-init();
+    ];
+    const { checks } = yield inquirer_1.default.prompt(questions);
+    if (checks === "Typescript") {
+        yield writeFileAsync(path_1.default.join(process.cwd(), "Client.ts"), read).then(res => {
+            console.log("created");
+        });
+    }
+}))();
