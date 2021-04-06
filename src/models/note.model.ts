@@ -9,4 +9,3 @@ const Notes = new mongoose.Schema({
 
 const NoteModel = mongoose.model('notes', Notes);
 export default NoteModel;
-

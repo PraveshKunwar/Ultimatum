@@ -13,6 +13,16 @@ export const ReturnMappedVals = (
 		});
 };
 
+export const shuffleElements = (arr: any[]): any[] => {
+	for (let i = 0; i < arr.length; i++) {
+		const j = Math.floor(Math.random() * i + 1);
+		const store = arr[i];
+		arr[i] = arr[j];
+		arr[j] = store;
+	}
+	return arr;
+};
+
 export const BlockQuote = (text: string | number, lang?: string) => {
 	return `\`\`\`${lang}\n${text}\`\`\``;
 };

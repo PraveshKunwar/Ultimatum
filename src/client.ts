@@ -5,7 +5,7 @@ import { Command } from './interfaces/Command';
 import { Event } from './interfaces/Event';
 import ErrorEmbed from './errors/ErrorEmbed';
 import { Mongo } from './utils/Mongoose';
-import { BlockQuote, OneQuote } from './utils/utils';
+import { BlockQuote, OneQuote, shuffleElements } from './utils/utils';
 
 import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';

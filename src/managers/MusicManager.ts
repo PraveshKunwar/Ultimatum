@@ -7,7 +7,7 @@ import {
 	VoiceConnection,
 } from 'discord.js';
 import { Ultimatum } from '../client';
-import { GuildQueue } from '../interfaces/MusicInterface';
+import { GuildMusicSongs, GuildQueue } from '../interfaces/MusicInterface';
 import ytdl from 'ytdl-core';
 import fetch from 'node-fetch';
 
@@ -15,7 +15,7 @@ class MusicManager {
 	public queue: Map<string, GuildQueue> = new Map();
 	public client: Ultimatum;
 	public dispatcher: VoiceConnection;
-	public play(msg: Message, songs): Promise<Message> {
+	public play(msg: Message, songs: GuildMusicSongs): Promise<Message> {
 		const guildQueue = this.queue.get(msg.guild.id);
 		if (!songs) {
 			guildQueue.vc.leave();
@@ -47,41 +47,15 @@ class MusicManager {
 				this.play(msg, guildQueue.songs[0]);
 			})
 			.on('error', (err: Error) => {
-			console.log(err);
+				console.log(err);
 			});
 		const PlayingEmbed = new MessageEmbed()
+			//@ts-ignore
 			.setThumbnail(songs.img)
-			.setDescription(`➤ Started Playing: ${songs.title}`)
-			.addFields(
-				{
-					name: 'Url',
-					value: `[Link](${songs.url})`,
-					inline: true,
-				},
-				{
-					name: 'Description',
-					value: songs.desc ? songs.desc : 'No description!',
-					inline: true,
-				},
-				{
-					name: 'Timestamp',
-					value: songs.timestamp
-						? songs.timestamp
-						: 'No timestamp provided. May be a livestream you are trying to listen!',
-					inline: true,
-				},
-				{
-					name: 'Views',
-					value: songs.views ? songs.views : "Couldn't load views.",
-					inline: true,
-				}
+			.setDescription(
+				`➤ **${songs.title}** is now playing \n\nUse **<prefix>desc** to get more info on the current track. 🎶`
 			)
-			.setColor('#333')
-			.setTimestamp()
-			.setFooter(
-				`User: ${msg.author?.tag} • Created by: PraveshK`,
-				msg.author.displayAvatarURL()
-			);
+			.setColor('#333');
 		guildQueue.channel.send(PlayingEmbed);
 	}
 	public getQueue(msg: Message) {
@@ -153,8 +127,25 @@ class MusicManager {
 					.then(async (msg) => await msg.delete({ timeout: 5000 }));
 			});
 	}
+	public async skip(msg: Message) {
+		const DC = new MessageEmbed()
+			.setDescription(
+				`❯ Skipping **${this.queue.get(msg.guild.id).songs[0].title}.** 🎵`
+			)
+			.setColor('#333')
+			.setFooter('\u3000'.repeat(10));
+		this.queue
+			.get(msg.guild.id)
+			.channel.send(DC)
+			.then(async (msg) => await msg.delete({ timeout: 5000 }));
+		this.queue.get(msg.guild.id).connection.dispatcher.end();
+	}
 	public async lyrics(msg: Message) {
-		const lyrics = await fetch(`https://api.lyrics.ovh/v1/${this.queue.get(msg.guild.id).songs[0].author.name}/${this.queue.get(msg.guild.id).songs[0].title} `);
+		const lyrics = await fetch(
+			`https://api.lyrics.ovh/v1/${
+				this.queue.get(msg.guild.id).songs[0].author.name
+			}/${this.queue.get(msg.guild.id).songs[0].title} `
+		);
 	}
 }
 

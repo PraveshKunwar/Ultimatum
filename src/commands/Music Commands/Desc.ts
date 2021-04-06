@@ -1,5 +1,5 @@
 import { Run } from '../../interfaces/Command';
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 
 export const run: Run = async (client, message, args) => {
 	const currentQueue = client.MusicManager.getQueue(message);
@@ -40,21 +40,46 @@ export const run: Run = async (client, message, args) => {
 		(message.member.voice.channel && currentQueue !== undefined) ||
 		null
 	) {
-		let queue = `**Current Queue (Requested By: ${message.author.tag})**\n\n `;
-		for (let i = 0; i < currentQueue.songs.length; i++) {
-			queue += `${i} - **[${currentQueue.songs[i].title}](${currentQueue.songs[i].url})** - ${currentQueue.songs[i].timestamp}\n`;
-		}
-		const DC = new MessageEmbed()
+		const results: any = currentQueue.songs[0];
+		const PlayingEmbed = new MessageEmbed()
+			.setDescription(`➤ Info for: **${results.title}**`)
+			.setThumbnail(results.img)
+			.addFields(
+				{
+					name: 'Url',
+					value: `[Link](${results.url})`,
+					inline: true,
+				},
+				{
+					name: 'Description',
+					value: results.desc ? results.desc : 'No description!',
+					inline: true,
+				},
+				{
+					name: 'Timestamp',
+					value: results.timestamp
+						? results.timestamp
+						: 'No timestamp provided. May be a livestream you are trying to listen!',
+					inline: true,
+				},
+				{
+					name: 'Views',
+					value: results.views ? results.views : "Couldn't load views.",
+					inline: true,
+				},
+				{
+					name: 'Thumbnail',
+					value: results.img ? `[Link](${results.img})` : 'No image!',
+					inline: true,
+				}
+			)
 			.setColor('#333')
-			.setTimestamp()
-			.setThumbnail(currentQueue.songs[0].image)
-			.setFooter('\u3000'.repeat(10))
-			.setDescription(queue);
-		message.channel.send(DC);
+			.setFooter('\u3000'.repeat(10));
+		currentQueue.channel.send(PlayingEmbed);
 	}
 };
 
-export const name: string = 'queue';
+export const name: string = 'desc';
 export const category: string = 'music';
-export const desc: string = 'Get the current queue from the voice channel.';
+export const desc: string = 'Get description on a current track.';
 export const perms: string[] = ['SPEAK', 'CONNECT'];

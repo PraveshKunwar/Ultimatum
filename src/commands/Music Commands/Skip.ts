@@ -21,28 +21,23 @@ export const run: Run = async (client, message, args) => {
 				message
 			)
 		);
-	} else if (
-		!message.member?.hasPermission('CONNECT') ||
-		!message.member?.hasPermission('SPEAK') ||
-		!message.guild?.me?.hasPermission('CONNECT') ||
-		!message.guild?.me?.hasPermission('SPEAK')
-	) {
-		return message.channel.send(
-			client.ErrorEmbed(
-				`➤ Please make sure you AND I have the following permissions: \n\n 🔰${client.OneQuote(
-					`SPEAK | CONNECT`
-				)}`,
-				client,
-				message
-			)
-		);
 	}
 	if ((message.member.voice.channel && currentQueue !== undefined) || null) {
-		client.MusicManager.stop(message);
+		if (currentQueue.songs.length <= 1) {
+			message.channel.send(
+				client.ErrorEmbed(
+					`➤ Cannot skip music since there is only one song playing. Add more songs to skip songs throughout queue.`,
+					client,
+					message
+				)
+			);
+		} else if (currentQueue.songs.length >= 1) {
+			client.MusicManager.skip(message);
+		}
 	}
 };
 
-export const name: string = 'stop';
+export const name: string = 'skip';
 export const category: string = 'music';
-export const desc: string = 'Stop playing some music from queue.';
+export const desc: string = 'Skip to the next music in the queue.';
 export const perms: string[] = ['SPEAK', 'CONNECT'];

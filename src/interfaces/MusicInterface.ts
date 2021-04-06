@@ -1,9 +1,5 @@
 import { TextChannel, VoiceChannel, VoiceConnection } from 'discord.js';
 
-export interface Name {
-	name?: string;
-}
-
 export interface MusicInterface {
 	all: [
 		{
@@ -13,16 +9,30 @@ export interface MusicInterface {
 			image?: string;
 			timestamp?: string;
 			views?: number;
-			author?: Name;
+			author?: {
+				name?: string;
+			};
 		}
 	];
+}
+
+export interface GuildMusicSongs {
+	title?: string;
+	url?: string;
+	desc?: string;
+	image?: string;
+	timestamp?: string;
+	views?: number;
+	author?: {
+		name?: string;
+	};
 }
 
 export interface GuildQueue {
 	channel: TextChannel;
 	vc: VoiceChannel;
 	connection: VoiceConnection;
-	songs: any[];
+	songs: GuildMusicSongs[];
 	volume: number;
 	playing: boolean;
 }

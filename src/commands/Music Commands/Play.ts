@@ -3,8 +3,9 @@ import { Message, MessageEmbed, VoiceConnection } from 'discord.js';
 import ytdl from 'ytdl-core';
 import yts from 'yt-search';
 import { MusicInterface } from '../../interfaces/MusicInterface';
+import { CallTracker } from 'node:assert';
 
-export const run: Run = async (client, message, args) => {
+export const run: Run = async (client, message, args, prefix) => {
 	const searchFor = args.join(' ');
 	const search: MusicInterface = searchFor ? await yts(searchFor) : false;
 	const globQueue = client.queue;
@@ -31,6 +32,18 @@ export const run: Run = async (client, message, args) => {
 		return message.channel.send(
 			client.ErrorEmbed(
 				`➤  Please make sure you specify something for me to play. `,
+				client,
+				message
+			)
+		);
+	} else if (
+		searchFor.match(
+			/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm
+		)
+	) {
+		return message.channel.send(
+			client.ErrorEmbed(
+				`➤  Please make sure you specify a video, do not copy and paste YouTube links. You can copy the title of the video. `,
 				client,
 				message
 			)
@@ -78,37 +91,8 @@ export const run: Run = async (client, message, args) => {
 		const PlayingEmbed = new MessageEmbed()
 			.setThumbnail(results.img)
 			.setDescription(`➤ **${results.title}** has been added to the queue.`)
-			.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
-			.addFields(
-				{
-					name: 'Url',
-					value: `[Link](${results.url})`,
-					inline: true,
-				},
-				{
-					name: 'Description',
-					value: results.desc ? results.desc : 'No description!',
-					inline: true,
-				},
-				{
-					name: 'Timestamp',
-					value: results.timestamp
-						? results.timestamp
-						: 'No timestamp provided. May be a livestream you are trying to listen!',
-					inline: true,
-				},
-				{
-					name: 'Views',
-					value: results.views ? results.views : "Couldn't load views.",
-					inline: true,
-				}
-			)
-			.setColor('#333')
-			.setTimestamp()
-			.setFooter(
-				`User: ${message.author?.tag} • Created by: PraveshK`,
-				message.author.displayAvatarURL()
-			);
+			.setColor('#333');
+
 		guildQueue.channel.send(PlayingEmbed);
 	}
 };
