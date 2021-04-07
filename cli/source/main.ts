@@ -82,6 +82,15 @@ interface Questions {
 		'typescript',
 		'index.ts'
 	);
+	const Ping: string = path.join(
+		process.cwd(),
+		'source',
+		'pkg',
+		'typescript',
+		'commands',
+		'Other Commands',
+		'Ping.ts'
+	);
 	const readClient = await (
 		await readFileAsync(client, { encoding: null })
 	).toString();
@@ -108,6 +117,9 @@ interface Questions {
 	).toString();
 	const readIndex = await (
 		await readFileAsync(index, { encoding: null })
+	).toString();
+	const readPing = await (
+		await readFileAsync(Ping, { encoding: null })
 	).toString();
 	const base = '/src';
 	const questions: Questions[] = [
@@ -144,32 +156,68 @@ interface Questions {
 						path.join(process.cwd(), base, 'tsconfig.json'),
 						readTsconfig
 					);
-					if (!fs.existsSync(path.join(process.cwd(), 'interfaces'))) {
-						makeDirAsync(path.join(process.cwd(), base + '/interfaces'))
+					if (!fs.existsSync(path.join(process.cwd(), base, 'interfaces'))) {
+						makeDirAsync(path.join(process.cwd(), base, 'interfaces'))
 							.then(async (res: void) => {
 								await writeFileAsync(
-									path.join(process.cwd(), base + '/interfaces', 'Command.ts'),
+									path.join(process.cwd(), base, 'interfaces', 'Command.ts'),
 									readCommandType
 								);
 								await writeFileAsync(
-									path.join(process.cwd(), base + '/interfaces', 'Event.ts'),
+									path.join(process.cwd(), base, 'interfaces', 'Event.ts'),
 									readEventType
 								);
 							})
 							.catch((err) => {
 								if (err) console.error(err);
 							});
-						if (!fs.existsSync(path.join(process.cwd(), 'events'))) {
+						if (!fs.existsSync(path.join(process.cwd(), base, 'events'))) {
 							makeDirAsync(path.join(process.cwd(), base + '/events')).then(
 								async (res: void) => {
 									await writeFileAsync(
-										path.join(process.cwd(), base + '/events', 'Message.ts'),
+										path.join(process.cwd(), base, 'events', 'Message.ts'),
 										readMessage
 									);
 									await writeFileAsync(
-										path.join(process.cwd(), base + '/events', 'Ready.ts'),
+										path.join(process.cwd(), base, 'events', 'Ready.ts'),
 										readReady
 									);
+								}
+							);
+						}
+						if (!fs.existsSync(path.join(process.cwd(), base, 'commands'))) {
+							makeDirAsync(path.join(process.cwd(), base, 'commands')).then(
+								(res: void) => {
+									if (
+										!fs.existsSync(
+											path.join(
+												process.cwd(),
+												base,
+												'commands',
+												'Other Commands'
+											)
+										)
+									) {
+										makeDirAsync(
+											path.join(
+												process.cwd(),
+												base,
+												'commands',
+												'Other Commands'
+											)
+										).then(async (res: void) => {
+											await writeFileAsync(
+												path.join(
+													process.cwd(),
+													base,
+													'commands',
+													'Other Commands',
+													'Ping.ts'
+												),
+												readPing
+											);
+										});
+									}
 								}
 							);
 						}

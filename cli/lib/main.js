@@ -27,12 +27,20 @@ const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
     const Package = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'package.json');
     const Tsconfig = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'tsconfig.json');
     const README = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'README.md');
+    const Message = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'events', 'Message.ts');
+    const Ready = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'events', 'Ready.ts');
+    const index = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'index.ts');
+    const Ping = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'commands', 'Other Commands', 'Ping.ts');
     const readClient = yield (yield readFileAsync(client, { encoding: null })).toString();
     const readCommandType = yield (yield readFileAsync(Command, { encoding: null })).toString();
     const readEventType = yield (yield readFileAsync(Event, { encoding: null })).toString();
     const readPackage = yield (yield readFileAsync(Package, { encoding: null })).toString();
     const readTsconfig = yield (yield readFileAsync(Tsconfig, { encoding: null })).toString();
     const readMe = yield (yield readFileAsync(README, { encoding: null })).toString();
+    const readMessage = yield (yield readFileAsync(Message, { encoding: null })).toString();
+    const readReady = yield (yield readFileAsync(Ready, { encoding: null })).toString();
+    const readIndex = yield (yield readFileAsync(index, { encoding: null })).toString();
+    const readPing = yield (yield readFileAsync(Ping, { encoding: null })).toString();
     const base = '/src';
     const questions = [
         {
@@ -49,24 +57,40 @@ const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
             if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base))) {
                 makeDirAsync(path_1.default.join(process.cwd(), base)).then((res) => __awaiter(void 0, void 0, void 0, function* () {
                     yield writeFileAsync(path_1.default.join(process.cwd(), base, 'Client.ts'), readClient);
+                    yield writeFileAsync(path_1.default.join(process.cwd(), base, 'index.ts'), readIndex);
                     yield writeFileAsync(path_1.default.join(process.cwd(), base, 'package.json'), readPackage);
                     yield writeFileAsync(path_1.default.join(process.cwd(), base, 'README.md'), readMe);
                     yield writeFileAsync(path_1.default.join(process.cwd(), base, 'tsconfig.json'), readTsconfig);
-                    if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), 'interfaces'))) {
-                        makeDirAsync(path_1.default.join(process.cwd(), base + '/interfaces'))
+                    if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base, 'interfaces'))) {
+                        makeDirAsync(path_1.default.join(process.cwd(), base, 'interfaces'))
                             .then((res) => __awaiter(void 0, void 0, void 0, function* () {
-                            yield writeFileAsync(path_1.default.join(process.cwd(), base + '/interfaces', 'Command.ts'), readCommandType);
-                            yield writeFileAsync(path_1.default.join(process.cwd(), base + '/interfaces', 'Event.ts'), readEventType);
-                            setTimeout(() => {
-                                spinner.color = 'yellow';
-                                spinner.text = 'Almost done...';
-                                spinner.stop();
-                            }, 10000);
+                            yield writeFileAsync(path_1.default.join(process.cwd(), base, 'interfaces', 'Command.ts'), readCommandType);
+                            yield writeFileAsync(path_1.default.join(process.cwd(), base, 'interfaces', 'Event.ts'), readEventType);
                         }))
                             .catch((err) => {
                             if (err)
                                 console.error(err);
                         });
+                        if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base, 'events'))) {
+                            makeDirAsync(path_1.default.join(process.cwd(), base + '/events')).then((res) => __awaiter(void 0, void 0, void 0, function* () {
+                                yield writeFileAsync(path_1.default.join(process.cwd(), base, 'events', 'Message.ts'), readMessage);
+                                yield writeFileAsync(path_1.default.join(process.cwd(), base, 'events', 'Ready.ts'), readReady);
+                            }));
+                        }
+                        if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base, 'commands'))) {
+                            makeDirAsync(path_1.default.join(process.cwd(), base, 'commands')).then((res) => {
+                                if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base, 'commands', 'Other Commands'))) {
+                                    makeDirAsync(path_1.default.join(process.cwd(), base, 'commands', 'Other Commands')).then((res) => __awaiter(void 0, void 0, void 0, function* () {
+                                        yield writeFileAsync(path_1.default.join(process.cwd(), base, 'commands', 'Other Commands', 'Ping.ts'), readPing);
+                                    }));
+                                }
+                            });
+                        }
+                        setTimeout(() => {
+                            spinner.color = 'yellow';
+                            spinner.text = 'Almost done...';
+                            spinner.stop();
+                        }, 5000);
                     }
                 }));
             }
