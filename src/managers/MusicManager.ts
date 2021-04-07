@@ -144,7 +144,7 @@ class MusicManager {
 		const lyrics = await fetch(
 			`https://api.lyrics.ovh/v1/${
 				this.queue.get(msg.guild.id).songs[0].author.name
-			}/${this.queue.get(msg.guild.id).songs[0].title} `
+			}/${this.queue.get(msg.guild.id).songs[0].title}`
 		);
 	}
 }

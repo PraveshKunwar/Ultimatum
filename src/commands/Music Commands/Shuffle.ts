@@ -69,3 +69,5 @@ export const name: string = 'shuffle';
 export const category: string = 'music';
 export const desc: string = 'Shuffle some music from the current queue.';
 export const perms: string[] = ['SPEAK', 'CONNECT'];
+
+

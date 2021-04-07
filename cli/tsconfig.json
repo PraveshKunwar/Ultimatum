@@ -19,4 +19,5 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["source"],
+	"exclude": ["source/pkg/Typescript"]
 }
