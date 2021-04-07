@@ -1,11 +1,14 @@
+#!/usr/bin/env node
 import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs';
 import util from 'util';
 import ora from 'ora';
+import { Command } from 'commander';
 const writeFileAsync = util.promisify(fs.writeFile);
 const readFileAsync = util.promisify(fs.readFile);
 const makeDirAsync = util.promisify(fs.mkdir);
+const program = new Command();
 
 interface Questions {
 	name: string;
@@ -15,6 +18,9 @@ interface Questions {
 }
 
 (async (): Promise<void> => {
+	program
+		.version('1.0.0')
+		.description('Typescript or Javascript Discord JS project creator.');
 	const client: string = path.join(
 		process.cwd(),
 		'source',
@@ -130,10 +136,22 @@ interface Questions {
 			choices: ['Javascript', 'Typescript'],
 		},
 	];
-	const { checks } = await inquirer.prompt(questions);
-	if (checks === 'Typescript') {
-		const spinner = ora('Creating packages...').start();
-		try {
+
+	program
+		.command('help')
+		.description('Get help on how to use this tool.')
+		.action(() => {
+			console.log(
+				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create \n\n This creates a Javascript Template.'
+			);
+		});
+
+	program
+		.command('typescript')
+		.alias('ts')
+		.description('Create Typescript template')
+		.action(() => {
+			const spinner = ora('Creating packages...').start();
 			if (!fs.existsSync(path.join(process.cwd(), base))) {
 				makeDirAsync(path.join(process.cwd(), base)).then(async (res: void) => {
 					await writeFileAsync(
@@ -229,8 +247,6 @@ interface Questions {
 					}
 				});
 			}
-		} catch (e) {
-			if (e) console.error(e);
-		}
-	}
+		});
+	program.parse(process.argv);
 })();
