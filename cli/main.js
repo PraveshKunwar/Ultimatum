@@ -56,8 +56,7 @@ const program = new commander_1.Command();
         },
     ];
     program
-        .command('--help')
-        .aliases(['help', '-help'])
+        .command('help')
         .description('Get help on how to use this tool.')
         .action(() => {
         console.log('You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create \n\n This creates a Javascript Template.');
