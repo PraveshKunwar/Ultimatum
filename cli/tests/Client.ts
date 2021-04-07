@@ -1,1 +1,1 @@
-const variable: string = 'asdasdjasdaskjd'
+const variable: string = 'asdasdjasdaskjd';

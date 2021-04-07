@@ -8,14 +8,12 @@ const ErrorEmbed = (
 	external?: string | any
 ) => {
 	const Embed: MessageEmbed = new MessageEmbed()
-		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
+		.setAuthor(`User: ${message.author?.tag} • Created by: PraveshK`,
+			message.author.displayAvatarURL())
 		.setDescription(`${err}`)
 		.setColor(Colors.error)
 		.setTimestamp()
-		.setFooter(
-			`User: ${message.author?.tag} • Created by: PraveshK`,
-			message.author.displayAvatarURL()
-		);
+		.setFooter('\u3000'.repeat(10));
 	return Embed;
 };
 

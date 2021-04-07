@@ -1,27 +1,28 @@
 {
-  "name": "ts-djs-create",
-  "version": "1.0.0",
-  "description": "A CLI for creating a Discord JS project with Typescript (template).",
-  "main": "index.js",
-  "preferGlobal": true,
-  "bin": "/lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node lib/main.js",
-    "dev": "nodemon lib/main.js",
-    "lint": "prettier --write ."
-  },
-  "author": "Pravesh Kunwar",
-  "license": "MIT",
-  "dependencies": {
-    "@types/inquirer": "^7.3.1",
-    "commander": "^7.2.0",
-    "discord": "^0.8.2",
-    "glob": "^7.1.6",
-    "inquirer": "^8.0.0",
-    "ora": "^5.4.0",
-    "path": "^0.12.7",
-    "prettier": "^2.2.1"
-  }
+	"name": "ts-djs-create",
+	"version": "1.0.0",
+	"description": "A CLI for creating a Discord JS project with Typescript (template).",
+	"main": "index.js",
+	"preferGlobal": true,
+	"bin": "/lib/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"start": "node lib/main.js",
+		"dev": "nodemon lib/main.js",
+		"lint": "prettier --write ."
+	},
+	"author": "Pravesh Kunwar",
+	"license": "MIT",
+	"dependencies": {
+		"@types/inquirer": "^7.3.1",
+		"commander": "^7.2.0",
+		"discord": "^0.8.2",
+		"discord.js": "^12.5.3",
+		"glob": "^7.1.6",
+		"inquirer": "^8.0.0",
+		"ora": "^5.4.0",
+		"path": "^0.12.7",
+		"prettier": "^2.2.1"
+	}
 }
