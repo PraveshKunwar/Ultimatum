@@ -1,7 +1,6 @@
 .env
 node_modules
 yarn.lock
-index.ts
 dist
 config.json
 yarn-error.log
