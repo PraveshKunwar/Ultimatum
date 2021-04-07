@@ -23,9 +23,13 @@ const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
     const client = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'Client.ts');
     const Command = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'interfaces', 'Command.ts');
     const Event = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'interfaces', 'Event.ts');
+    const Package = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'package.json');
+    const Tsconfig = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'tsconfig.json');
     const readClient = yield (yield readFileAsync(client, { encoding: null })).toString();
     const readCommandType = yield (yield readFileAsync(Command, { encoding: null })).toString();
     const readEventType = yield (yield readFileAsync(Event, { encoding: null })).toString();
+    const readPackage = yield (yield readFileAsync(Package, { encoding: null })).toString();
+    const readTsconfig = yield (yield readFileAsync(Tsconfig, { encoding: null })).toString();
     const base = '/src';
     const questions = [
         {
@@ -41,6 +45,8 @@ const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
             if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base))) {
                 makeDirAsync(path_1.default.join(process.cwd(), base)).then((res) => __awaiter(void 0, void 0, void 0, function* () {
                     yield writeFileAsync(path_1.default.join(process.cwd(), base, 'Client.ts'), readClient);
+                    yield writeFileAsync(path_1.default.join(process.cwd(), base, 'package.json'), readPackage);
+                    yield writeFileAsync(path_1.default.join(process.cwd(), base, 'tsconfig.json'), readTsconfig);
                     if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), 'interfaces'))) {
                         makeDirAsync(path_1.default.join(process.cwd(), base + '/interfaces'))
                             .then((res) => __awaiter(void 0, void 0, void 0, function* () {
