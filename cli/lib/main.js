@@ -21,7 +21,11 @@ const readFileAsync = util_1.default.promisify(fs_1.default.readFile);
 const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const client = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'Client.ts');
-    const read = yield (yield readFileAsync(client, { encoding: null })).toString();
+    const Command = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'interfaces', 'Command.ts');
+    const Event = path_1.default.join(process.cwd(), 'source', 'pkg', 'typescript', 'interfaces', 'Event.ts');
+    const readClient = yield (yield readFileAsync(client, { encoding: null })).toString();
+    const readCommandType = yield (yield readFileAsync(Command, { encoding: null })).toString();
+    const readEventType = yield (yield readFileAsync(Event, { encoding: null })).toString();
     const base = '/src';
     const questions = [
         {
@@ -36,7 +40,18 @@ const makeDirAsync = util_1.default.promisify(fs_1.default.mkdir);
         try {
             if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base))) {
                 makeDirAsync(path_1.default.join(process.cwd(), base)).then((res) => __awaiter(void 0, void 0, void 0, function* () {
-                    yield writeFileAsync(path_1.default.join(process.cwd(), base, 'Client.ts'), read);
+                    yield writeFileAsync(path_1.default.join(process.cwd(), base, 'Client.ts'), readClient);
+                    if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), 'interfaces'))) {
+                        makeDirAsync(path_1.default.join(process.cwd(), base + '/interfaces'))
+                            .then((res) => __awaiter(void 0, void 0, void 0, function* () {
+                            yield writeFileAsync(path_1.default.join(process.cwd(), base + '/interfaces', 'Command.ts'), readCommandType);
+                            yield writeFileAsync(path_1.default.join(process.cwd(), base + '/interfaces', 'Event.ts'), readEventType);
+                        }))
+                            .catch((err) => {
+                            if (err)
+                                console.error(err);
+                        });
+                    }
                 }));
             }
         }
