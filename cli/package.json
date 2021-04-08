@@ -1,6 +1,6 @@
 {
 	"name": "ts-djs-create",
-	"version": "1.1.3",
+	"version": "1.1.5",
 	"description": "A CLI for creating a Discord JS project with Typescript (template).",
 	"main": "main.js",
 	"preferGlobal": true,
