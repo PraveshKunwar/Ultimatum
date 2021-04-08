@@ -21,6 +21,7 @@ interface Questions {
 	program
 		.version('1.0.0')
 		.description('Typescript or Javascript Discord JS project creator.');
+
 	const client: string = path.join(
 		process.cwd(),
 		'source',
@@ -142,7 +143,7 @@ interface Questions {
 		.description('Get help on how to use this tool.')
 		.action(() => {
 			console.log(
-				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create javascript\n\n This creates a Javascript Template.'
+				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create \n\n This creates a Javascript Template.'
 			);
 		});
 
