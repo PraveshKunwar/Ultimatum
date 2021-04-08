@@ -70,7 +70,6 @@ const program = new commander_1.Command();
         if (!fs_1.default.existsSync(path_1.default.join(process.cwd(), base))) {
             makeDirAsync(path_1.default.join(process.cwd(), base)).then((res) => __awaiter(void 0, void 0, void 0, function* () {
                 yield writeFileAsync(path_1.default.join(process.cwd(), base, 'Client.ts'), readClient);
-                yield writeFileAsync(path_1.default.join(process.cwd(), base, 'index.ts'), readIndex);
                 yield writeFileAsync(path_1.default.join(process.cwd(), base, 'package.json'), readPackage);
                 yield writeFileAsync(path_1.default.join(process.cwd(), base, 'README.md'), readMe);
                 yield writeFileAsync(path_1.default.join(process.cwd(), base, 'tsconfig.json'), readTsconfig);

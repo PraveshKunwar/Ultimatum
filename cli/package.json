@@ -1,17 +1,17 @@
 {
 	"name": "ts-djs-create",
-	"version": "1.0.1",
+	"version": "1.1.2",
 	"description": "A CLI for creating a Discord JS project with Typescript (template).",
-	"main": "index.js",
+	"main": "main.js",
 	"preferGlobal": true,
 	"bin": {
-		"djs": "index.js"
+		"ts-create-pro": "main.js"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc",
-		"start": "node lib/main.js",
-		"dev": "nodemon lib/main.js",
+		"start": "node main.js",
+		"dev": "nodemon main.js",
 		"lint": "prettier --write ."
 	},
 	"author": "Pravesh Kunwar",

@@ -142,7 +142,7 @@ interface Questions {
 		.description('Get help on how to use this tool.')
 		.action(() => {
 			console.log(
-				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create \n\n This creates a Javascript Template.'
+				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create javascript\n\n This creates a Javascript Template.'
 			);
 		});
 
@@ -158,10 +158,7 @@ interface Questions {
 						path.join(process.cwd(), base, 'Client.ts'),
 						readClient
 					);
-					await writeFileAsync(
-						path.join(process.cwd(), base, 'index.ts'),
-						readIndex
-					);
+
 					await writeFileAsync(
 						path.join(process.cwd(), base, 'package.json'),
 						readPackage
