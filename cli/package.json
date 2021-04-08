@@ -1,12 +1,10 @@
 {
-	"name": "ts-djs-create",
+	"name": "create-ts-djs-pro",
 	"version": "1.1.5",
 	"description": "A CLI for creating a Discord JS project with Typescript (template).",
 	"main": "main.js",
 	"preferGlobal": true,
-	"bin": {
-		"ts-create-pro": "main.js"
-	},
+	"bin": "main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc",

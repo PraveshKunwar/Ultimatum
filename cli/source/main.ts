@@ -3,8 +3,8 @@ import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs';
 import util from 'util';
-import ora from 'ora';
 import { Command } from 'commander';
+import ora from 'ora';
 const writeFileAsync = util.promisify(fs.writeFile);
 const readFileAsync = util.promisify(fs.readFile);
 const makeDirAsync = util.promisify(fs.mkdir);
@@ -18,10 +18,6 @@ interface Questions {
 }
 
 (async (): Promise<void> => {
-	program
-		.version('1.0.0')
-		.description('Typescript or Javascript Discord JS project creator.');
-
 	const client: string = path.join(
 		process.cwd(),
 		'source',
@@ -137,57 +133,57 @@ interface Questions {
 			choices: ['Javascript', 'Typescript'],
 		},
 	];
-
+	program.version('1.1.1').description('Current version.');
 	program
-		.command('help')
-		.description('Get help on how to use this tool.')
-		.action(() => {
-			console.log(
-				'You can do: \n\n ts-djs-create typescript \n\n This creates a Typescript template, or you can do: \n\n: ts-djs-create \n\n This creates a Javascript Template.'
-			);
-		});
+		.command('init')
+		.aliases(['create'])
+		.description('Creates a new project template')
+		.action(async () => {
+			const { checks } = await inquirer.prompt(questions);
+			if (checks === 'Typescript') {
+				const spinner = ora('Creating packages...').start();
+				try {
+					makeDirAsync(path.join(process.cwd(), base)).then(
+						async (res: void) => {
+							await writeFileAsync(
+								path.join(process.cwd(), base, 'Client.ts'),
+								readClient
+							);
+							await writeFileAsync(
+								path.join(process.cwd(), base, 'index.ts'),
+								readIndex
+							);
+							/*	await writeFileAsync(
+								path.join(process.cwd(), 'package.json'),
+								readPackage
+							);
+							await writeFileAsync(
+								path.join(process.cwd(), 'README.md'),
+								readMe
+							);
+							await writeFileAsync(
+								path.join(process.cwd(), 'tsconfig.json'),
+								readTsconfig
+							);*/
 
-	program
-		.command('typescript')
-		.alias('ts')
-		.description('Create Typescript template')
-		.action(() => {
-			const spinner = ora('Creating packages...').start();
-			if (!fs.existsSync(path.join(process.cwd(), base))) {
-				makeDirAsync(path.join(process.cwd(), base)).then(async (res: void) => {
-					await writeFileAsync(
-						path.join(process.cwd(), base, 'Client.ts'),
-						readClient
-					);
+							makeDirAsync(path.join(process.cwd(), base, 'interfaces'))
+								.then(async (res: void) => {
+									await writeFileAsync(
+										path.join(process.cwd(), base, 'interfaces', 'Command.ts'),
+										readCommandType
+									);
+									await writeFileAsync(
+										path.join(process.cwd(), base, 'interfaces', 'Event.ts'),
+										readEventType
+									);
+								})
+								.catch((err) => {
+									if (err) {
+										spinner.stop();
+										console.error(err);
+									}
+								});
 
-					await writeFileAsync(
-						path.join(process.cwd(), base, 'package.json'),
-						readPackage
-					);
-					await writeFileAsync(
-						path.join(process.cwd(), base, 'README.md'),
-						readMe
-					);
-					await writeFileAsync(
-						path.join(process.cwd(), base, 'tsconfig.json'),
-						readTsconfig
-					);
-					if (!fs.existsSync(path.join(process.cwd(), base, 'interfaces'))) {
-						makeDirAsync(path.join(process.cwd(), base, 'interfaces'))
-							.then(async (res: void) => {
-								await writeFileAsync(
-									path.join(process.cwd(), base, 'interfaces', 'Command.ts'),
-									readCommandType
-								);
-								await writeFileAsync(
-									path.join(process.cwd(), base, 'interfaces', 'Event.ts'),
-									readEventType
-								);
-							})
-							.catch((err) => {
-								if (err) console.error(err);
-							});
-						if (!fs.existsSync(path.join(process.cwd(), base, 'events'))) {
 							makeDirAsync(path.join(process.cwd(), base + '/events')).then(
 								async (res: void) => {
 									await writeFileAsync(
@@ -200,8 +196,7 @@ interface Questions {
 									);
 								}
 							);
-						}
-						if (!fs.existsSync(path.join(process.cwd(), base, 'commands'))) {
+
 							makeDirAsync(path.join(process.cwd(), base, 'commands')).then(
 								(res: void) => {
 									if (
@@ -236,14 +231,20 @@ interface Questions {
 									}
 								}
 							);
+
+							setTimeout(() => {
+								spinner.color = 'yellow';
+								spinner.text = 'Almost done...';
+								spinner.stop();
+							}, 5000);
 						}
-						setTimeout(() => {
-							spinner.color = 'yellow';
-							spinner.text = 'Almost done...';
-							spinner.stop();
-						}, 5000);
+					);
+				} catch (e) {
+					if (e) {
+						console.error(e);
+						spinner.stop();
 					}
-				});
+				}
 			}
 		});
 	program.parse(process.argv);
