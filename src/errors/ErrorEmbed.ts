@@ -11,8 +11,7 @@ const ErrorEmbed = (
 		.setAuthor(`User: ${message.author?.tag} • Created by: PraveshK`,
 			message.author.displayAvatarURL())
 		.setDescription(`${err}`)
-		.setColor(Colors.error)
-		.setTimestamp()
+		.setColor('#333')
 		.setFooter('\u3000'.repeat(10));
 	return Embed;
 };

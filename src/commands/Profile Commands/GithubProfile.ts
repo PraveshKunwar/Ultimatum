@@ -35,37 +35,37 @@ export const run: Run = async (client, message, args, prefix) => {
 					.setDescription(`Github Profile displayed for user **${username}**.`)
 					.addFields(
 						{
-							name: '⭐ Bio',
+							name: 'Bio',
 							value: res.data.bio === null ? 'No Bio!' : res.data.bio,
 						},
 						{
-							name: '⭐ Followers',
+							name: 'Followers',
 							value: res.data.followers,
 							inline: true,
 						},
 						{
-							name: '⭐ Following',
+							name: 'Following',
 							value: res.data.following,
 							inline: true,
 						},
 						{
-							name: '⭐ Location',
+							name: 'Location',
 							value:
 								res.data.location === null ? 'No location!' : res.data.location,
 							inline: true,
 						},
 						{
-							name: '⭐ Repos',
+							name: 'Repos',
 							value: res.data.public_repos,
 							inline: true,
 						},
 						{
-							name: '⭐ Account created at:',
+							name: 'Account created at:',
 							value: `${month}/${day}/${year}`,
 							inline: true,
 						},
 						{
-							name: `⭐ Link to Github profile`,
+							name: `Link to Github profile`,
 							value: `[${username}'s Link](${res.data.html_url})`,
 							inline: true,
 						}
