@@ -12,7 +12,7 @@ export const run: Run = async (client, message, args, prefix) => {
 	const UserProfile = new MessageEmbed()
 		.setColor(Colors.github_color_palette)
 		.setTimestamp()
-		.setTitle('🕵️ User Profile')
+		.setTitle('🕵️ User       Profile')
 		.setAuthor(client.user?.tag, client.user?.displayAvatarURL())
 		.setThumbnail(user.user.displayAvatarURL())
 		.setFooter(

@@ -52,9 +52,7 @@ class MusicManager {
 		const PlayingEmbed = new MessageEmbed()
 			//@ts-ignore
 			.setThumbnail(songs.img)
-			.setDescription(
-				`➤ **${songs.title}** is now playing \n\nUse **<prefix>desc** to get more info on the current track. 🎶`
-			)
+			.setDescription(`➤ **${songs.title}** is now playing. 🎶`)
 			.setColor('#333');
 		guildQueue.channel.send(PlayingEmbed);
 	}

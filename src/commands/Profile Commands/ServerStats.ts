@@ -17,42 +17,42 @@ export const run: Run = async (client, message, args) => {
 		.setTimestamp()
 		.addFields(
 			{
-				name: '⭐ Owner',
+				name: 'Owner',
 				value: message.guild?.owner?.user.username,
 				inline: true,
 			},
 			{
-				name: '⭐ Server Name',
+				name: 'Server Name',
 				value: message.guild?.name,
 				inline: true,
 			},
 			{
-				name: '⭐ Total Members',
+				name: 'Total Members',
 				value: message.guild?.members.cache.size,
 				inline: true,
 			},
 			{
-				name: '⭐ Total Channels',
+				name: 'Total Channels',
 				value: message.guild?.channels.cache.size,
 				inline: true,
 			},
 			{
-				name: '⭐ Total Roles',
+				name: 'Total Roles',
 				value: message.guild?.roles.cache.size,
 				inline: true,
 			},
 			{
-				name: '⭐ Created at',
+				name: 'Created at',
 				value: `${month}/${day}/${year}`,
 				inline: true,
 			},
 			{
-				name: '⭐ Region',
+				name: 'Region',
 				value: message.guild?.region,
 				inline: true,
 			},
 			{
-				name: '⭐ Description',
+				name: 'Description',
 				value: message.guild?.description
 					? message.guild?.description
 					: 'No description!',

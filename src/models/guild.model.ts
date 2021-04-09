@@ -15,6 +15,7 @@ const GuildJoin = new mongoose.Schema({
 	ModChannel: String || null,
 	ModChannelName: String || null,
 	BadWords: Boolean || null,
+	Welcome: Boolean,
 	Warns:
 		[
 			{

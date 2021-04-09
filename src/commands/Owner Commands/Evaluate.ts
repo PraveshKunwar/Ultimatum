@@ -53,7 +53,8 @@ export const run: Run = async (client, message, args) => {
 			if (e) {
 				const DeletedEmbed = new MessageEmbed()
 					.setColor('#333')
-					.setDescription(`❯ ${e}`);
+					.setDescription(`❯ ${e}`)
+					.setFooter('\u3000'.repeat(10));;
 				message.channel
 					.send(DeletedEmbed)
 					.then(async (msg) => await msg.delete({ timeout: 5000 }));

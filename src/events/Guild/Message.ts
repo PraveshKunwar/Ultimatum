@@ -17,18 +17,29 @@ export const run: Run = async (client, message: Message) => {
 			!message.content.startsWith(prefix)
 		) {
 			if (message.deletable) {
-				message.delete().then(async (msg) => {
-					const badEmbed = new MessageEmbed()
-						.setDescription(
-							`🔰 ${client.OneQuote(
-								msg.author.tag
-							)} -  Please **DO NOT** send discord links in here! Thank you!`
-						)
-						.setColor('#333');
-					await msg.channel.send(badEmbed).then(async (mesg) => {
-						await mesg.delete({ timeout: 5000 });
+				message
+					.delete()
+					.then(async (msg) => {
+						const badEmbed = new MessageEmbed()
+							.setDescription(
+								`🔰 ${client.OneQuote(
+									msg.author.tag
+								)} -  Please **DO NOT** send discord links in here! Thank you!`
+							)
+							.setColor('#333');
+						await msg.channel.send(badEmbed).then(async (mesg) => {
+							await mesg.delete({ timeout: 5000 });
+						});
+					})
+					.catch((err) => {
+						if (err) {
+							const DeletedEmbed = new MessageEmbed()
+								.setColor('#333')
+								.setDescription(`❯ ${err}`)
+								.setFooter('\u3000'.repeat(10));
+							message.channel.send(DeletedEmbed);
+						}
 					});
-				});
 			}
 		} else if (res.DiscordLink === false) {
 			return;
@@ -36,18 +47,29 @@ export const run: Run = async (client, message: Message) => {
 		if (res.BadWords === true && !message.content.startsWith(prefix)) {
 			words.forEach((item) => {
 				if (message.deletable && message.content.includes(item)) {
-					message.delete().then(async (msg) => {
-						const badEmbed = new MessageEmbed()
-							.setDescription(
-								`🔰 ${client.OneQuote(
-									msg.author.tag
-								)} -  Please **DO NOT** send bad words here. Thank you!`
-							)
-							.setColor('#333');
-						await msg.channel.send(badEmbed).then(async (mesg) => {
-							await mesg.delete({ timeout: 5000 });
+					message
+						.delete()
+						.then(async (msg) => {
+							const badEmbed = new MessageEmbed()
+								.setDescription(
+									`🔰 ${client.OneQuote(
+										msg.author.tag
+									)} -  Please **DO NOT** send bad words here. Thank you!`
+								)
+								.setColor('#333');
+							await msg.channel.send(badEmbed).then(async (mesg) => {
+								await mesg.delete({ timeout: 5000 });
+							});
+						})
+						.catch((err) => {
+							if (err) {
+								const DeletedEmbed = new MessageEmbed()
+									.setColor('#333')
+									.setDescription(`❯ ${err}`)
+									.setFooter('\u3000'.repeat(10));
+								message.channel.send(DeletedEmbed);
+							}
 						});
-					});
 				}
 			});
 		}

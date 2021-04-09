@@ -25,6 +25,7 @@ export const run: Run = async (client, guild: Guild) => {
 			ModChannel: null,
 			ModChannelName: null,
 			BadWords: null,
+			Welcome: Boolean,
 		}
 	);
 	const Welcome = new MessageEmbed()
