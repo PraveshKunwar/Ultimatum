@@ -55,6 +55,13 @@ const program = new commander_1.Command();
     ];
     program.version('1.1.1').description('Current version.');
     program
+        .command('help')
+        .aliases(['-help'])
+        .description('Get help for usage on the CLI.')
+        .action(() => {
+        console.log(`//holder`);
+    });
+    program
         .command('init')
         .aliases(['create'])
         .description('Creates a new project template')

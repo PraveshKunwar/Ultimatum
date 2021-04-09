@@ -124,6 +124,15 @@ interface Questions {
 	const readPing = await (
 		await readFileAsync(Ping, { encoding: null })
 	).toString();
+
+	const ClientJS: string = path.join(
+		process.cwd(),
+		'source',
+		'pkg',
+		'js',
+		'Client.js'
+	);
+	const readClientJS = await readFileAsync(ClientJS, { encoding: null });
 	const base = '/src';
 	const questions: Questions[] = [
 		{
@@ -134,12 +143,42 @@ interface Questions {
 		},
 	];
 	program.version('1.1.1').description('Current version.');
+
+	program
+		.command('help')
+		.aliases(['-help'])
+		.description('Get help for usage on the CLI.')
+		.action(() => {
+			console.log(`//holder`);
+		});
+
 	program
 		.command('init')
 		.aliases(['create'])
 		.description('Creates a new project template')
 		.action(async () => {
 			const { checks } = await inquirer.prompt(questions);
+			if (checks === 'Javascript') {
+				const spinner = ora('Creating packages...').start();
+				await writeFileAsync(
+					path.join(process.cwd(), 'client.js'),
+					readClientJS
+				);
+				try {
+				} catch (e) {
+					if (e) {
+						console.error(e);
+						spinner.stop();
+					}
+				}
+
+				setTimeout(() => {
+					spinner.color = 'yellow';
+					spinner.text = 'Almost done...';
+					spinner.stop();
+				}, 5000);
+			}
+
 			if (checks === 'Typescript') {
 				const spinner = ora('Creating packages...').start();
 				try {

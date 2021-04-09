@@ -19,5 +19,5 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["src"],
-	"exclude": ["app", "bin", "cli", "electron"]
+	"exclude": ["app", "cli", "electron"]
 }
