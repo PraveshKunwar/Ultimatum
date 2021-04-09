@@ -4,13 +4,15 @@ import mongoose from 'mongoose';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import Colors from '../../utils/utils';
 import moment from 'moment';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const link = args[0];
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
+
 	if (!link) {
 		message.channel.send(
 			client.ErrorEmbed(
@@ -54,7 +56,7 @@ export const run: Run = async (client, message, args, prefix) => {
 				.setColor('#333')
 				.setFooter('\u3000'.repeat(10));
 			message.channel.send(OnEmbed);
-			mod.then((res) => {
+			mod.then((res: GuildType) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
 					return;
 				} else {

@@ -3,10 +3,11 @@ import { MessageEmbed } from 'discord.js';
 import GuildModel from '../../models/guild.model';
 import moment from 'moment';
 import { TextChannel } from 'discord.js';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NewPrefix: string | number = args[0];
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
@@ -42,7 +43,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			.setColor('#333')
 			.setFooter('\u3000'.repeat(10));
 		message.channel.send(NewPrefixEmbed);
-		mod.then((res) => {
+		mod.then((res: GuildType) => {
 			if (res.ModChannel === null || res.ModChannelName === null) {
 				return;
 			} else {

@@ -3,10 +3,11 @@ import NoteModel from '../../models/note.model';
 import GuildModel from '../../models/guild.model';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import moment from 'moment';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const user = message.mentions.users.first();
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
@@ -59,7 +60,7 @@ export const run: Run = async (client, message, args, prefix) => {
 						.setColor('#333')
 						.setFooter('\u3000'.repeat(10));
 					message.channel.send(NoteEmbed);
-					mod.then((res) => {
+					mod.then((res: GuildType) => {
 						if (res.ModChannel === null || res.ModChannelName === null) {
 							return;
 						} else {

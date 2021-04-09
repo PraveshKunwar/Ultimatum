@@ -1,6 +1,7 @@
 import { Run } from '../../interfaces/Command';
 import NoteModel from '../../models/note.model';
 import { MessageEmbed } from 'discord.js';
+import { NoteType } from '../../interfaces/NoteInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const user = message.mentions.users.first();
@@ -29,10 +30,10 @@ export const run: Run = async (client, message, args, prefix) => {
 			)
 		);
 	} else if (message.member.hasPermission('MANAGE_MESSAGES') && user) {
-		const note: any = client.DatabaseManager.findOne(
+		const note: Promise<any> = client.DatabaseManager.findOne(
 			{ UserId: user.id, GuildId: message.guild.id },
 			NoteModel
-		).then((res: any) => {
+		).then((res: NoteType) => {
 			if (res === null || undefined) {
 				return message.channel.send(
 					client.ErrorEmbed(

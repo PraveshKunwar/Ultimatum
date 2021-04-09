@@ -4,9 +4,10 @@ import GuildModel from '../../models/guild.model';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import moment from 'moment';
 import mongoose from 'mongoose';
+import { NoteType } from '../../interfaces/NoteInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
@@ -59,7 +60,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		await client.DatabaseManager.findOne(
 			{ UserId: user.id, GuildId: message.guild.id },
 			NoteModel
-		).then((res) => {
+		).then((res: NoteType) => {
 			if (res === null || undefined) {
 				client.DatabaseManager.findAndCreate(
 					{ UserId: user.id, GuildId: message.guild.id },

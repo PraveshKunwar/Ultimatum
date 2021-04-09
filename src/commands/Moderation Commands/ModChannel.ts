@@ -1,6 +1,7 @@
 import { Run } from '../../interfaces/Command';
 import GuildModel from '../../models/guild.model';
 import { MessageEmbed } from 'discord.js';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const channel = message.mentions.channels.first();
@@ -42,7 +43,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ GuildId: message.guild.id },
 			GuildModel,
 			{ ModChannelName: channel.name }
-		).then((res) => {
+		).then((res: GuildType) => {
 			const SetEmbed = new MessageEmbed()
 				.setDescription(
 					`❯ Saved new mod channel: ${client.OneQuote(channel.name)} 🛠`

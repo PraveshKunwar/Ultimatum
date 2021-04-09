@@ -3,12 +3,12 @@ import { GuildType } from '../../interfaces/GuildInterface';
 import GuildModel from '../../models/guild.model';
 import { Message, MessageEmbed } from 'discord.js';
 import { words } from '../../utils/utils';
-//@ts-ignore
+
 export const run: Run = async (client, message: Message) => {
 	client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
-	).then((res: GuildType | any) => {
+	).then((res: GuildType) => {
 		const prefix = res.Prefix ? res.Prefix : 'ult!';
 		const discReg: RegExp = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/g;
 		if (

@@ -2,10 +2,11 @@ import { Run } from '../../interfaces/Command';
 import GuildModel from '../../models/guild.model';
 import { MessageEmbed, GuildMember, TextChannel } from 'discord.js';
 import moment from 'moment';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const member = message.mentions.members.first();
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
@@ -75,7 +76,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.author.displayAvatarURL()
 				);
 			message.channel.send(BannedEmbed);
-			mod.then((res) => {
+			mod.then((res: GuildType) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
 					return;
 				} else {

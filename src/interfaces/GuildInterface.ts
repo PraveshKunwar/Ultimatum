@@ -1,5 +1,8 @@
-export interface GuildType {
-	GuildId: number;
+import { Document } from 'mongoose';
+
+export interface GuildType extends Document {
+	Prefix: string;
+	GuildId: string;
 	GuildName: string;
 	GuildMembers: number;
 	GuildChannels: number;
@@ -9,7 +12,7 @@ export interface GuildType {
 	createdAt: Date;
 	icon: string | null;
 	DiscordLink: boolean | null;
-	ModChannel: number | null;
+	ModChannel: string | null;
 	ModChannelName: string | null;
 	BadWords: boolean | null;
 	Warns:

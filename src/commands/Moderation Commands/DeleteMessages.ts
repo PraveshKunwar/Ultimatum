@@ -4,10 +4,11 @@ import GuildModel from '../../models/guild.model';
 import { TextChannel } from 'discord.js';
 import moment from 'moment';
 import { isJSDocReturnTag } from 'typescript';
+import { GuildType } from '../../interfaces/GuildInterface';
 
 export const run: Run = async (client, message, args, prefix) => {
 	const NumMsgDel = parseInt(args[0]);
-	const mod: any = client.DatabaseManager.findOne(
+	const mod: Promise<any> = client.DatabaseManager.findOne(
 		{ GuildId: message.guild.id },
 		GuildModel
 	);
@@ -44,7 +45,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.channel
 						.send(DeletedEmbed)
 						.then(async (msg) => await msg.delete({ timeout: 5000 }));
-					mod.then((res) => {
+					mod.then((res: GuildType) => {
 						if (res.ModChannel === null || res.ModChannelName === null) {
 							return;
 						} else {
