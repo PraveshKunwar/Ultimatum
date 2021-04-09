@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"lib": ["ES2015", "ESNext"],
+		"module": "CommonJS",
+		"allowJs": true,
+		"checkJs": true,
+		"rootDir": "../server",
+		"outDir": "./dist",
+		"removeComments": true,
+		"noEmit": false,
+		"noEmitOnError": false,
+		"noImplicitAny": false,
+		"noImplicitThis": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"strictPropertyInitialization": false,
+		"moduleResolution": "node",
+		"forceConsistentCasingInFileNames": true
+	}
+}
