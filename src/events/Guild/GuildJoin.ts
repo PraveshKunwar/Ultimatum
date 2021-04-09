@@ -38,7 +38,7 @@ export const run: Run = async (client, guild: Guild) => {
 				'ult!'
 			)} \n\n➤ You can customize it using ${client.OneQuote(
 				'ult!prefix'
-			)} \n\n ➤Please also give me sufficient permissions as most of my commands use a lot of the permissions!. \n **Have fun!** `
+			)} \n\n ➤Please also give me sufficient permissions as most of my commands use a lot of the permissions!. \n\n ***For any issues***: If you have any issues, please contact **PraveshK#4056**. Thank you. \n\n **External Info**: \n\n [Invite Me](https://discord.com/api/oauth2/authorize?client_id=806540029052059698&permissions=0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorized&scope=bot) • [Support Server](https://discord.gg/2dxa2S24KZ) • [Github](https://github.com/PraveshKunwar/Ultimatum) \n\n **Have fun!** `
 		)
 		.setColor('#333')
 		.setTimestamp()

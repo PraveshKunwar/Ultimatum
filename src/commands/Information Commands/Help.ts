@@ -26,7 +26,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					ReturnMappedVals(client.commands, 'profile').join(' | ')
 				)}\n\n ➤ ***For further information on a command***: \n If you want more information on a command, type ${client.OneQuote(
 					`${prefix}help <CommandName>`
-				)} to get more information on a specific command, including aliases, description, permissions, etc! \n\n ***For any issues***: If you have any issues, please contact **PraveshK#4056**. Thank you. 
+				)} to get more information on a specific command, including aliases, description, permissions, etc! \n\n ***For any issues***: If you have any issues, please contact **PraveshK#4056**. Thank you. \n\n **External Info**: \n\n [Invite Me](https://discord.com/api/oauth2/authorize?client_id=806540029052059698&permissions=0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorized&scope=bot) • [Support Server](https://discord.gg/2dxa2S24KZ) • [Github](https://github.com/PraveshKunwar/Ultimatum)
 				`
 			)
 			.setThumbnail(message.guild.icon)

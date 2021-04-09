@@ -57,7 +57,7 @@ export const run: Run = async (client, message, args, prefix) => {
 		note &&
 		note.length < 2000
 	) {
-		await client.DatabaseManager.findOne(
+		client.DatabaseManager.findOne(
 			{ UserId: user.id, GuildId: message.guild.id },
 			NoteModel
 		).then((res: NoteType) => {

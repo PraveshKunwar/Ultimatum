@@ -76,7 +76,7 @@ export const run: Run = async (client, message, args, prefix) => {
 					message.author.displayAvatarURL()
 				);
 			message.channel.send(KickedEmbed);
-			mod.then((res: GuildType) => {
+			mod.then((res: GuildTypew) => {
 				if (res.ModChannel === null || res.ModChannelName === null) {
 					return;
 				} else {

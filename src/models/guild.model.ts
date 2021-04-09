@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const GuildJoin = new mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
 	Prefix: String || Number,
@@ -16,13 +17,6 @@ const GuildJoin = new mongoose.Schema({
 	ModChannelName: String || null,
 	BadWords: Boolean || null,
 	Welcome: Boolean,
-	Warns:
-		[
-			{
-				userId: Number,
-				GuildId: Number,
-			},
-		] || null,
 });
 
 const GuildModel = mongoose.model('guilds', GuildJoin);
