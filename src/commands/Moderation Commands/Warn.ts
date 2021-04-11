@@ -59,7 +59,7 @@ export const run: Run = async (client, message, args, prefix) => {
 			{ UserId: user.id, GuildId: message.guild.id },
 			WarnModel
 		).then((res: WarnType) => {
-			//continue later
+				
 		});
 	}
 };

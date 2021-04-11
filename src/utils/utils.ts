@@ -23,6 +23,14 @@ export const shuffleElements = (arr: any[]): any[] => {
 	return arr;
 };
 
+export const millisToMS = (time: number): string => {
+	const mins = Math.floor(time / 60000);
+	const secs = ((time % 60000) / 1000).toFixed(0);
+	return mins + ':' + (parseInt(secs) < 10 ? '0' : '') + secs;
+};
+
+
+
 export const BlockQuote = (text: string | number, lang?: string) => {
 	return `\`\`\`${lang}\n${text}\`\`\``;
 };

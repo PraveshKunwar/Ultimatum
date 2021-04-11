@@ -10,6 +10,7 @@ import { Ultimatum } from '../client';
 import { GuildMusicSongs, GuildQueue } from '../interfaces/MusicInterface';
 import ytdl from 'ytdl-core';
 import fetch from 'node-fetch';
+import { millisToMS } from '../utils/utils';
 
 class MusicManager {
 	public queue: Map<string, GuildQueue> = new Map();
@@ -17,6 +18,7 @@ class MusicManager {
 	public dispatcher: VoiceConnection;
 	public play(msg: Message, songs: GuildMusicSongs): Promise<Message> {
 		const guildQueue = this.queue.get(msg.guild.id);
+
 		if (!songs) {
 			guildQueue.vc.leave();
 			this.queue.delete(msg.guild.id);
@@ -125,6 +127,7 @@ class MusicManager {
 					.then(async (msg) => await msg.delete({ timeout: 5000 }));
 			});
 	}
+
 	public async skip(msg: Message) {
 		const DC = new MessageEmbed()
 			.setDescription(
@@ -144,6 +147,63 @@ class MusicManager {
 				this.queue.get(msg.guild.id).songs[0].author.name
 			}/${this.queue.get(msg.guild.id).songs[0].title}`
 		);
+	}
+	public async pause(msg: Message) {
+		const currentTime = this.queue.get(msg.guild.id).connection.dispatcher
+			.streamTime;
+		this.queue.get(msg.guild.id).connection.dispatcher.pause(true);
+		const PausedEmbed = new MessageEmbed()
+			.setDescription(
+				`➤ **${
+					this.queue.get(msg.guild.id).songs[0].title
+				}** is now paused. Paused at: ${millisToMS(currentTime)} minutes. 🎶`
+			)
+			.setColor('#333');
+		this.queue
+			.get(msg.guild.id)
+			.channel.send(PausedEmbed)
+			.then(async (msg) => await msg.delete({ timeout: 5000 }));
+	}
+	public async resume(msg: Message) {
+		if (this.queue.get(msg.guild.id).connection.dispatcher.paused === false) {
+			const Error = new MessageEmbed()
+				.setDescription(
+					`➤ **${
+						this.queue.get(msg.guild.id).songs[0].title
+					}** is currently playing. Cannot resume track. 🎶`
+				)
+				.setColor('#333');
+			this.queue
+				.get(msg.guild.id)
+				.channel.send(Error)
+				.then(async (msg) => await msg.delete({ timeout: 5000 }));
+		} else {
+			this.queue.get(msg.guild.id).connection.dispatcher.resume();
+			const ResumeEmbed = new MessageEmbed()
+				.setDescription(
+					`➤ **${
+						this.queue.get(msg.guild.id).songs[0].title
+					}** has been resumed. 🎶`
+				)
+				.setColor('#333');
+			this.queue
+				.get(msg.guild.id)
+				.channel.send(ResumeEmbed)
+				.then(async (msg) => await msg.delete({ timeout: 5000 }));
+		}
+	}
+	public async nowplaying(msg: Message) {
+		const ResumeEmbed = new MessageEmbed()
+			//@ts-ignore
+			.setThumbnail(this.queue.get(msg.guild.id).songs[0].img)
+			.setDescription(
+				`➤ **${this.queue.get(msg.guild.id).songs[0].title}** is now playing. 
+				Progress: ${millisToMS(
+					this.queue.get(msg.guild.id).connection.dispatcher.streamTime
+				)} / ${this.queue.get(msg.guild.id).songs[0].timestamp}. 🎶`
+			)
+			.setColor('#333');
+		this.queue.get(msg.guild.id).channel.send(ResumeEmbed);
 	}
 }
 
