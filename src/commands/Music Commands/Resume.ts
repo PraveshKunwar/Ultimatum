@@ -1,5 +1,4 @@
 import { Run } from '../../interfaces/Command';
-import { MessageEmbed, MessageReaction, User } from 'discord.js';
 
 export const run: Run = async (client, message, args) => {
 	const currentQueue = client.MusicManager.getQueue(message);
