@@ -1,6 +1,7 @@
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps, NextPageContext } from 'next';
 import Head from 'next/head';
 import Login from '../components/Login';
+import nookies from 'nookies';
 
 const Index: NextPage = () => {
 	return (
