@@ -10,19 +10,28 @@ export default async function logout(
 ) {
 	const token = req.cookies.token;
 
-	await fetch('https://discord.com/api/oauth2/token/revoke', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		body: encode({
-			token: token,
-			client_id: process.env.CLIENT_ID,
-			client_secret: process.env.CLIENT_SECRET,
-		}),
-	});
-	setCookie({ res }, 'token', '', {
-		expires: new Date(Date.now()),
-		httpOnly: true,
-		path: '/',
-	});
-	return res.redirect('/');
+	try {
+		await fetch('https://discord.com/api/oauth2/token/revoke', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encode({
+				token: token,
+				client_id: process.env.CLIENT_ID,
+				client_secret: process.env.CLIENT_SECRET,
+			}),
+		});
+		setCookie({ res }, 'token', '', {
+			expires: new Date(Date.now()),
+			httpOnly: true,
+			path: '/',
+		});
+		setCookie({ res }, 'token_type', '', {
+			expires: new Date(Date.now()),
+			httpOnly: true,
+			path: '/',
+		});
+		return res.redirect('/');
+	} catch (e) {
+		res.redirect(`/error?error=${e}`);
+	}
 }

@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
 import { useState, useEffect } from 'react';
 
-const Error: NextPage = () => {
+const Error: NextPage = (): JSX.Element => {
 	const router = useRouter();
 	const [err, setErr] = useState<null | string>(null);
 	useEffect(() => {
@@ -10,6 +10,5 @@ const Error: NextPage = () => {
 	}, [router]);
 	return <div className="error">An error has occured: {err}</div>;
 };
-
 
 export default Error;

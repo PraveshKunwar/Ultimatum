@@ -1,5 +1,4 @@
 import { AppProps } from 'next/app';
-import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
 
 const App = ({ Component, pageProps }: AppProps) => {
 	return (
@@ -8,10 +7,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 			<meta name="author" content="Pravesh K." />
 			<meta name="keywords" content="Ultimatum Website" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<meta
-				name="description"
-				content="The official website for Ultimatum"
-			/>{' '}
+			<meta name="description" content="The official website for Ultimatum" />
+
 			<Component {...pageProps} />
 		</>
 	);

@@ -10,8 +10,7 @@ interface Props {
 	token: { [key: string]: string };
 }
 
-const Index: NextPage<Props> = ({ token }: Props) => {
-	const router = useRouter();
+const Index: NextPage<Props> = ({ token }: Props): JSX.Element => {
 	return (
 		<div className="main">
 			{token.token ? <Dashboard token={token} /> : <Login />}
