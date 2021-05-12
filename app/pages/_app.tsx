@@ -1,14 +1,19 @@
 import { AppProps } from 'next/app';
 import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
-import Theme from '../components/Theme';
 
 const App = ({ Component, pageProps }: AppProps) => {
 	return (
-		<ChakraProvider theme={theme}>
-			<CSSReset />
-			<Theme />
+		<>
+			<meta charSet="utf-8" />
+			<meta name="author" content="Pravesh K." />
+			<meta name="keywords" content="Ultimatum Website" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta
+				name="description"
+				content="The official website for Ultimatum"
+			/>{' '}
 			<Component {...pageProps} />
-		</ChakraProvider>
+		</>
 	);
 };
 

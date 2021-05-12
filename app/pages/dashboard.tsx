@@ -11,9 +11,15 @@ interface Props {
 export const Dashboard: NextPage<Props> = ({ token }: Props) => {
 	const router = useRouter();
 	useEffect(() => {
-		console.log(token);
+		if (!token) {
+			router.push('/');
+		}
 	}, [router]);
-	return <div className="dashboard">HELLO DASHBOARD</div>;
+	return (
+		<div className="dashboard">
+			{!token ? false : <div className="welcome-dashboard">HI</div>}
+		</div>
+	);
 };
 
 export default Dashboard;

@@ -4,16 +4,17 @@ import Login from '../components/Login';
 import nookies from 'nookies';
 import { URLS } from '../glob.types';
 import Dashboard from './dashboard';
+import { useRouter } from 'next/dist/client/router';
 
 interface Props {
 	token: { [key: string]: string };
 }
 
 const Index: NextPage<Props> = ({ token }: Props) => {
+	const router = useRouter();
 	return (
 		<div className="main">
-		
-			{token ? <Dashboard token={token} /> : <Login />}
+			{token.token ? <Dashboard token={token} /> : <Login />}
 		</div>
 	);
 };
