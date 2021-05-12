@@ -8,6 +8,6 @@ export default function auth(req: NextApiRequest, res: NextApiResponse) {
 			process.env.CLIENT_ID
 		}&redirect_uri=${encodeURIComponent(
 			'http://localhost:3000/api/authorized'
-		)}&response_type=code&scope=${encodeURIComponent('identify guilds')}`
+		)}&response_type=code&scope=${encodeURIComponent('identify guilds email')}`
 	);
 }

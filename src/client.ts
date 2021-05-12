@@ -10,6 +10,8 @@ import { BlockQuote, OneQuote, shuffleElements } from './utils/utils';
 import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';
 
+
+
 class Ultimatum extends Client {
 	public queue: Map<string, object>;
 	public commands: Collection<string | string[], Command> = new Collection();
