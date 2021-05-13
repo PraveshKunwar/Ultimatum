@@ -13,7 +13,13 @@ interface Props {
 const Index: NextPage<Props> = ({ token }: Props): JSX.Element => {
 	return (
 		<div className="main">
-			{token.token ? <Dashboard token={token} /> : <Login />}
+			{token.token ? (
+				<Dashboard
+					token={{ token_type: token.token_type, token: token.token }}
+				/>
+			) : (
+				<Login />
+			)}
 		</div>
 	);
 };

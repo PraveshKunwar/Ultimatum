@@ -1,39 +1,45 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
-import nookies from 'nookies';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { URLS } from '../glob.types';
+import axios from 'axios';
 import { User } from '../interfaces/User';
-
 interface Props {
-	token: { [key: string]: string };
+	token: { token_type: string; token: string };
+}
+
+interface Token {
+	token_type: string;
+	token: string;
 }
 
 export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 	const router = useRouter();
-	const [user, setUser] = useState(null);
+	const getData = async (token: Token) => {
+		const res = await axios.get(URLS.USER, {
+			headers: {
+				Authorization: `${token.token_type} ${token.token}`,
+			},
+		});
+		setUser(res.data as User);
+	};
+	const [user, setUser] = useState<User | null>(null);
 	useEffect(() => {
 		if (!token) {
 			router.push('/');
 		}
-		(async () => {
-			await fetch(URLS.USER, {
-				headers: {
-					Authorization: `${token.token_type} ${token.token}`,
-				},
-			})
-				.then((res) => res.json())
-				.then((data) => setUser(data));
-		})();
-	}, [user]);
+
+		getData(token);
+	}, [getData]);
 	return (
 		<div className="dashboard">
-			{!token || typeof user === null ? (
-				router.push('/api/auth')
-			) : (
+			{!token ? router.push('/api/auth') : true}
+			{user !== null ? (
 				<div className="welcome-dashboard">
-					Welcome {user.id}
+					Welcome {`${user.username}#${user.discriminator}`}
+					<img
+						src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`}
+					/>
 					<button
 						onClick={() => {
 							router.push('/api/logout');
@@ -41,7 +47,10 @@ export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 					>
 						button
 					</button>
+					{user.avatar}
 				</div>
+			) : (
+				false
 			)}
 		</div>
 	);
