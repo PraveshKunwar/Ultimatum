@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { URLS } from '../glob.types';
 import axios from 'axios';
@@ -15,6 +15,9 @@ interface Token {
 
 export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 	const router = useRouter();
+	const redirect = () => {
+		router.push('/api/auth');
+	};
 	const getData = async (token: Token) => {
 		const res = await axios.get(URLS.USER, {
 			headers: {
@@ -24,16 +27,16 @@ export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 		setUser(res.data as User);
 	};
 	const [user, setUser] = useState<User | null>(null);
+	const [guilds, setGuilds] = useState(null);
 	useEffect(() => {
 		if (!token) {
 			router.push('/');
+		} else {
+			getData(token);
 		}
-
-		getData(token);
-	}, [getData]);
+	}, []);
 	return (
 		<div className="dashboard">
-			{!token ? router.push('/api/auth') : true}
 			{user !== null ? (
 				<div className="welcome-dashboard">
 					Welcome {`${user.username}#${user.discriminator}`}
@@ -45,9 +48,10 @@ export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 							router.push('/api/logout');
 						}}
 					>
-						button
+						logout
 					</button>
 					{user.avatar}
+					{guilds}
 				</div>
 			) : (
 				false
