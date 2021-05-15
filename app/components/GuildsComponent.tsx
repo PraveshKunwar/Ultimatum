@@ -9,10 +9,10 @@ const GuildsComponent: React.FC<GuildProps> = ({
 }: GuildProps): JSX.Element => {
 	return (
 		<div className="guilds-component">
-			{guild.map((x) => {
+			{guild.map((x, i) => {
 				return (
 					<p>
-						{x.name} <br></br>
+						<a href={`guild/${x.id}`}>{x.name}</a> - {i} <br></br>
 					</p>
 				);
 			})}
