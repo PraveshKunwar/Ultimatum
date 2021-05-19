@@ -1,4 +1,4 @@
-import { Client, Collection, Guild, Intents, Message } from 'discord.js';
+import { Client, Collection, Intents } from 'discord.js';
 import glob from 'glob';
 
 import { Command } from './interfaces/Command';
