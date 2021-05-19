@@ -14,7 +14,7 @@ interface Props {
 interface Token {
 	token_type: string;
 	token: string;
-}
+}	
 
 export const Dashboard: NextPage<Props> = ({ token }: Props): JSX.Element => {
 	const router = useRouter();

@@ -10,6 +10,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 			<meta name="description" content="The official website for Ultimatum" />
 
 			<Component {...pageProps} />
+			
 		</>
 	);
 };
