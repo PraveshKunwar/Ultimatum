@@ -35,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	nookies.set({ res }, 'token', recievedData.access_token, {
 		expires: new Date(Date.now() + recievedData.expires_in * 1000),
 		httpOnly: true,
-		secure: process.env.NODE_ENV !== 'development',
+		secure: process.env.NODE_ENV !== "development",
 		path: '/',
 	});
 	nookies.set({ res }, 'token_type', recievedData.token_type, {
