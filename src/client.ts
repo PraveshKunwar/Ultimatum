@@ -1,4 +1,4 @@
-import { Client, Collection, Intents } from 'discord.js';
+import { Client, Collection, Intents  } from 'discord.js';
 import glob from 'glob';
 
 import { Command } from './interfaces/Command';
@@ -10,7 +10,7 @@ import { BlockQuote, OneQuote } from './utils/utils';
 import { DatabaseManager } from './managers/DatabaseManager';
 import { MusicManager } from './managers/MusicManager';
 
-
+ 
 
 class Ultimatum extends Client {
   public queue: Map<string, object>;

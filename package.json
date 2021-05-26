@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"@chakra-ui/icons": "^1.0.13",
-		"@chakra-ui/system": "^1.6.5",
+		"@chakra-ui/system": "^1.6.7",
 		"@discordjs/opus": "^0.5.0",
 		"@material-ui/icons": "^4.11.2",
 		"@types/dotenv": "^8.2.0",
