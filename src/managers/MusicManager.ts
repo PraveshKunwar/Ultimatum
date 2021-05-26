@@ -48,7 +48,7 @@ class MusicManager {
 				guildQueue.songs.shift();
 				this.play(msg, guildQueue.songs[0]);
 			})
-			.on('error', (err: Error) => {
+			.on('error', (err) => {
 				console.log(err);
 			});
 		const PlayingEmbed = new MessageEmbed()
