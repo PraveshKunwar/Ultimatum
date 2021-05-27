@@ -33,7 +33,7 @@
 		"styled-components": "^5.3.0",
 		"typescript": "^4.2.4",
 		"util": "^0.12.3",
-		"yt-search": "^2.7.5",
+		"yt-search": "^2.8.0",
 		"ytdl-core": "^4.5.0"
 	},
 	"name": "ultimatum",
